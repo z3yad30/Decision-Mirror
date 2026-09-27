@@ -1,0 +1,40 @@
+Decision-Mirror/
+│
+├── README.md
+├── .gitignore
+├── .env.example
+├── requirements.txt
+│
+├── docs/
+│   ├── proposal/
+│   ├── ontology/
+│   └── tasks/
+│       ├── task-1-project-analysis/
+│       ├── task-2-trait-ontology/
+│       ├── task-3-onboarding-quiz/
+│       └── task-4-llm-extraction/
+│
+├── data/
+│   ├── gold/
+│   ├── raw/
+│   └── processed/
+│
+├── prompts/
+│   └── extraction/
+│
+├── schemas/
+│
+├── src/
+│   └── decision_mirror/
+│       ├── quiz/
+│       ├── extraction/
+│       ├── profiling/
+│       ├── retrieval/
+│       ├── advisory/
+│       ├── storage/
+│       └── common/
+│
+├── evaluation/
+├── experiments/
+├── tests/
+└── scripts/
