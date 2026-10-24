@@ -1,0 +1,77 @@
+Decision-Mirror/
+|-- .vscode/  # Workspace editor settings
+|   `-- settings.json
+|-- data/  # Gold, raw, and processed datasets
+|   |-- gold/
+|   |   |-- CHECKSUMS.txt
+|   |   `-- quiz_gold_v1.0.json
+|   |-- processed/
+|   |   `-- .gitkeep
+|   `-- raw/
+|       `-- .gitkeep
+|-- docs/  # Project documentation and source archives
+|   |-- ontology/
+|   |   |-- Decision_Mirror_Trait_Ontology.pdf
+|   |   `-- Decision_Mirror_Trait_Ontology_Complete.pdf
+|   |-- proposal/
+|   |   |-- Decision_Mirror_Proposal.pdf
+|   |   |-- Decision_Mirror_Proposal_main.pdf
+|   |   `-- Use_Case.pdf
+|   `-- tasks/
+|       |-- task-1-project-analysis/
+|       |   `-- .gitkeep
+|       |-- task-2-trait-ontology/
+|       |   |-- Decision Mirror Trait Ontology.docx
+|       |   `-- Decision_Mirror_Trait_Ontology.pdf
+|       |-- task-3-onboarding-quiz/
+|       |   `-- Decision_Mirror_Task_3_Onboarding_Quiz_and_Labeled_Dataset.docx
+|       `-- task-4-llm-extraction/
+|           |-- source/
+|           |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
+|           |   |-- Decision_Mirror_Task4_Shams_Amr.docx
+|           |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
+|           `-- 00_team_review.md
+|-- evaluation/  # Evaluation outputs and results
+|   `-- .gitkeep
+|-- experiments/  # Experimental and legacy implementations
+|   `-- legacy/
+|       |-- ahmed_main_v0.py
+|       `-- README.md
+|-- prompts/  # Versioned model prompts
+|   `-- extraction/
+|       `-- legacy/
+|           |-- README.md
+|           |-- v1.0.md
+|           |-- v1.1.md
+|           |-- v1.2.md
+|           `-- v1.3.md
+|-- schemas/  # Data contracts and validation schemas
+|   `-- .gitkeep
+|-- scripts/  # Project maintenance utilities
+|   `-- update_file_structure.py
+|-- src/  # Decision Mirror application source
+|   `-- decision_mirror/
+|       |-- advisory/
+|       |   `-- __init__.py
+|       |-- common/
+|       |   `-- __init__.py
+|       |-- extraction/
+|       |   `-- __init__.py
+|       |-- profiling/
+|       |   `-- __init__.py
+|       |-- quiz/
+|       |   `-- __init__.py
+|       |-- retrieval/
+|       |   `-- __init__.py
+|       |-- storage/
+|       |   `-- __init__.py
+|       `-- __init__.py
+|-- tests/  # Automated test suite
+|   `-- .gitkeep
+|-- .env
+|-- .env.example
+|-- .gitignore
+|-- file_structure.txt
+|-- pyproject.toml
+|-- README.md
+`-- requirements.txt

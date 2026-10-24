@@ -1,0 +1,2795 @@
+{
+  "metadata": {
+    "name": "Decision Mirror - Onboarding Quiz Gold Dataset",
+    "version": "1.0.0",
+    "source_document": "Decision Mirror Task 3 - Onboarding Quiz & Initial Labeled Dataset",
+    "created_for": "Task 4 - LLM Extraction Evaluation",
+    "num_questions": 25,
+    "num_records": 125,
+    "questions_per_trait": 5,
+    "answer_positions": [
+      "A",
+      "B",
+      "C",
+      "D",
+      "E"
+    ],
+    "gold_value_anchors": {
+      "A": 0.1,
+      "B": 0.3,
+      "C": 0.5,
+      "D": 0.7,
+      "E": 0.9
+    },
+    "scale_note": "0-1 scale. T03: 0=other-centered, 1=self-centered. T05: 0=emotional, 1=analytical.",
+    "traits": {
+      "risk_tolerance": {
+        "trait_id": "T01",
+        "name": "Risk Tolerance",
+        "polarity": "low = risk-averse, high = risk-tolerant"
+      },
+      "time_horizon": {
+        "trait_id": "T02",
+        "name": "Time Horizon",
+        "polarity": "low = immediate benefit, high = delayed payoff"
+      },
+      "locus_of_priority": {
+        "trait_id": "T03",
+        "name": "Locus of Priority",
+        "polarity": "low = other-centered, high = self-centered"
+      },
+      "decisiveness_speed": {
+        "trait_id": "T04",
+        "name": "Decisiveness Speed",
+        "polarity": "low = slow/deliberate, high = fast/intuitive"
+      },
+      "emotional_vs_analytical": {
+        "trait_id": "T05",
+        "name": "Emotional vs. Analytical Weighting",
+        "polarity": "low = emotional/gut/values, high = analytical/logic/data"
+      }
+    },
+    "self_consistency": {
+      "trait_id": "T06",
+      "value": null,
+      "status": "insufficient_history",
+      "note": "Not measured at onboarding; computed longitudinally."
+    },
+    "notes": [
+      "gold_value and answer text are copied verbatim from Task 3 and must not be modified.",
+      "The evidence rationale is written per trait and answer direction (Task 3 only gave one explicit example, Q01_A).",
+      "confidence = 0.70 per Task 3 Section 5 (item-level). Task 3 Section 7 example shows 0.9; this inconsistency should be resolved by the team.",
+      "situational_factor is null for all items; all items are marked trait_revealing.",
+      "This is an engineering calibration dataset, not a clinically validated one."
+    ]
+  },
+  "questions": [
+    {
+      "question_id": "Q01",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You receive two job offers. Offer A is stable and pays $1,500/month. Offer B pays $1,000/month now but could grow substantially if the company succeeds.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would choose the stable $1,500 offer.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would probably choose the stable offer unless the startup had unusually strong evidence of success.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would compare both carefully; the risk and upside are roughly equally important.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would lean toward the startup because the upside is worth accepting some uncertainty.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would choose the startup; uncertainty is acceptable when the potential upside is much larger.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q02",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You have savings that could support you for several months. You can either keep them in a predictable low-return account or use part of them for a business idea with a meaningful chance of failure.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would keep the money safe; preserving what I have matters most.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would invest only a small amount because I strongly prefer protecting the savings.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would split the money between safety and the opportunity.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would invest a meaningful portion after checking the downside.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would accept the possibility of losing much of it for a chance to build something much larger.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q03",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A travel company offers a heavily discounted trip, but the destination has a higher-than-usual chance of disruption. A normal trip costs much more.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would pay more for the reliable trip.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would probably choose the reliable trip unless the disruption risk looked very small.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would weigh the discount against the disruption risk equally.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would take the discounted trip if the possible inconvenience were manageable.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would take the discounted trip; I enjoy accepting uncertainty for a worthwhile benefit.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q04",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You can choose a guaranteed moderate reward today or enter a fair competition with a substantial chance of receiving a much larger reward.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would take the guaranteed reward.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would usually take the guaranteed reward.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "It would depend on how large the difference is.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would usually take the competition for the larger upside.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would strongly prefer the competition because the larger upside is worth the uncertainty.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q05",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A new technology could make your current skillset much more valuable, but it could also make part of it obsolete. You have time to learn it without leaving your current path.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would avoid depending on it until it becomes proven.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would learn it cautiously while protecting my current path.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would experiment while keeping both options open.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would invest heavily in learning it because the upside is meaningful.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would move aggressively toward it because I am comfortable betting on emerging opportunities.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q06",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can spend your free time earning extra money this month or spend that time learning a skill that may significantly improve your income several years from now.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would take the money now; the immediate benefit matters most.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would mostly take the money now, with some learning on the side.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would split the time between both.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would give most of the time to the skill for the future benefit.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would prioritize the long-term skill almost entirely if the future payoff is credible.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q07",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can buy a cheaper product now or wait several months and save for a much better version that will last longer.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would buy the cheaper one now.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would lean toward buying now unless the better version is clearly worth waiting for.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would compare the immediate usefulness with the long-term value.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would wait if the long-term improvement is substantial.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would willingly wait and sacrifice convenience now for the better long-term outcome.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q08",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You are offered a course that requires six months of difficult study before providing a career benefit.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would prefer something that produces a benefit quickly.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would hesitate unless the benefit is fairly near.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would consider both the effort now and the future payoff.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would accept the short-term effort for a strong future opportunity.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I am comfortable making a major short-term sacrifice for a payoff several years away.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q09",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can solve a recurring problem with a quick temporary fix or spend more time now on a solution that is likely to prevent the problem for years.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would take the quick fix.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would usually take the quick fix unless the recurring cost is obvious.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would balance the time saved now against the long-term benefit.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would invest the extra time for a durable solution.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would strongly prefer the durable solution even if it creates substantial work now.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q10",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You receive a bonus. You can spend it on an experience this month or save it toward a major goal you want to reach in three years.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would mostly spend it now.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would spend most of it and save a little.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would divide it between current enjoyment and the future goal.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would save most of it for the goal.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would prioritize the three-year goal and accept giving up most immediate enjoyment.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q11",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You receive a career opportunity in another city. It is clearly better for your own career, but your partner strongly prefers staying where you are.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would prioritize my partner's preference unless there were no alternative.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would lean toward staying because the relationship's preference matters more.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would treat my career and my partner's preference as equally important.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would lean toward taking the opportunity if it strongly advances my career.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would take it if it is the right move for me, even if my partner prefers otherwise.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q12",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "Your team must choose between an approach that makes your individual work easier and one that makes the overall team's work better but creates extra work for you.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would choose the team-benefiting approach.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would usually accept extra work if it clearly helps the team.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would compare my workload with the team benefit.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would favor the approach that makes my own work easier unless the team impact is large.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would prioritize my own workload and goals unless helping the team is essential.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q13",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You have one free weekend. You can use it for something personally important or help a family member with a project they asked you to join.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would almost certainly help my family member.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would lean toward helping them.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would split the weekend or negotiate a compromise.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would lean toward my own plans unless the request is important.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would keep my weekend for my own priorities unless there is a serious reason to change them.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q14",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are offered a promotion that improves your career but requires you to give up a commitment that is important to a close group you belong to.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would protect the group's commitment.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would usually put the group commitment first.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would seek a solution that protects both.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would lean toward the promotion if it is important for my career.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would prioritize the promotion and accept disappointing the group if necessary.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q15",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are choosing a place to live. One option is much better for your daily routine; another is better for the people you live with.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would choose what best serves the people I live with.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would lean toward their needs.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would try to find the best compromise.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would lean toward what works best for my own routine.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would choose what best serves my own needs even if others prefer the alternative.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q16",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to buy a laptop. Several models are good, and there is no urgent deadline.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would research for a long time, compare many models and revisit the decision.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would spend considerable time researching before committing.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would research the main options and decide once I have enough information.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would narrow it to a few options and decide fairly quickly.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would pick one that seems right and commit quickly.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q17",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing between two restaurants for a casual meal with no strong preference.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would carefully compare menus, reviews and prices before deciding.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would ask several people or compare reviews first.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would look briefly and then decide.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would choose one of the first reasonable options.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would decide almost immediately based on my first instinct.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q18",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You receive a non-urgent offer and have several days to respond.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would use most of the available time researching and reconsidering.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would deliberate substantially before responding.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would think it through and respond once I felt sufficiently informed.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would make a decision after a short review rather than using all the time.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would probably decide quickly if my first impression were positive.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q19",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing a course from several similar options.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would build a detailed comparison and revisit it before choosing.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would research extensively and possibly ask several people.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would compare the main criteria and then choose.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would select a strong option after a quick comparison.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would choose the first course that feels like a good fit.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q20",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to choose a small purchase today, and changing your mind later would be easy.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would still research extensively before buying.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would compare several options carefully.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would check the basics and decide.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would make a quick choice among reasonable options.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would trust my first acceptable option and move on.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q21",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "Two apartments are similar. One has better numbers for price, commute and space; the other immediately feels like home.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would choose the one that feels right even if the numbers are worse.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would give my feeling more weight than the comparison.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would balance the feeling with the measurable differences.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would give the measurable differences more weight unless the feeling is unusually strong.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would choose primarily from a structured comparison of price, commute, space and other criteria.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q22",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are deciding whether to accept an opportunity. Your gut strongly says yes, but the available data shows several meaningful disadvantages.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would follow my gut despite the data.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would give the gut feeling substantial weight.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would investigate the conflict between feeling and evidence before deciding.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would mostly follow the evidence unless the emotional signal reveals something concrete.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would prioritize the evidence and explicit criteria over my gut feeling.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q23",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are buying an expensive device and have narrowed the choice to three options.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would choose the one I connect with or simply like most.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would let personal preference and feeling dominate the final choice.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would combine how each feels with objective features.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would use objective features as the main guide but still consider preference.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would build a detailed comparison using specifications, price and performance.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q24",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "A friend recommends a decision because they have a strong positive feeling about it, but you have numerical evidence that points in another direction.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would trust the feeling and recommendation.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would give the personal judgment more weight than the numbers.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would investigate both before choosing.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would lean toward the numbers while considering why the friend feels strongly.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would prioritize the quantitative evidence and explicit comparison.",
+          "gold_value": 0.9
+        }
+      ]
+    },
+    {
+      "question_id": "Q25",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You must choose between two career paths. One feels exciting and meaningful; the other scores better across salary, stability and advancement criteria.",
+      "context_type": "trait_revealing",
+      "options": [
+        {
+          "answer": "A",
+          "text": "I would choose the exciting and meaningful path because that feeling matters most.",
+          "gold_value": 0.1
+        },
+        {
+          "answer": "B",
+          "text": "I would let meaning and excitement outweigh most of the criteria.",
+          "gold_value": 0.3
+        },
+        {
+          "answer": "C",
+          "text": "I would balance meaning with the objective career factors.",
+          "gold_value": 0.5
+        },
+        {
+          "answer": "D",
+          "text": "I would give the career criteria more weight while still considering meaning.",
+          "gold_value": 0.7
+        },
+        {
+          "answer": "E",
+          "text": "I would score the alternatives against explicit criteria and choose the stronger overall result.",
+          "gold_value": 0.9
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "record_id": "Q01_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q01",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You receive two job offers. Offer A is stable and pays $1,500/month. Offer B pays $1,000/month now but could grow substantially if the company succeeds.",
+      "answer": "A",
+      "answer_text": "I would choose the stable $1,500 offer.",
+      "gold_value": 0.1,
+      "evidence": "The user selects the stable known outcome over an uncertain higher-upside option, indicating strong risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q01_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q01",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You receive two job offers. Offer A is stable and pays $1,500/month. Offer B pays $1,000/month now but could grow substantially if the company succeeds.",
+      "answer": "B",
+      "answer_text": "I would probably choose the stable offer unless the startup had unusually strong evidence of success.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward the safe option and accepts risk only with strong evidence, indicating moderate risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q01_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q01",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You receive two job offers. Offer A is stable and pays $1,500/month. Offer B pays $1,000/month now but could grow substantially if the company succeeds.",
+      "answer": "C",
+      "answer_text": "I would compare both carefully; the risk and upside are roughly equally important.",
+      "gold_value": 0.5,
+      "evidence": "The user weighs safety and upside roughly equally, indicating a balanced attitude toward risk.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q01_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q01",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You receive two job offers. Offer A is stable and pays $1,500/month. Offer B pays $1,000/month now but could grow substantially if the company succeeds.",
+      "answer": "D",
+      "answer_text": "I would lean toward the startup because the upside is worth accepting some uncertainty.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward the uncertain higher-upside option after considering the downside, indicating moderate risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q01_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q01",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You receive two job offers. Offer A is stable and pays $1,500/month. Offer B pays $1,000/month now but could grow substantially if the company succeeds.",
+      "answer": "E",
+      "answer_text": "I would choose the startup; uncertainty is acceptable when the potential upside is much larger.",
+      "gold_value": 0.9,
+      "evidence": "The user clearly chooses the uncertain high-upside option and accepts the possibility of loss, indicating strong risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q02_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q02",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You have savings that could support you for several months. You can either keep them in a predictable low-return account or use part of them for a business idea with a meaningful chance of failure.",
+      "answer": "A",
+      "answer_text": "I would keep the money safe; preserving what I have matters most.",
+      "gold_value": 0.1,
+      "evidence": "The user selects the stable known outcome over an uncertain higher-upside option, indicating strong risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q02_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q02",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You have savings that could support you for several months. You can either keep them in a predictable low-return account or use part of them for a business idea with a meaningful chance of failure.",
+      "answer": "B",
+      "answer_text": "I would invest only a small amount because I strongly prefer protecting the savings.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward the safe option and accepts risk only with strong evidence, indicating moderate risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q02_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q02",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You have savings that could support you for several months. You can either keep them in a predictable low-return account or use part of them for a business idea with a meaningful chance of failure.",
+      "answer": "C",
+      "answer_text": "I would split the money between safety and the opportunity.",
+      "gold_value": 0.5,
+      "evidence": "The user weighs safety and upside roughly equally, indicating a balanced attitude toward risk.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q02_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q02",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You have savings that could support you for several months. You can either keep them in a predictable low-return account or use part of them for a business idea with a meaningful chance of failure.",
+      "answer": "D",
+      "answer_text": "I would invest a meaningful portion after checking the downside.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward the uncertain higher-upside option after considering the downside, indicating moderate risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q02_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q02",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You have savings that could support you for several months. You can either keep them in a predictable low-return account or use part of them for a business idea with a meaningful chance of failure.",
+      "answer": "E",
+      "answer_text": "I would accept the possibility of losing much of it for a chance to build something much larger.",
+      "gold_value": 0.9,
+      "evidence": "The user clearly chooses the uncertain high-upside option and accepts the possibility of loss, indicating strong risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q03_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q03",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A travel company offers a heavily discounted trip, but the destination has a higher-than-usual chance of disruption. A normal trip costs much more.",
+      "answer": "A",
+      "answer_text": "I would pay more for the reliable trip.",
+      "gold_value": 0.1,
+      "evidence": "The user selects the stable known outcome over an uncertain higher-upside option, indicating strong risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q03_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q03",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A travel company offers a heavily discounted trip, but the destination has a higher-than-usual chance of disruption. A normal trip costs much more.",
+      "answer": "B",
+      "answer_text": "I would probably choose the reliable trip unless the disruption risk looked very small.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward the safe option and accepts risk only with strong evidence, indicating moderate risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q03_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q03",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A travel company offers a heavily discounted trip, but the destination has a higher-than-usual chance of disruption. A normal trip costs much more.",
+      "answer": "C",
+      "answer_text": "I would weigh the discount against the disruption risk equally.",
+      "gold_value": 0.5,
+      "evidence": "The user weighs safety and upside roughly equally, indicating a balanced attitude toward risk.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q03_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q03",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A travel company offers a heavily discounted trip, but the destination has a higher-than-usual chance of disruption. A normal trip costs much more.",
+      "answer": "D",
+      "answer_text": "I would take the discounted trip if the possible inconvenience were manageable.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward the uncertain higher-upside option after considering the downside, indicating moderate risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q03_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q03",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A travel company offers a heavily discounted trip, but the destination has a higher-than-usual chance of disruption. A normal trip costs much more.",
+      "answer": "E",
+      "answer_text": "I would take the discounted trip; I enjoy accepting uncertainty for a worthwhile benefit.",
+      "gold_value": 0.9,
+      "evidence": "The user clearly chooses the uncertain high-upside option and accepts the possibility of loss, indicating strong risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q04_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q04",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You can choose a guaranteed moderate reward today or enter a fair competition with a substantial chance of receiving a much larger reward.",
+      "answer": "A",
+      "answer_text": "I would take the guaranteed reward.",
+      "gold_value": 0.1,
+      "evidence": "The user selects the stable known outcome over an uncertain higher-upside option, indicating strong risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q04_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q04",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You can choose a guaranteed moderate reward today or enter a fair competition with a substantial chance of receiving a much larger reward.",
+      "answer": "B",
+      "answer_text": "I would usually take the guaranteed reward.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward the safe option and accepts risk only with strong evidence, indicating moderate risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q04_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q04",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You can choose a guaranteed moderate reward today or enter a fair competition with a substantial chance of receiving a much larger reward.",
+      "answer": "C",
+      "answer_text": "It would depend on how large the difference is.",
+      "gold_value": 0.5,
+      "evidence": "The user weighs safety and upside roughly equally, indicating a balanced attitude toward risk.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q04_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q04",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You can choose a guaranteed moderate reward today or enter a fair competition with a substantial chance of receiving a much larger reward.",
+      "answer": "D",
+      "answer_text": "I would usually take the competition for the larger upside.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward the uncertain higher-upside option after considering the downside, indicating moderate risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q04_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q04",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "You can choose a guaranteed moderate reward today or enter a fair competition with a substantial chance of receiving a much larger reward.",
+      "answer": "E",
+      "answer_text": "I would strongly prefer the competition because the larger upside is worth the uncertainty.",
+      "gold_value": 0.9,
+      "evidence": "The user clearly chooses the uncertain high-upside option and accepts the possibility of loss, indicating strong risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q05_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q05",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A new technology could make your current skillset much more valuable, but it could also make part of it obsolete. You have time to learn it without leaving your current path.",
+      "answer": "A",
+      "answer_text": "I would avoid depending on it until it becomes proven.",
+      "gold_value": 0.1,
+      "evidence": "The user selects the stable known outcome over an uncertain higher-upside option, indicating strong risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q05_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q05",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A new technology could make your current skillset much more valuable, but it could also make part of it obsolete. You have time to learn it without leaving your current path.",
+      "answer": "B",
+      "answer_text": "I would learn it cautiously while protecting my current path.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward the safe option and accepts risk only with strong evidence, indicating moderate risk aversion.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q05_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q05",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A new technology could make your current skillset much more valuable, but it could also make part of it obsolete. You have time to learn it without leaving your current path.",
+      "answer": "C",
+      "answer_text": "I would experiment while keeping both options open.",
+      "gold_value": 0.5,
+      "evidence": "The user weighs safety and upside roughly equally, indicating a balanced attitude toward risk.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q05_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q05",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A new technology could make your current skillset much more valuable, but it could also make part of it obsolete. You have time to learn it without leaving your current path.",
+      "answer": "D",
+      "answer_text": "I would invest heavily in learning it because the upside is meaningful.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward the uncertain higher-upside option after considering the downside, indicating moderate risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q05_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q05",
+      "trait_id": "T01",
+      "trait": "risk_tolerance",
+      "scenario": "A new technology could make your current skillset much more valuable, but it could also make part of it obsolete. You have time to learn it without leaving your current path.",
+      "answer": "E",
+      "answer_text": "I would move aggressively toward it because I am comfortable betting on emerging opportunities.",
+      "gold_value": 0.9,
+      "evidence": "The user clearly chooses the uncertain high-upside option and accepts the possibility of loss, indicating strong risk tolerance.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q06_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q06",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can spend your free time earning extra money this month or spend that time learning a skill that may significantly improve your income several years from now.",
+      "answer": "A",
+      "answer_text": "I would take the money now; the immediate benefit matters most.",
+      "gold_value": 0.1,
+      "evidence": "The user prioritizes the immediate benefit over a delayed payoff, indicating a strongly short-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q06_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q06",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can spend your free time earning extra money this month or spend that time learning a skill that may significantly improve your income several years from now.",
+      "answer": "B",
+      "answer_text": "I would mostly take the money now, with some learning on the side.",
+      "gold_value": 0.3,
+      "evidence": "The user mostly favors the near-term benefit with limited investment in the future, indicating a short-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q06_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q06",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can spend your free time earning extra money this month or spend that time learning a skill that may significantly improve your income several years from now.",
+      "answer": "C",
+      "answer_text": "I would split the time between both.",
+      "gold_value": 0.5,
+      "evidence": "The user splits or weighs present and future benefits equally, indicating a balanced time horizon.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q06_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q06",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can spend your free time earning extra money this month or spend that time learning a skill that may significantly improve your income several years from now.",
+      "answer": "D",
+      "answer_text": "I would give most of the time to the skill for the future benefit.",
+      "gold_value": 0.7,
+      "evidence": "The user gives most of the resources to the delayed payoff, indicating a long-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q06_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q06",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can spend your free time earning extra money this month or spend that time learning a skill that may significantly improve your income several years from now.",
+      "answer": "E",
+      "answer_text": "I would prioritize the long-term skill almost entirely if the future payoff is credible.",
+      "gold_value": 0.9,
+      "evidence": "The user almost entirely prioritizes the long-term payoff and accepts a major present sacrifice, indicating a strongly long-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q07_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q07",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can buy a cheaper product now or wait several months and save for a much better version that will last longer.",
+      "answer": "A",
+      "answer_text": "I would buy the cheaper one now.",
+      "gold_value": 0.1,
+      "evidence": "The user prioritizes the immediate benefit over a delayed payoff, indicating a strongly short-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q07_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q07",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can buy a cheaper product now or wait several months and save for a much better version that will last longer.",
+      "answer": "B",
+      "answer_text": "I would lean toward buying now unless the better version is clearly worth waiting for.",
+      "gold_value": 0.3,
+      "evidence": "The user mostly favors the near-term benefit with limited investment in the future, indicating a short-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q07_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q07",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can buy a cheaper product now or wait several months and save for a much better version that will last longer.",
+      "answer": "C",
+      "answer_text": "I would compare the immediate usefulness with the long-term value.",
+      "gold_value": 0.5,
+      "evidence": "The user splits or weighs present and future benefits equally, indicating a balanced time horizon.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q07_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q07",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can buy a cheaper product now or wait several months and save for a much better version that will last longer.",
+      "answer": "D",
+      "answer_text": "I would wait if the long-term improvement is substantial.",
+      "gold_value": 0.7,
+      "evidence": "The user gives most of the resources to the delayed payoff, indicating a long-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q07_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q07",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can buy a cheaper product now or wait several months and save for a much better version that will last longer.",
+      "answer": "E",
+      "answer_text": "I would willingly wait and sacrifice convenience now for the better long-term outcome.",
+      "gold_value": 0.9,
+      "evidence": "The user almost entirely prioritizes the long-term payoff and accepts a major present sacrifice, indicating a strongly long-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q08_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q08",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You are offered a course that requires six months of difficult study before providing a career benefit.",
+      "answer": "A",
+      "answer_text": "I would prefer something that produces a benefit quickly.",
+      "gold_value": 0.1,
+      "evidence": "The user prioritizes the immediate benefit over a delayed payoff, indicating a strongly short-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q08_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q08",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You are offered a course that requires six months of difficult study before providing a career benefit.",
+      "answer": "B",
+      "answer_text": "I would hesitate unless the benefit is fairly near.",
+      "gold_value": 0.3,
+      "evidence": "The user mostly favors the near-term benefit with limited investment in the future, indicating a short-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q08_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q08",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You are offered a course that requires six months of difficult study before providing a career benefit.",
+      "answer": "C",
+      "answer_text": "I would consider both the effort now and the future payoff.",
+      "gold_value": 0.5,
+      "evidence": "The user splits or weighs present and future benefits equally, indicating a balanced time horizon.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q08_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q08",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You are offered a course that requires six months of difficult study before providing a career benefit.",
+      "answer": "D",
+      "answer_text": "I would accept the short-term effort for a strong future opportunity.",
+      "gold_value": 0.7,
+      "evidence": "The user gives most of the resources to the delayed payoff, indicating a long-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q08_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q08",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You are offered a course that requires six months of difficult study before providing a career benefit.",
+      "answer": "E",
+      "answer_text": "I am comfortable making a major short-term sacrifice for a payoff several years away.",
+      "gold_value": 0.9,
+      "evidence": "The user almost entirely prioritizes the long-term payoff and accepts a major present sacrifice, indicating a strongly long-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q09_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q09",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can solve a recurring problem with a quick temporary fix or spend more time now on a solution that is likely to prevent the problem for years.",
+      "answer": "A",
+      "answer_text": "I would take the quick fix.",
+      "gold_value": 0.1,
+      "evidence": "The user prioritizes the immediate benefit over a delayed payoff, indicating a strongly short-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q09_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q09",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can solve a recurring problem with a quick temporary fix or spend more time now on a solution that is likely to prevent the problem for years.",
+      "answer": "B",
+      "answer_text": "I would usually take the quick fix unless the recurring cost is obvious.",
+      "gold_value": 0.3,
+      "evidence": "The user mostly favors the near-term benefit with limited investment in the future, indicating a short-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q09_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q09",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can solve a recurring problem with a quick temporary fix or spend more time now on a solution that is likely to prevent the problem for years.",
+      "answer": "C",
+      "answer_text": "I would balance the time saved now against the long-term benefit.",
+      "gold_value": 0.5,
+      "evidence": "The user splits or weighs present and future benefits equally, indicating a balanced time horizon.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q09_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q09",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can solve a recurring problem with a quick temporary fix or spend more time now on a solution that is likely to prevent the problem for years.",
+      "answer": "D",
+      "answer_text": "I would invest the extra time for a durable solution.",
+      "gold_value": 0.7,
+      "evidence": "The user gives most of the resources to the delayed payoff, indicating a long-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q09_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q09",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You can solve a recurring problem with a quick temporary fix or spend more time now on a solution that is likely to prevent the problem for years.",
+      "answer": "E",
+      "answer_text": "I would strongly prefer the durable solution even if it creates substantial work now.",
+      "gold_value": 0.9,
+      "evidence": "The user almost entirely prioritizes the long-term payoff and accepts a major present sacrifice, indicating a strongly long-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q10_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q10",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You receive a bonus. You can spend it on an experience this month or save it toward a major goal you want to reach in three years.",
+      "answer": "A",
+      "answer_text": "I would mostly spend it now.",
+      "gold_value": 0.1,
+      "evidence": "The user prioritizes the immediate benefit over a delayed payoff, indicating a strongly short-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q10_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q10",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You receive a bonus. You can spend it on an experience this month or save it toward a major goal you want to reach in three years.",
+      "answer": "B",
+      "answer_text": "I would spend most of it and save a little.",
+      "gold_value": 0.3,
+      "evidence": "The user mostly favors the near-term benefit with limited investment in the future, indicating a short-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q10_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q10",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You receive a bonus. You can spend it on an experience this month or save it toward a major goal you want to reach in three years.",
+      "answer": "C",
+      "answer_text": "I would divide it between current enjoyment and the future goal.",
+      "gold_value": 0.5,
+      "evidence": "The user splits or weighs present and future benefits equally, indicating a balanced time horizon.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q10_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q10",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You receive a bonus. You can spend it on an experience this month or save it toward a major goal you want to reach in three years.",
+      "answer": "D",
+      "answer_text": "I would save most of it for the goal.",
+      "gold_value": 0.7,
+      "evidence": "The user gives most of the resources to the delayed payoff, indicating a long-term lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q10_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q10",
+      "trait_id": "T02",
+      "trait": "time_horizon",
+      "scenario": "You receive a bonus. You can spend it on an experience this month or save it toward a major goal you want to reach in three years.",
+      "answer": "E",
+      "answer_text": "I would prioritize the three-year goal and accept giving up most immediate enjoyment.",
+      "gold_value": 0.9,
+      "evidence": "The user almost entirely prioritizes the long-term payoff and accepts a major present sacrifice, indicating a strongly long-term orientation.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q11_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q11",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You receive a career opportunity in another city. It is clearly better for your own career, but your partner strongly prefers staying where you are.",
+      "answer": "A",
+      "answer_text": "I would prioritize my partner's preference unless there were no alternative.",
+      "gold_value": 0.1,
+      "evidence": "The user places the interests of others (partner/team/family/group/housemates) ahead of their own, indicating a strongly other-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q11_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q11",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You receive a career opportunity in another city. It is clearly better for your own career, but your partner strongly prefers staying where you are.",
+      "answer": "B",
+      "answer_text": "I would lean toward staying because the relationship's preference matters more.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward others' interests while still considering their own, indicating an other-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q11_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q11",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You receive a career opportunity in another city. It is clearly better for your own career, but your partner strongly prefers staying where you are.",
+      "answer": "C",
+      "answer_text": "I would treat my career and my partner's preference as equally important.",
+      "gold_value": 0.5,
+      "evidence": "The user treats own and others' interests as equally important or seeks a compromise, indicating a balanced priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q11_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q11",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You receive a career opportunity in another city. It is clearly better for your own career, but your partner strongly prefers staying where you are.",
+      "answer": "D",
+      "answer_text": "I would lean toward taking the opportunity if it strongly advances my career.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward their own interests unless the others' stake is large, indicating a self-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q11_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q11",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You receive a career opportunity in another city. It is clearly better for your own career, but your partner strongly prefers staying where you are.",
+      "answer": "E",
+      "answer_text": "I would take it if it is the right move for me, even if my partner prefers otherwise.",
+      "gold_value": 0.9,
+      "evidence": "The user prioritizes their own interests even at the cost of disappointing others, indicating a strongly self-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q12_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q12",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "Your team must choose between an approach that makes your individual work easier and one that makes the overall team's work better but creates extra work for you.",
+      "answer": "A",
+      "answer_text": "I would choose the team-benefiting approach.",
+      "gold_value": 0.1,
+      "evidence": "The user places the interests of others (partner/team/family/group/housemates) ahead of their own, indicating a strongly other-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q12_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q12",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "Your team must choose between an approach that makes your individual work easier and one that makes the overall team's work better but creates extra work for you.",
+      "answer": "B",
+      "answer_text": "I would usually accept extra work if it clearly helps the team.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward others' interests while still considering their own, indicating an other-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q12_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q12",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "Your team must choose between an approach that makes your individual work easier and one that makes the overall team's work better but creates extra work for you.",
+      "answer": "C",
+      "answer_text": "I would compare my workload with the team benefit.",
+      "gold_value": 0.5,
+      "evidence": "The user treats own and others' interests as equally important or seeks a compromise, indicating a balanced priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q12_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q12",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "Your team must choose between an approach that makes your individual work easier and one that makes the overall team's work better but creates extra work for you.",
+      "answer": "D",
+      "answer_text": "I would favor the approach that makes my own work easier unless the team impact is large.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward their own interests unless the others' stake is large, indicating a self-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q12_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q12",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "Your team must choose between an approach that makes your individual work easier and one that makes the overall team's work better but creates extra work for you.",
+      "answer": "E",
+      "answer_text": "I would prioritize my own workload and goals unless helping the team is essential.",
+      "gold_value": 0.9,
+      "evidence": "The user prioritizes their own interests even at the cost of disappointing others, indicating a strongly self-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q13_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q13",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You have one free weekend. You can use it for something personally important or help a family member with a project they asked you to join.",
+      "answer": "A",
+      "answer_text": "I would almost certainly help my family member.",
+      "gold_value": 0.1,
+      "evidence": "The user places the interests of others (partner/team/family/group/housemates) ahead of their own, indicating a strongly other-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q13_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q13",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You have one free weekend. You can use it for something personally important or help a family member with a project they asked you to join.",
+      "answer": "B",
+      "answer_text": "I would lean toward helping them.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward others' interests while still considering their own, indicating an other-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q13_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q13",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You have one free weekend. You can use it for something personally important or help a family member with a project they asked you to join.",
+      "answer": "C",
+      "answer_text": "I would split the weekend or negotiate a compromise.",
+      "gold_value": 0.5,
+      "evidence": "The user treats own and others' interests as equally important or seeks a compromise, indicating a balanced priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q13_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q13",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You have one free weekend. You can use it for something personally important or help a family member with a project they asked you to join.",
+      "answer": "D",
+      "answer_text": "I would lean toward my own plans unless the request is important.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward their own interests unless the others' stake is large, indicating a self-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q13_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q13",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You have one free weekend. You can use it for something personally important or help a family member with a project they asked you to join.",
+      "answer": "E",
+      "answer_text": "I would keep my weekend for my own priorities unless there is a serious reason to change them.",
+      "gold_value": 0.9,
+      "evidence": "The user prioritizes their own interests even at the cost of disappointing others, indicating a strongly self-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q14_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q14",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are offered a promotion that improves your career but requires you to give up a commitment that is important to a close group you belong to.",
+      "answer": "A",
+      "answer_text": "I would protect the group's commitment.",
+      "gold_value": 0.1,
+      "evidence": "The user places the interests of others (partner/team/family/group/housemates) ahead of their own, indicating a strongly other-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q14_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q14",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are offered a promotion that improves your career but requires you to give up a commitment that is important to a close group you belong to.",
+      "answer": "B",
+      "answer_text": "I would usually put the group commitment first.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward others' interests while still considering their own, indicating an other-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q14_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q14",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are offered a promotion that improves your career but requires you to give up a commitment that is important to a close group you belong to.",
+      "answer": "C",
+      "answer_text": "I would seek a solution that protects both.",
+      "gold_value": 0.5,
+      "evidence": "The user treats own and others' interests as equally important or seeks a compromise, indicating a balanced priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q14_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q14",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are offered a promotion that improves your career but requires you to give up a commitment that is important to a close group you belong to.",
+      "answer": "D",
+      "answer_text": "I would lean toward the promotion if it is important for my career.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward their own interests unless the others' stake is large, indicating a self-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q14_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q14",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are offered a promotion that improves your career but requires you to give up a commitment that is important to a close group you belong to.",
+      "answer": "E",
+      "answer_text": "I would prioritize the promotion and accept disappointing the group if necessary.",
+      "gold_value": 0.9,
+      "evidence": "The user prioritizes their own interests even at the cost of disappointing others, indicating a strongly self-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q15_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q15",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are choosing a place to live. One option is much better for your daily routine; another is better for the people you live with.",
+      "answer": "A",
+      "answer_text": "I would choose what best serves the people I live with.",
+      "gold_value": 0.1,
+      "evidence": "The user places the interests of others (partner/team/family/group/housemates) ahead of their own, indicating a strongly other-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q15_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q15",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are choosing a place to live. One option is much better for your daily routine; another is better for the people you live with.",
+      "answer": "B",
+      "answer_text": "I would lean toward their needs.",
+      "gold_value": 0.3,
+      "evidence": "The user leans toward others' interests while still considering their own, indicating an other-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q15_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q15",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are choosing a place to live. One option is much better for your daily routine; another is better for the people you live with.",
+      "answer": "C",
+      "answer_text": "I would try to find the best compromise.",
+      "gold_value": 0.5,
+      "evidence": "The user treats own and others' interests as equally important or seeks a compromise, indicating a balanced priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q15_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q15",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are choosing a place to live. One option is much better for your daily routine; another is better for the people you live with.",
+      "answer": "D",
+      "answer_text": "I would lean toward what works best for my own routine.",
+      "gold_value": 0.7,
+      "evidence": "The user leans toward their own interests unless the others' stake is large, indicating a self-centered lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q15_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q15",
+      "trait_id": "T03",
+      "trait": "locus_of_priority",
+      "scenario": "You are choosing a place to live. One option is much better for your daily routine; another is better for the people you live with.",
+      "answer": "E",
+      "answer_text": "I would choose what best serves my own needs even if others prefer the alternative.",
+      "gold_value": 0.9,
+      "evidence": "The user prioritizes their own interests even at the cost of disappointing others, indicating a strongly self-centered priority.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q16_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q16",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to buy a laptop. Several models are good, and there is no urgent deadline.",
+      "answer": "A",
+      "answer_text": "I would research for a long time, compare many models and revisit the decision.",
+      "gold_value": 0.1,
+      "evidence": "The user describes extensive research, comparison and revisiting before committing, indicating a strongly deliberate decision process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q16_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q16",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to buy a laptop. Several models are good, and there is no urgent deadline.",
+      "answer": "B",
+      "answer_text": "I would spend considerable time researching before committing.",
+      "gold_value": 0.3,
+      "evidence": "The user describes considerable research or consultation before deciding, indicating a deliberate lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q16_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q16",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to buy a laptop. Several models are good, and there is no urgent deadline.",
+      "answer": "C",
+      "answer_text": "I would research the main options and decide once I have enough information.",
+      "gold_value": 0.5,
+      "evidence": "The user describes a moderate amount of research and decides once sufficiently informed, indicating a balanced pace.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q16_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q16",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to buy a laptop. Several models are good, and there is no urgent deadline.",
+      "answer": "D",
+      "answer_text": "I would narrow it to a few options and decide fairly quickly.",
+      "gold_value": 0.7,
+      "evidence": "The user describes a short review followed by a fairly quick decision, indicating a fast lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q16_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q16",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to buy a laptop. Several models are good, and there is no urgent deadline.",
+      "answer": "E",
+      "answer_text": "I would pick one that seems right and commit quickly.",
+      "gold_value": 0.9,
+      "evidence": "The user describes committing almost immediately on first instinct or first acceptable option, indicating a strongly fast/intuitive process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q17_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q17",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing between two restaurants for a casual meal with no strong preference.",
+      "answer": "A",
+      "answer_text": "I would carefully compare menus, reviews and prices before deciding.",
+      "gold_value": 0.1,
+      "evidence": "The user describes extensive research, comparison and revisiting before committing, indicating a strongly deliberate decision process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q17_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q17",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing between two restaurants for a casual meal with no strong preference.",
+      "answer": "B",
+      "answer_text": "I would ask several people or compare reviews first.",
+      "gold_value": 0.3,
+      "evidence": "The user describes considerable research or consultation before deciding, indicating a deliberate lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q17_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q17",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing between two restaurants for a casual meal with no strong preference.",
+      "answer": "C",
+      "answer_text": "I would look briefly and then decide.",
+      "gold_value": 0.5,
+      "evidence": "The user describes a moderate amount of research and decides once sufficiently informed, indicating a balanced pace.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q17_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q17",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing between two restaurants for a casual meal with no strong preference.",
+      "answer": "D",
+      "answer_text": "I would choose one of the first reasonable options.",
+      "gold_value": 0.7,
+      "evidence": "The user describes a short review followed by a fairly quick decision, indicating a fast lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q17_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q17",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing between two restaurants for a casual meal with no strong preference.",
+      "answer": "E",
+      "answer_text": "I would decide almost immediately based on my first instinct.",
+      "gold_value": 0.9,
+      "evidence": "The user describes committing almost immediately on first instinct or first acceptable option, indicating a strongly fast/intuitive process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q18_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q18",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You receive a non-urgent offer and have several days to respond.",
+      "answer": "A",
+      "answer_text": "I would use most of the available time researching and reconsidering.",
+      "gold_value": 0.1,
+      "evidence": "The user describes extensive research, comparison and revisiting before committing, indicating a strongly deliberate decision process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q18_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q18",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You receive a non-urgent offer and have several days to respond.",
+      "answer": "B",
+      "answer_text": "I would deliberate substantially before responding.",
+      "gold_value": 0.3,
+      "evidence": "The user describes considerable research or consultation before deciding, indicating a deliberate lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q18_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q18",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You receive a non-urgent offer and have several days to respond.",
+      "answer": "C",
+      "answer_text": "I would think it through and respond once I felt sufficiently informed.",
+      "gold_value": 0.5,
+      "evidence": "The user describes a moderate amount of research and decides once sufficiently informed, indicating a balanced pace.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q18_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q18",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You receive a non-urgent offer and have several days to respond.",
+      "answer": "D",
+      "answer_text": "I would make a decision after a short review rather than using all the time.",
+      "gold_value": 0.7,
+      "evidence": "The user describes a short review followed by a fairly quick decision, indicating a fast lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q18_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q18",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You receive a non-urgent offer and have several days to respond.",
+      "answer": "E",
+      "answer_text": "I would probably decide quickly if my first impression were positive.",
+      "gold_value": 0.9,
+      "evidence": "The user describes committing almost immediately on first instinct or first acceptable option, indicating a strongly fast/intuitive process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q19_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q19",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing a course from several similar options.",
+      "answer": "A",
+      "answer_text": "I would build a detailed comparison and revisit it before choosing.",
+      "gold_value": 0.1,
+      "evidence": "The user describes extensive research, comparison and revisiting before committing, indicating a strongly deliberate decision process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q19_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q19",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing a course from several similar options.",
+      "answer": "B",
+      "answer_text": "I would research extensively and possibly ask several people.",
+      "gold_value": 0.3,
+      "evidence": "The user describes considerable research or consultation before deciding, indicating a deliberate lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q19_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q19",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing a course from several similar options.",
+      "answer": "C",
+      "answer_text": "I would compare the main criteria and then choose.",
+      "gold_value": 0.5,
+      "evidence": "The user describes a moderate amount of research and decides once sufficiently informed, indicating a balanced pace.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q19_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q19",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing a course from several similar options.",
+      "answer": "D",
+      "answer_text": "I would select a strong option after a quick comparison.",
+      "gold_value": 0.7,
+      "evidence": "The user describes a short review followed by a fairly quick decision, indicating a fast lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q19_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q19",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You are choosing a course from several similar options.",
+      "answer": "E",
+      "answer_text": "I would choose the first course that feels like a good fit.",
+      "gold_value": 0.9,
+      "evidence": "The user describes committing almost immediately on first instinct or first acceptable option, indicating a strongly fast/intuitive process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q20_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q20",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to choose a small purchase today, and changing your mind later would be easy.",
+      "answer": "A",
+      "answer_text": "I would still research extensively before buying.",
+      "gold_value": 0.1,
+      "evidence": "The user describes extensive research, comparison and revisiting before committing, indicating a strongly deliberate decision process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q20_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q20",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to choose a small purchase today, and changing your mind later would be easy.",
+      "answer": "B",
+      "answer_text": "I would compare several options carefully.",
+      "gold_value": 0.3,
+      "evidence": "The user describes considerable research or consultation before deciding, indicating a deliberate lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q20_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q20",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to choose a small purchase today, and changing your mind later would be easy.",
+      "answer": "C",
+      "answer_text": "I would check the basics and decide.",
+      "gold_value": 0.5,
+      "evidence": "The user describes a moderate amount of research and decides once sufficiently informed, indicating a balanced pace.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q20_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q20",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to choose a small purchase today, and changing your mind later would be easy.",
+      "answer": "D",
+      "answer_text": "I would make a quick choice among reasonable options.",
+      "gold_value": 0.7,
+      "evidence": "The user describes a short review followed by a fairly quick decision, indicating a fast lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q20_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q20",
+      "trait_id": "T04",
+      "trait": "decisiveness_speed",
+      "scenario": "You need to choose a small purchase today, and changing your mind later would be easy.",
+      "answer": "E",
+      "answer_text": "I would trust my first acceptable option and move on.",
+      "gold_value": 0.9,
+      "evidence": "The user describes committing almost immediately on first instinct or first acceptable option, indicating a strongly fast/intuitive process.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q21_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q21",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "Two apartments are similar. One has better numbers for price, commute and space; the other immediately feels like home.",
+      "answer": "A",
+      "answer_text": "I would choose the one that feels right even if the numbers are worse.",
+      "gold_value": 0.1,
+      "evidence": "The user follows feeling or gut over measurable evidence, indicating strongly emotional/intuitive weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q21_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q21",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "Two apartments are similar. One has better numbers for price, commute and space; the other immediately feels like home.",
+      "answer": "B",
+      "answer_text": "I would give my feeling more weight than the comparison.",
+      "gold_value": 0.3,
+      "evidence": "The user gives feeling or personal judgment more weight than the data, indicating an emotional lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q21_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q21",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "Two apartments are similar. One has better numbers for price, commute and space; the other immediately feels like home.",
+      "answer": "C",
+      "answer_text": "I would balance the feeling with the measurable differences.",
+      "gold_value": 0.5,
+      "evidence": "The user balances feeling with measurable evidence or investigates both, indicating a balanced weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q21_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q21",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "Two apartments are similar. One has better numbers for price, commute and space; the other immediately feels like home.",
+      "answer": "D",
+      "answer_text": "I would give the measurable differences more weight unless the feeling is unusually strong.",
+      "gold_value": 0.7,
+      "evidence": "The user gives measurable evidence more weight while still considering feeling, indicating an analytical lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q21_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q21",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "Two apartments are similar. One has better numbers for price, commute and space; the other immediately feels like home.",
+      "answer": "E",
+      "answer_text": "I would choose primarily from a structured comparison of price, commute, space and other criteria.",
+      "gold_value": 0.9,
+      "evidence": "The user decides primarily from explicit criteria and structured comparison, indicating strongly analytical weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q22_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q22",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are deciding whether to accept an opportunity. Your gut strongly says yes, but the available data shows several meaningful disadvantages.",
+      "answer": "A",
+      "answer_text": "I would follow my gut despite the data.",
+      "gold_value": 0.1,
+      "evidence": "The user follows feeling or gut over measurable evidence, indicating strongly emotional/intuitive weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q22_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q22",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are deciding whether to accept an opportunity. Your gut strongly says yes, but the available data shows several meaningful disadvantages.",
+      "answer": "B",
+      "answer_text": "I would give the gut feeling substantial weight.",
+      "gold_value": 0.3,
+      "evidence": "The user gives feeling or personal judgment more weight than the data, indicating an emotional lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q22_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q22",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are deciding whether to accept an opportunity. Your gut strongly says yes, but the available data shows several meaningful disadvantages.",
+      "answer": "C",
+      "answer_text": "I would investigate the conflict between feeling and evidence before deciding.",
+      "gold_value": 0.5,
+      "evidence": "The user balances feeling with measurable evidence or investigates both, indicating a balanced weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q22_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q22",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are deciding whether to accept an opportunity. Your gut strongly says yes, but the available data shows several meaningful disadvantages.",
+      "answer": "D",
+      "answer_text": "I would mostly follow the evidence unless the emotional signal reveals something concrete.",
+      "gold_value": 0.7,
+      "evidence": "The user gives measurable evidence more weight while still considering feeling, indicating an analytical lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q22_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q22",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are deciding whether to accept an opportunity. Your gut strongly says yes, but the available data shows several meaningful disadvantages.",
+      "answer": "E",
+      "answer_text": "I would prioritize the evidence and explicit criteria over my gut feeling.",
+      "gold_value": 0.9,
+      "evidence": "The user decides primarily from explicit criteria and structured comparison, indicating strongly analytical weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q23_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q23",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are buying an expensive device and have narrowed the choice to three options.",
+      "answer": "A",
+      "answer_text": "I would choose the one I connect with or simply like most.",
+      "gold_value": 0.1,
+      "evidence": "The user follows feeling or gut over measurable evidence, indicating strongly emotional/intuitive weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q23_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q23",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are buying an expensive device and have narrowed the choice to three options.",
+      "answer": "B",
+      "answer_text": "I would let personal preference and feeling dominate the final choice.",
+      "gold_value": 0.3,
+      "evidence": "The user gives feeling or personal judgment more weight than the data, indicating an emotional lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q23_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q23",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are buying an expensive device and have narrowed the choice to three options.",
+      "answer": "C",
+      "answer_text": "I would combine how each feels with objective features.",
+      "gold_value": 0.5,
+      "evidence": "The user balances feeling with measurable evidence or investigates both, indicating a balanced weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q23_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q23",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are buying an expensive device and have narrowed the choice to three options.",
+      "answer": "D",
+      "answer_text": "I would use objective features as the main guide but still consider preference.",
+      "gold_value": 0.7,
+      "evidence": "The user gives measurable evidence more weight while still considering feeling, indicating an analytical lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q23_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q23",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You are buying an expensive device and have narrowed the choice to three options.",
+      "answer": "E",
+      "answer_text": "I would build a detailed comparison using specifications, price and performance.",
+      "gold_value": 0.9,
+      "evidence": "The user decides primarily from explicit criteria and structured comparison, indicating strongly analytical weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q24_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q24",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "A friend recommends a decision because they have a strong positive feeling about it, but you have numerical evidence that points in another direction.",
+      "answer": "A",
+      "answer_text": "I would trust the feeling and recommendation.",
+      "gold_value": 0.1,
+      "evidence": "The user follows feeling or gut over measurable evidence, indicating strongly emotional/intuitive weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q24_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q24",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "A friend recommends a decision because they have a strong positive feeling about it, but you have numerical evidence that points in another direction.",
+      "answer": "B",
+      "answer_text": "I would give the personal judgment more weight than the numbers.",
+      "gold_value": 0.3,
+      "evidence": "The user gives feeling or personal judgment more weight than the data, indicating an emotional lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q24_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q24",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "A friend recommends a decision because they have a strong positive feeling about it, but you have numerical evidence that points in another direction.",
+      "answer": "C",
+      "answer_text": "I would investigate both before choosing.",
+      "gold_value": 0.5,
+      "evidence": "The user balances feeling with measurable evidence or investigates both, indicating a balanced weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q24_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q24",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "A friend recommends a decision because they have a strong positive feeling about it, but you have numerical evidence that points in another direction.",
+      "answer": "D",
+      "answer_text": "I would lean toward the numbers while considering why the friend feels strongly.",
+      "gold_value": 0.7,
+      "evidence": "The user gives measurable evidence more weight while still considering feeling, indicating an analytical lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q24_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q24",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "A friend recommends a decision because they have a strong positive feeling about it, but you have numerical evidence that points in another direction.",
+      "answer": "E",
+      "answer_text": "I would prioritize the quantitative evidence and explicit comparison.",
+      "gold_value": 0.9,
+      "evidence": "The user decides primarily from explicit criteria and structured comparison, indicating strongly analytical weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q25_A",
+      "source": "onboarding_quiz",
+      "question_id": "Q25",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You must choose between two career paths. One feels exciting and meaningful; the other scores better across salary, stability and advancement criteria.",
+      "answer": "A",
+      "answer_text": "I would choose the exciting and meaningful path because that feeling matters most.",
+      "gold_value": 0.1,
+      "evidence": "The user follows feeling or gut over measurable evidence, indicating strongly emotional/intuitive weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q25_B",
+      "source": "onboarding_quiz",
+      "question_id": "Q25",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You must choose between two career paths. One feels exciting and meaningful; the other scores better across salary, stability and advancement criteria.",
+      "answer": "B",
+      "answer_text": "I would let meaning and excitement outweigh most of the criteria.",
+      "gold_value": 0.3,
+      "evidence": "The user gives feeling or personal judgment more weight than the data, indicating an emotional lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q25_C",
+      "source": "onboarding_quiz",
+      "question_id": "Q25",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You must choose between two career paths. One feels exciting and meaningful; the other scores better across salary, stability and advancement criteria.",
+      "answer": "C",
+      "answer_text": "I would balance meaning with the objective career factors.",
+      "gold_value": 0.5,
+      "evidence": "The user balances feeling with measurable evidence or investigates both, indicating a balanced weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q25_D",
+      "source": "onboarding_quiz",
+      "question_id": "Q25",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You must choose between two career paths. One feels exciting and meaningful; the other scores better across salary, stability and advancement criteria.",
+      "answer": "D",
+      "answer_text": "I would give the career criteria more weight while still considering meaning.",
+      "gold_value": 0.7,
+      "evidence": "The user gives measurable evidence more weight while still considering feeling, indicating an analytical lean.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    },
+    {
+      "record_id": "Q25_E",
+      "source": "onboarding_quiz",
+      "question_id": "Q25",
+      "trait_id": "T05",
+      "trait": "emotional_vs_analytical",
+      "scenario": "You must choose between two career paths. One feels exciting and meaningful; the other scores better across salary, stability and advancement criteria.",
+      "answer": "E",
+      "answer_text": "I would score the alternatives against explicit criteria and choose the stronger overall result.",
+      "gold_value": 0.9,
+      "evidence": "The user decides primarily from explicit criteria and structured comparison, indicating strongly analytical weighting.",
+      "confidence": 0.7,
+      "situational_factor": null,
+      "context_type": "trait_revealing"
+    }
+  ]
+}
