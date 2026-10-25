@@ -30,7 +30,9 @@ Decision-Mirror/
 |           |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
 |           |   |-- Decision_Mirror_Task4_Shams_Amr.docx
 |           |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
-|           `-- 00_team_review.md
+|           |-- 00_team_review.md
+|           |-- 01_input_spec.md
+|           `-- 02_output_spec.md
 |-- evaluation/  # Evaluation outputs and results
 |   `-- .gitkeep
 |-- experiments/  # Experimental and legacy implementations
@@ -46,7 +48,33 @@ Decision-Mirror/
 |           |-- v1.2.md
 |           `-- v1.3.md
 |-- schemas/  # Data contracts and validation schemas
-|   `-- .gitkeep
+|   |-- examples/
+|   |   |-- invalid/
+|   |   |   |-- duplicate_trait.json
+|   |   |   |-- evidence_is_string.json
+|   |   |   |-- extra_top_level_field.json
+|   |   |   |-- five_traits.json
+|   |   |   |-- markdown_fenced_json.json
+|   |   |   |-- model_emits_error_status.json
+|   |   |   |-- null_score_nonzero_confidence.json
+|   |   |   |-- null_score_with_evidence.json
+|   |   |   |-- plain_text_response.json
+|   |   |   |-- score_above_one.json
+|   |   |   |-- score_string_null.json
+|   |   |   |-- success_all_null_scores.json
+|   |   |   |-- t06_scored_without_history.json
+|   |   |   |-- wrong_trait_name_for_id.json
+|   |   |   `-- wrong_trait_order.json
+|   |   `-- valid/
+|   |       |-- fully_scored_narrative.json
+|   |       |-- insufficient_evidence_short_text.json
+|   |       |-- multi_trait_narrative.json
+|   |       |-- quiz_success_off_target_null.json
+|   |       |-- situational_constraint.json
+|   |       `-- t06_null_without_history.json
+|   |-- extraction_input.schema.json
+|   |-- extraction_output.schema.json
+|   `-- extraction_result.schema.json
 |-- scripts/  # Project maintenance utilities
 |   `-- update_file_structure.py
 |-- src/  # Decision Mirror application source
@@ -56,7 +84,9 @@ Decision-Mirror/
 |       |-- common/
 |       |   `-- __init__.py
 |       |-- extraction/
-|       |   `-- __init__.py
+|       |   |-- __init__.py
+|       |   |-- payloads.py
+|       |   `-- validation.py
 |       |-- profiling/
 |       |   `-- __init__.py
 |       |-- quiz/
@@ -67,7 +97,8 @@ Decision-Mirror/
 |       |   `-- __init__.py
 |       `-- __init__.py
 |-- tests/  # Automated test suite
-|   `-- .gitkeep
+|   |-- .gitkeep
+|   `-- test_contract.py
 |-- .env
 |-- .env.example
 |-- .gitignore

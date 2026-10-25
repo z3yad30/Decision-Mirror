@@ -1,0 +1,19 @@
+{
+  "payload": {
+    "decision_id": "Q001",
+    "source_type": "onboarding_quiz",
+    "decision_text": "Scenario: You can choose a stable role or an uncertain startup.\nSelected answer: I chose the stable role because my family depends on my income."
+  },
+  "response": {
+    "decision_id": "Q001",
+    "extraction_status": "success",
+    "traits": [
+      {"trait_id": "T01", "trait_name": "Risk Tolerance", "score": 0.3, "confidence": 0.63, "evidence": ["I chose the stable role because my family depends on my income."], "situational_factor": {"category": "family_pressure", "description": "The user's family depends on their income."}, "context_notes": "Family pressure may explain the stable choice and lower confidence."},
+      {"trait_id": "T02", "trait_name": "Time Horizon", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "No time-horizon preference is stated."},
+      {"trait_id": "T03", "trait_name": "Locus of Priority", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "The response gives no independent priority evidence."},
+      {"trait_id": "T04", "trait_name": "Decisiveness Speed", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "No evidence indicates how quickly the choice was made."},
+      {"trait_id": "T05", "trait_name": "Emotional vs. Analytical Weighting", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "No evidence distinguishes emotional from analytical reasoning."},
+      {"trait_id": "T06", "trait_name": "Self-Consistency", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": ""}
+    ]
+  }
+}

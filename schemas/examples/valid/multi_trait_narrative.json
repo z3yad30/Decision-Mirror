@@ -1,0 +1,19 @@
+{
+  "payload": {
+    "decision_id": "D004",
+    "source_type": "decision_log",
+    "decision_text": "I compared the secure job with the startup for a week. I chose the startup because its long-term growth mattered more to me than a guaranteed salary."
+  },
+  "response": {
+    "decision_id": "D004",
+    "extraction_status": "success",
+    "traits": [
+      {"trait_id": "T01", "trait_name": "Risk Tolerance", "score": 0.75, "confidence": 0.8, "evidence": ["I chose the startup"], "situational_factor": null, "context_notes": ""},
+      {"trait_id": "T02", "trait_name": "Time Horizon", "score": 0.82, "confidence": 0.81, "evidence": ["its long-term growth mattered more to me than a guaranteed salary"], "situational_factor": null, "context_notes": ""},
+      {"trait_id": "T03", "trait_name": "Locus of Priority", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "No other person's interests are mentioned."},
+      {"trait_id": "T04", "trait_name": "Decisiveness Speed", "score": 0.45, "confidence": 0.54, "evidence": ["I compared the secure job with the startup for a week."], "situational_factor": null, "context_notes": ""},
+      {"trait_id": "T05", "trait_name": "Emotional vs. Analytical Weighting", "score": 0.7, "confidence": 0.67, "evidence": ["I compared the secure job with the startup for a week."], "situational_factor": null, "context_notes": ""},
+      {"trait_id": "T06", "trait_name": "Self-Consistency", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": ""}
+    ]
+  }
+}

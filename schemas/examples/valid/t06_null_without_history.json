@@ -1,0 +1,19 @@
+{
+  "payload": {
+    "decision_id": "D005",
+    "source_type": "decision_log",
+    "decision_text": "I chose the nearby university because it lets me keep working."
+  },
+  "response": {
+    "decision_id": "D005",
+    "extraction_status": "success",
+    "traits": [
+      {"trait_id": "T01", "trait_name": "Risk Tolerance", "score": 0.4, "confidence": 0.48, "evidence": ["I chose the nearby university"], "situational_factor": null, "context_notes": ""},
+      {"trait_id": "T02", "trait_name": "Time Horizon", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "The text gives no time-horizon evidence."},
+      {"trait_id": "T03", "trait_name": "Locus of Priority", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "The text does not identify whose priorities guided the choice."},
+      {"trait_id": "T04", "trait_name": "Decisiveness Speed", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "The text does not say how quickly the decision was made."},
+      {"trait_id": "T05", "trait_name": "Emotional vs. Analytical Weighting", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": "No reasoning style is described."},
+      {"trait_id": "T06", "trait_name": "Self-Consistency", "score": null, "confidence": 0.0, "evidence": [], "situational_factor": null, "context_notes": ""}
+    ]
+  }
+}

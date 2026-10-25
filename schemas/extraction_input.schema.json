@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://decision-mirror.local/schemas/extraction_input.schema.json",
+  "title": "Decision Mirror Extraction Input",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_id",
+    "user_id",
+    "source_type",
+    "decision_text",
+    "ontology_version"
+  ],
+  "properties": {
+    "decision_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.\\-]{1,64}$"
+    },
+    "user_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.\\-]{1,64}$"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": [
+        "decision_log",
+        "onboarding_quiz"
+      ]
+    },
+    "decision_text": {
+      "type": "string",
+      "pattern": "^\\s*\\S(?:[\\s\\S]{0,3998}\\S)?\\s*$"
+    },
+    "ontology_version": {
+      "type": "string",
+      "enum": [
+        "v1.0"
+      ]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(?:\\.\\d+)?Z$"
+    },
+    "language": {
+      "type": "string",
+      "pattern": "^(?:[A-Za-z]{2,8}|x)(?:-[A-Za-z0-9]{1,8})*$",
+      "default": "en"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "question_id": {
+          "type": "string"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "Reserved for a future contract version; absent from Task 4 payloads."
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "required": [
+          "source_type"
+        ],
+        "properties": {
+          "source_type": {
+            "const": "decision_log"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "context": {
+            "not": {
+              "required": [
+                "question_id"
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}

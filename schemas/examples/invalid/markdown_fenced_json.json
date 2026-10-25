@@ -1,0 +1,6 @@
+{
+  "payload": {"decision_id": "D900", "decision_text": "I chose the stable role because I value predictable income over the uncertain startup."},
+  "raw_text": "```json\n{\"decision_id\":\"D900\",\"extraction_status\":\"insufficient_evidence\",\"traits\":[]}\n```",
+  "expected_error_type": "not_json",
+  "expected_recovered": true
+}

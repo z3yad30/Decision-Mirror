@@ -1,0 +1,12 @@
+{
+  "payload": {"decision_id": "D900", "decision_text": "I chose the stable role because I value predictable income over the uncertain startup."},
+  "response": {"decision_id": "D900", "extraction_status": "success", "traits": [
+    {"trait_id": "T01", "trait_name": "Risk Tolerance", "score": null, "confidence": 0, "evidence": [], "situational_factor": null, "context_notes": "No risk evidence."},
+    {"trait_id": "T02", "trait_name": "Time Horizon", "score": null, "confidence": 0, "evidence": [], "situational_factor": null, "context_notes": "No time evidence."},
+    {"trait_id": "T03", "trait_name": "Locus of Priority", "score": null, "confidence": 0, "evidence": [], "situational_factor": null, "context_notes": "No priority evidence."},
+    {"trait_id": "T04", "trait_name": "Decisiveness Speed", "score": null, "confidence": 0, "evidence": [], "situational_factor": null, "context_notes": "No speed evidence."},
+    {"trait_id": "T05", "trait_name": "Emotional vs. Analytical Weighting", "score": null, "confidence": 0, "evidence": [], "situational_factor": null, "context_notes": "No reasoning evidence."},
+    {"trait_id": "T06", "trait_name": "Self-Consistency", "score": 0.6, "confidence": 0.8, "evidence": ["I chose the stable role"], "situational_factor": null, "context_notes": "A history-based consistency score."}
+  ]},
+  "expected_error_type": "semantic_violation"
+}

@@ -1,0 +1,5 @@
+{
+  "payload": {"decision_id": "D900", "decision_text": "I chose the stable role because I value predictable income over the uncertain startup."},
+  "response": {"decision_id": "D900", "extraction_status": "error", "traits": []},
+  "expected_error_type": "schema_violation"
+}

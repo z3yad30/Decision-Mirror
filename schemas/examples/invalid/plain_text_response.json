@@ -1,0 +1,5 @@
+{
+  "payload": {"decision_id": "D900", "decision_text": "I chose the stable role because I value predictable income over the uncertain startup."},
+  "raw_text": "The decision suggests a cautious preference.",
+  "expected_error_type": "not_json"
+}

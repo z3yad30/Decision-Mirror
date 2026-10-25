@@ -35,7 +35,25 @@ Run the test suite:
 pytest -q
 ```
 
+## Contracts
+
+Task 4's frozen contracts are in [`schemas/`](./schemas/):
+[`extraction_input.schema.json`](./schemas/extraction_input.schema.json),
+[`extraction_output.schema.json`](./schemas/extraction_output.schema.json), and
+[`extraction_result.schema.json`](./schemas/extraction_result.schema.json).
+The field tables, semantic rules, and malformed-output policy are documented in
+[`01_input_spec.md`](./docs/tasks/task-4-llm-extraction/01_input_spec.md) and
+[`02_output_spec.md`](./docs/tasks/task-4-llm-extraction/02_output_spec.md).
+Validate a JSON instance against a schema with:
+
+```powershell
+python -c "import json, jsonschema; jsonschema.validate(json.load(open(r'payload.json', encoding='utf-8')), json.load(open(r'schemas/extraction_input.schema.json', encoding='utf-8')))"
+```
+
+The example fixture sets are validated together with the schemas and semantic
+rules by `pytest -q`.
+
 ## Task 4 status
 
 - [x] Prompt 1: environment, scaffold, source archive, and team review.
-- [ ] Later prompts: not yet completed.
+- [x] Prompt 2: frozen input/output contracts, validators, examples, and tests.

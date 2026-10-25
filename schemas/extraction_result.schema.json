@@ -1,0 +1,288 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://decision-mirror.local/schemas/extraction_result.schema.json",
+  "title": "Decision Mirror Extraction Pipeline Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "decision_id",
+    "extraction_status",
+    "traits",
+    "model_version",
+    "prompt_version",
+    "prompt_sha256",
+    "error",
+    "validation"
+  ],
+  "definitions": {
+    "trait": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "trait_id",
+        "trait_name",
+        "score",
+        "confidence",
+        "evidence",
+        "situational_factor",
+        "context_notes"
+      ],
+      "properties": {
+        "trait_id": {
+          "type": "string",
+          "enum": ["T01", "T02", "T03", "T04", "T05", "T06"]
+        },
+        "trait_name": {
+          "type": "string",
+          "enum": [
+            "Risk Tolerance",
+            "Time Horizon",
+            "Locus of Priority",
+            "Decisiveness Speed",
+            "Emotional vs. Analytical Weighting",
+            "Self-Consistency"
+          ]
+        },
+        "score": {
+          "type": ["number", "null"],
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "confidence": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 1.0
+        },
+        "evidence": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "situational_factor": {
+          "oneOf": [
+            {"type": "null"},
+            {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["category", "description"],
+              "properties": {
+                "category": {
+                  "type": "string",
+                  "enum": [
+                    "financial_dependency",
+                    "family_pressure",
+                    "external_deadline",
+                    "external_constraint",
+                    "limited_alternatives",
+                    "social_influence",
+                    "low_stakes",
+                    "other"
+                  ]
+                },
+                "description": {"type": "string"}
+              }
+            }
+          ]
+        },
+        "context_notes": {"type": "string"}
+      },
+      "allOf": [
+        {
+          "if": {
+            "required": ["trait_id", "trait_name"],
+            "properties": {"trait_id": {"const": "T01"}}
+          },
+          "then": {
+            "properties": {"trait_name": {"const": "Risk Tolerance"}}
+          }
+        },
+        {
+          "if": {
+            "required": ["trait_id", "trait_name"],
+            "properties": {"trait_id": {"const": "T02"}}
+          },
+          "then": {
+            "properties": {"trait_name": {"const": "Time Horizon"}}
+          }
+        },
+        {
+          "if": {
+            "required": ["trait_id", "trait_name"],
+            "properties": {"trait_id": {"const": "T03"}}
+          },
+          "then": {
+            "properties": {"trait_name": {"const": "Locus of Priority"}}
+          }
+        },
+        {
+          "if": {
+            "required": ["trait_id", "trait_name"],
+            "properties": {"trait_id": {"const": "T04"}}
+          },
+          "then": {
+            "properties": {"trait_name": {"const": "Decisiveness Speed"}}
+          }
+        },
+        {
+          "if": {
+            "required": ["trait_id", "trait_name"],
+            "properties": {"trait_id": {"const": "T05"}}
+          },
+          "then": {
+            "properties": {
+              "trait_name": {"const": "Emotional vs. Analytical Weighting"}
+            }
+          }
+        },
+        {
+          "if": {
+            "required": ["trait_id", "trait_name"],
+            "properties": {"trait_id": {"const": "T06"}}
+          },
+          "then": {
+            "properties": {"trait_name": {"const": "Self-Consistency"}}
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "trait_id": {"enum": ["T01", "T02", "T03", "T04", "T05"]},
+              "score": {"type": "null"}
+            },
+            "required": ["trait_id", "score"]
+          },
+          "then": {
+            "properties": {"context_notes": {"minLength": 1}}
+          }
+        }
+      ]
+    }
+  },
+  "properties": {
+    "decision_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9_.\\-]{1,64}$"
+    },
+    "extraction_status": {
+      "type": "string",
+      "enum": [
+        "success",
+        "insufficient_evidence",
+        "error"
+      ]
+    },
+    "traits": {
+      "oneOf": [
+        {
+          "type": "array",
+          "minItems": 6,
+          "maxItems": 6,
+          "items": {
+            "$ref": "#/definitions/trait"
+          }
+        },
+        {
+          "type": "null"
+        }
+      ]
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prompt_sha256": {
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{64}$"
+    },
+    "error": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "type",
+            "message"
+          ],
+          "properties": {
+            "type": {
+              "type": "string",
+              "enum": [
+                "empty_response",
+                "not_json",
+                "schema_violation",
+                "semantic_violation",
+                "api_error"
+              ]
+            },
+            "message": {
+              "type": "string"
+            }
+          }
+        }
+      ]
+    },
+    "validation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_valid",
+        "semantic_valid",
+        "warnings"
+      ],
+      "properties": {
+        "schema_valid": {
+          "type": "boolean"
+        },
+        "semantic_valid": {
+          "type": "boolean"
+        },
+        "warnings": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "extraction_status": {
+            "const": "error"
+          }
+        },
+        "required": [
+          "extraction_status"
+        ]
+      },
+      "then": {
+        "properties": {
+          "traits": {
+            "type": "null"
+          },
+          "error": {
+            "type": "object"
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "traits": {
+            "type": "array"
+          },
+          "error": {
+            "type": "null"
+          }
+        }
+      }
+    }
+  ]
+}
