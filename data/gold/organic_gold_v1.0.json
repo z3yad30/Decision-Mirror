@@ -1,0 +1,399 @@
+{
+  "metadata": {
+    "name": "Decision Mirror Organic Decision Gold Dataset",
+    "version": "1.0.0",
+    "source_document": "docs/ontology/Decision_Mirror_Trait_Ontology_Complete.pdf",
+    "source_section": "§9 Example Annotated Decisions",
+    "record_count": 20,
+    "transcription_note": "Decision text and annotation wording transcribed from the source PDF. Dashed values remain null; no values were inferred."
+  },
+  "records": [
+    {
+      "record_id": "ORG01",
+      "source": "decision_log",
+      "decision_text": "I rejected a startup position because I couldn't risk losing my current income.",
+      "gold_traits": {
+        "T01": {"value": 0.3, "confidence": 0.72},
+        "T02": {"value": 0.4, "confidence": 0.45},
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["I couldn't risk losing my current income."],
+      "gold_situational_factor": {
+        "category": "financial_dependency",
+        "description": "Current financial dependency (explicitly stated) -- dampens confidence that this reflects a stable trait rather than a constraint."
+      },
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG02",
+      "source": "decision_log",
+      "decision_text": "I took the international assignment even though my partner didn't want to move, because it was the right step for my career.",
+      "gold_traits": {
+        "T01": {"value": 0.6, "confidence": 0.55},
+        "T02": {"value": 0.7, "confidence": 0.55},
+        "T03": {"value": 0.8, "confidence": 0.8},
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["\"It was the right step for my career,\" chosen despite partner's preference."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG03",
+      "source": "decision_log",
+      "decision_text": "I spent three weeks comparing every laptop on the market with a spreadsheet before buying one.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": null,
+        "T04": {"value": 0.1, "confidence": 0.85},
+        "T05": {"value": 0.9, "confidence": 0.85},
+        "T06": null
+      },
+      "gold_evidence": ["\"Three weeks comparing every laptop... with a spreadsheet.\""],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG04",
+      "source": "decision_log",
+      "decision_text": "I wanted to take the risky opportunity, but my family convinced me not to, so I stayed in my current job.",
+      "gold_traits": {
+        "T01": {"value": null, "confidence": 0.35},
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["\"I wanted to take the risky opportunity\" indicates underlying preference, but the final choice was overridden by family influence."],
+      "gold_situational_factor": {
+        "category": "family_pressure",
+        "description": "Family pressure explicitly named as the deciding factor, not the person's own risk stance."
+      },
+      "edge_case": 1,
+      "ambiguous_gold": true,
+      "ambiguity_note": "The ontology gives Risk Tolerance as -- with confidence 0.35. Its note says to record the stated preference at reduced confidence, while also saying not to score the trait from the final action; the numeric value is intentionally left null."
+    },
+    {
+      "record_id": "ORG05",
+      "source": "decision_log",
+      "decision_text": "I chose the cheaper university because I couldn't afford the other one.",
+      "gold_traits": {
+        "T01": {"value": null, "confidence": 0.2},
+        "T02": {"value": null, "confidence": 0.2},
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["\"I couldn't afford the other one.\""],
+      "gold_situational_factor": {
+        "category": "external_constraint",
+        "description": "Pure financial constraint -- no value-based reasoning is present at all."
+      },
+      "edge_case": 2,
+      "ambiguous_gold": true,
+      "ambiguity_note": "The ontology assigns -- to Risk Tolerance and Time Horizon despite confidence 0.20 for each; the scores remain null."
+    },
+    {
+      "record_id": "ORG06",
+      "source": "decision_log",
+      "decision_text": "I chose option A.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": [],
+      "gold_situational_factor": null,
+      "edge_case": 4,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG07",
+      "source": "decision_log",
+      "decision_text": "I quit my stable corporate job to freelance full-time, even though income will be unpredictable for at least a year.",
+      "gold_traits": {
+        "T01": {"value": 0.85, "confidence": 0.8},
+        "T02": {"value": 0.65, "confidence": 0.55},
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["\"Even though income will be unpredictable for at least a year\" -- explicit acceptance of near-term instability for a longer-term goal."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG08",
+      "source": "decision_log",
+      "decision_text": "I stayed an extra year at my job I disliked so I could vest my stock options before leaving.",
+      "gold_traits": {
+        "T01": null,
+        "T02": {"value": 0.85, "confidence": 0.78},
+        "T03": null,
+        "T04": null,
+        "T05": {"value": 0.75, "confidence": 0.55},
+        "T06": null
+      },
+      "gold_evidence": ["Endured dissatisfaction for a specific deferred financial benefit."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG09",
+      "source": "decision_log",
+      "decision_text": "I said yes to the blind date because my friend really wanted me to meet him, even though I wasn't in the mood to go out.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": {"value": 0.25, "confidence": 0.55},
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["Went despite personal reluctance, to satisfy a friend's wish."],
+      "gold_situational_factor": {
+        "category": "low_stakes",
+        "description": "Low-stakes social decision -- evidence is present but the decision's overall significance is minor, which should be reflected in lower weight during profile aggregation even though confidence in the extraction itself is moderate."
+      },
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG10",
+      "source": "decision_log",
+      "decision_text": "Six months ago I would never have negotiated my salary, but this time I pushed back and asked for 15% more.",
+      "gold_traits": {
+        "T01": {"value": 0.65, "confidence": 0.6},
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["Explicit self-reported contrast with past behavior."],
+      "gold_situational_factor": null,
+      "edge_case": 3,
+      "ambiguous_gold": true,
+      "ambiguity_note": "The ontology labels the decision an ambiguous edge case and describes it as Self-Consistency-relevant, but assigns no T06 value."
+    },
+    {
+      "record_id": "ORG11",
+      "source": "decision_log",
+      "decision_text": "I turned down a higher-paying job in another city to stay near my aging parents.",
+      "gold_traits": {
+        "T01": null,
+        "T02": {"value": 0.6, "confidence": 0.4},
+        "T03": {"value": 0.15, "confidence": 0.8},
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["Explicit prioritization of family proximity over a better financial offer."],
+      "gold_situational_factor": {
+        "category": "other",
+        "description": "Caregiving context noted but framed as a value, not merely a constraint -- raises confidence that this reflects a stable priority."
+      },
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG12",
+      "source": "decision_log",
+      "decision_text": "I picked the restaurant everyone else wanted even though I don't love that cuisine.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": {"value": 0.2, "confidence": 0.35},
+        "T04": null,
+        "T05": null,
+        "T06": null
+      },
+      "gold_evidence": ["Deferred to group preference over personal preference."],
+      "gold_situational_factor": {
+        "category": "low_stakes",
+        "description": "Extremely low-stakes decision; should contribute minimally to the running profile despite a clear directional signal."
+      },
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG13",
+      "source": "decision_log",
+      "decision_text": "I signed the lease within an hour of seeing the apartment because I just had a good feeling about it.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": null,
+        "T04": {"value": 0.9, "confidence": 0.85},
+        "T05": {"value": 0.15, "confidence": 0.75},
+        "T06": null
+      },
+      "gold_evidence": ["\"Within an hour\" and \"just had a good feeling.\""],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG14",
+      "source": "decision_log",
+      "decision_text": "I've turned down three promotions in a row because each one would have meant more travel and less time with my kids.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": {"value": 0.15, "confidence": 0.85},
+        "T04": null,
+        "T05": null,
+        "T06": {"value": 0.85, "confidence": 0.8}
+      },
+      "gold_evidence": ["Repeated pattern across three separate decisions with the same stated reasoning."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG15",
+      "source": "decision_log",
+      "decision_text": "I went with the loan offer with the lower monthly payment, without really comparing the total interest over the life of the loan.",
+      "gold_traits": {
+        "T01": null,
+        "T02": {"value": 0.2, "confidence": 0.55},
+        "T03": null,
+        "T04": null,
+        "T05": {"value": 0.35, "confidence": 0.4},
+        "T06": null
+      },
+      "gold_evidence": ["Optimized for near-term cash flow without evaluating longer-term total cost."],
+      "gold_situational_factor": {
+        "category": "financial_dependency",
+        "description": "Possible financial pressure implied but not stated -- confidence kept moderate rather than high."
+      },
+      "edge_case": null,
+      "ambiguous_gold": true,
+      "ambiguity_note": "The ontology explicitly says it is unclear whether the shorter time horizon was a preference or a necessity such as limited monthly cash, and flags it for clarification."
+    },
+    {
+      "record_id": "ORG16",
+      "source": "decision_log",
+      "decision_text": "I've been offered the same kind of 'safe but boring' role three times in five years and rejected all three for something less certain but more interesting.",
+      "gold_traits": {
+        "T01": {"value": 0.75, "confidence": 0.8},
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": {"value": 0.85, "confidence": 0.82}
+      },
+      "gold_evidence": ["Repeated, directionally consistent choices across multiple independent decisions."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG17",
+      "source": "decision_log",
+      "decision_text": "I stayed in an unhappy relationship for two years because I was scared of being alone, even though I knew logically it wasn't working.",
+      "gold_traits": {
+        "T01": {"value": 0.25, "confidence": 0.45},
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": {"value": 0.15, "confidence": 0.75},
+        "T06": null
+      },
+      "gold_evidence": ["Explicit statement that fear overrode acknowledged logical conclusion."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    },
+    {
+      "record_id": "ORG18",
+      "source": "decision_log",
+      "decision_text": "Over the last two years my decisions have shifted from consistently risk-averse to consistently more willing to take chances, coinciding with a promotion and higher savings.",
+      "gold_traits": {
+        "T01": {"value": 0.65, "confidence": 0.55},
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": {"value": 0.4, "confidence": 0.5}
+      },
+      "gold_evidence": ["Explicit longitudinal self-report of change, with a plausible situational driver (financial security) named."],
+      "gold_situational_factor": {
+        "category": "financial_dependency",
+        "description": "Increased financial cushion given as the likely cause -- this should be modeled as a genuine profile shift, not as inconsistency to be penalized."
+      },
+      "edge_case": 3,
+      "ambiguous_gold": true,
+      "ambiguity_note": "The ontology labels it an ambiguous edge case and describes a real situationally driven profile shift; interpretation of T06 should not turn this change into a penalty."
+    },
+    {
+      "record_id": "ORG19",
+      "source": "decision_log",
+      "decision_text": "I keep saying I want to prioritize my health, but every time work gets busy I skip the gym and work late instead.",
+      "gold_traits": {
+        "T01": null,
+        "T02": null,
+        "T03": null,
+        "T04": null,
+        "T05": null,
+        "T06": {"value": 0.25, "confidence": 0.6}
+      },
+      "gold_evidence": ["Explicit gap between stated value and repeated behavior."],
+      "gold_situational_factor": {
+        "category": "other",
+        "description": "Recurring situational pressure (work busyness) is the repeated trigger -- itself a pattern worth surfacing to the user descriptively."
+      },
+      "edge_case": 5,
+      "ambiguous_gold": true,
+      "ambiguity_note": "The ontology labels the decision an ambiguous edge case and requires a descriptive account of the context-dependent gap, not a judgmental label."
+    },
+    {
+      "record_id": "ORG20",
+      "source": "decision_log",
+      "decision_text": "I moved back in with my parents for a year to save aggressively before buying a home, even though it meant giving up my independence and a shorter commute.",
+      "gold_traits": {
+        "T01": {"value": 0.35, "confidence": 0.45},
+        "T02": {"value": 0.85, "confidence": 0.75},
+        "T03": null,
+        "T04": null,
+        "T05": {"value": 0.7, "confidence": 0.55},
+        "T06": null
+      },
+      "gold_evidence": ["Explicit near-term sacrifice (independence, commute) for a stated longer-term financial goal."],
+      "gold_situational_factor": null,
+      "edge_case": null,
+      "ambiguous_gold": false,
+      "ambiguity_note": null
+    }
+  ]
+}

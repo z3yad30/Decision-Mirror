@@ -1,0 +1,54 @@
+{
+  "header": {
+    "version": "1.0",
+    "seed": 42,
+    "method": "Quiz: independently sample 2 of each trait's 5 question IDs using random.Random(42), then assign every answer record for each question together. Organic: sample 2 records with an ontology §10 edge-case reference and 4 without using random.Random(42). Edge set: all records are dev.",
+    "frozen_after_first_api_run": true,
+    "freeze_note": "Once any API run has happened, this split file is frozen; do not regenerate or edit it."
+  },
+  "quiz": {
+    "dev": [
+      "Q02_A", "Q02_B", "Q02_C", "Q02_D", "Q02_E",
+      "Q03_A", "Q03_B", "Q03_C", "Q03_D", "Q03_E",
+      "Q04_A", "Q04_B", "Q04_C", "Q04_D", "Q04_E",
+      "Q06_A", "Q06_B", "Q06_C", "Q06_D", "Q06_E",
+      "Q09_A", "Q09_B", "Q09_C", "Q09_D", "Q09_E",
+      "Q10_A", "Q10_B", "Q10_C", "Q10_D", "Q10_E",
+      "Q11_A", "Q11_B", "Q11_C", "Q11_D", "Q11_E",
+      "Q13_A", "Q13_B", "Q13_C", "Q13_D", "Q13_E",
+      "Q14_A", "Q14_B", "Q14_C", "Q14_D", "Q14_E",
+      "Q17_A", "Q17_B", "Q17_C", "Q17_D", "Q17_E",
+      "Q18_A", "Q18_B", "Q18_C", "Q18_D", "Q18_E",
+      "Q19_A", "Q19_B", "Q19_C", "Q19_D", "Q19_E",
+      "Q21_A", "Q21_B", "Q21_C", "Q21_D", "Q21_E",
+      "Q22_A", "Q22_B", "Q22_C", "Q22_D", "Q22_E",
+      "Q23_A", "Q23_B", "Q23_C", "Q23_D", "Q23_E"
+    ],
+    "heldout": [
+      "Q01_A", "Q01_B", "Q01_C", "Q01_D", "Q01_E",
+      "Q05_A", "Q05_B", "Q05_C", "Q05_D", "Q05_E",
+      "Q07_A", "Q07_B", "Q07_C", "Q07_D", "Q07_E",
+      "Q08_A", "Q08_B", "Q08_C", "Q08_D", "Q08_E",
+      "Q12_A", "Q12_B", "Q12_C", "Q12_D", "Q12_E",
+      "Q15_A", "Q15_B", "Q15_C", "Q15_D", "Q15_E",
+      "Q16_A", "Q16_B", "Q16_C", "Q16_D", "Q16_E",
+      "Q20_A", "Q20_B", "Q20_C", "Q20_D", "Q20_E",
+      "Q24_A", "Q24_B", "Q24_C", "Q24_D", "Q24_E",
+      "Q25_A", "Q25_B", "Q25_C", "Q25_D", "Q25_E"
+    ]
+  },
+  "organic": {
+    "dev": [
+      "ORG02", "ORG03", "ORG05", "ORG06", "ORG09", "ORG10", "ORG11",
+      "ORG12", "ORG13", "ORG14", "ORG15", "ORG17", "ORG18", "ORG20"
+    ],
+    "heldout": ["ORG01", "ORG04", "ORG07", "ORG08", "ORG16", "ORG19"]
+  },
+  "edge": {
+    "dev": [
+      "EDGE01", "EDGE02", "EDGE03", "EDGE04", "EDGE05", "EDGE06",
+      "EDGE07", "EDGE08", "EDGE09", "EDGE10", "EDGE11"
+    ],
+    "heldout": []
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "version": "1.0",
+  "hash_algorithm": "SHA-256",
+  "files": {
+    "data/gold/quiz_gold_v1.0.json": "fc0c39a69da072c532a8abe54d5cfddfee6d0437dbe7ab16d41ed9fc7fafaba8",
+    "data/gold/organic_gold_v1.0.json": "c071a2b3da5bf68f2c5edf28d83e7638aaa705d9bb768db32fd61b05991951e6",
+    "data/gold/edge_cases_v1.0.json": "27f94d88fba1063302251fdc0651b4b0938a4190ee3e8ecac4e330b098d83919",
+    "data/processed/split_v1.json": "3571248fb4a011dddc84f81de7bf13062e49b8528a2c7196a5dd24c4ee50b1c5",
+    "data/processed/eval_set_v1.json": "5825600d6a1962ccb94d288569894d72f9c5e2c440e5ba4fe2bab67650aa31b3"
+  }
+}

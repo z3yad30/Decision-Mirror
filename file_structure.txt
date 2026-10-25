@@ -4,9 +4,14 @@ Decision-Mirror/
 |-- data/  # Gold, raw, and processed datasets
 |   |-- gold/
 |   |   |-- CHECKSUMS.txt
+|   |   |-- edge_cases_v1.0.json
+|   |   |-- organic_gold_v1.0.json
 |   |   `-- quiz_gold_v1.0.json
 |   |-- processed/
-|   |   `-- .gitkeep
+|   |   |-- .gitkeep
+|   |   |-- eval_set_v1.json
+|   |   |-- MANIFEST.json
+|   |   `-- split_v1.json
 |   `-- raw/
 |       `-- .gitkeep
 |-- docs/  # Project documentation and source archives
@@ -32,7 +37,8 @@ Decision-Mirror/
 |           |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
 |           |-- 00_team_review.md
 |           |-- 01_input_spec.md
-|           `-- 02_output_spec.md
+|           |-- 02_output_spec.md
+|           `-- gold_data.md
 |-- evaluation/  # Evaluation outputs and results
 |   `-- .gitkeep
 |-- experiments/  # Experimental and legacy implementations
@@ -76,6 +82,7 @@ Decision-Mirror/
 |   |-- extraction_output.schema.json
 |   `-- extraction_result.schema.json
 |-- scripts/  # Project maintenance utilities
+|   |-- build_eval_set.py
 |   `-- update_file_structure.py
 |-- src/  # Decision Mirror application source
 |   `-- decision_mirror/
@@ -98,7 +105,9 @@ Decision-Mirror/
 |       `-- __init__.py
 |-- tests/  # Automated test suite
 |   |-- .gitkeep
-|   `-- test_contract.py
+|   |-- test_contract.py
+|   |-- test_eval_set.py
+|   `-- test_split.py
 |-- .env
 |-- .env.example
 |-- .gitignore

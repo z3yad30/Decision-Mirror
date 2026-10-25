@@ -35,6 +35,22 @@ Run the test suite:
 pytest -q
 ```
 
+## Data
+
+- `data/gold/` contains the supplied 125-record quiz gold file (unchanged), the
+  20-record organic transcription from Ontology §9, and self-authored
+  behavior-only edge cases. Dataset provenance, limitations, and ambiguity
+  notes are documented in
+  [`gold_data.md`](./docs/tasks/task-4-llm-extraction/gold_data.md).
+- `data/processed/` contains the fixed seed-42 split, the unified evaluation
+  set, and its SHA-256 manifest. Rebuild the evaluation set and manifest with:
+
+  ```powershell
+  python scripts/build_eval_set.py
+  ```
+
+  The split must not be changed after an API run begins.
+
 ## Contracts
 
 Task 4's frozen contracts are in [`schemas/`](./schemas/):
@@ -57,3 +73,4 @@ rules by `pytest -q`.
 
 - [x] Prompt 1: environment, scaffold, source archive, and team review.
 - [x] Prompt 2: frozen input/output contracts, validators, examples, and tests.
+- [x] Prompt 3: gold datasets, edge cases, fixed split, and unified evaluation set.
