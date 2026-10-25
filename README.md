@@ -69,8 +69,22 @@ python -c "import json, jsonschema; jsonschema.validate(json.load(open(r'payload
 The example fixture sets are validated together with the schemas and semantic
 rules by `pytest -q`.
 
+## Prompts
+
+Extraction prompt versions and their SHA-256 hashes are listed in
+[`prompts/extraction/registry.json`](./prompts/extraction/registry.json).
+`load_prompt(version)` returns the prompt text and its calculated hash; frozen
+versions are hash-verified, and legacy versions require an explicit
+`allow_legacy=True`. The current `v2.0` prompt is a draft.
+
+Never edit a frozen prompt in place. Create a new version, register its
+parentage and hash, and explain the change in
+[`CHANGELOG.md`](./prompts/extraction/CHANGELOG.md). Legacy prompts are
+archived for provenance and are not used for official evaluation.
+
 ## Task 4 status
 
 - [x] Prompt 1: environment, scaffold, source archive, and team review.
 - [x] Prompt 2: frozen input/output contracts, validators, examples, and tests.
 - [x] Prompt 3: gold datasets, edge cases, fixed split, and unified evaluation set.
+- [x] Prompt 4: versioned extraction prompt, registry, leakage tests, and review checklist.

@@ -38,6 +38,7 @@ Decision-Mirror/
 |           |-- 00_team_review.md
 |           |-- 01_input_spec.md
 |           |-- 02_output_spec.md
+|           |-- 03_extraction_prompts.md
 |           `-- gold_data.md
 |-- evaluation/  # Evaluation outputs and results
 |   `-- .gitkeep
@@ -47,12 +48,15 @@ Decision-Mirror/
 |       `-- README.md
 |-- prompts/  # Versioned model prompts
 |   `-- extraction/
-|       `-- legacy/
-|           |-- README.md
-|           |-- v1.0.md
-|           |-- v1.1.md
-|           |-- v1.2.md
-|           `-- v1.3.md
+|       |-- legacy/
+|       |   |-- README.md
+|       |   |-- v1.0.md
+|       |   |-- v1.1.md
+|       |   |-- v1.2.md
+|       |   `-- v1.3.md
+|       |-- CHANGELOG.md
+|       |-- extraction_v2.0.md
+|       `-- registry.json
 |-- schemas/  # Data contracts and validation schemas
 |   |-- examples/
 |   |   |-- invalid/
@@ -93,6 +97,7 @@ Decision-Mirror/
 |       |-- extraction/
 |       |   |-- __init__.py
 |       |   |-- payloads.py
+|       |   |-- prompt_loader.py
 |       |   `-- validation.py
 |       |-- profiling/
 |       |   `-- __init__.py
@@ -107,6 +112,8 @@ Decision-Mirror/
 |   |-- .gitkeep
 |   |-- test_contract.py
 |   |-- test_eval_set.py
+|   |-- test_prompt_leakage.py
+|   |-- test_prompt_loader.py
 |   `-- test_split.py
 |-- .env
 |-- .env.example

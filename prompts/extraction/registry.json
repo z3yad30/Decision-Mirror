@@ -1,0 +1,49 @@
+{
+  "prompts": [
+    {
+      "version": "v1.0",
+      "file": "legacy/v1.0.md",
+      "sha256": "caad5c659b5820bff0aae2ea2e183250621fe2e248c8835ee0ad25e6aa28c20b",
+      "status": "legacy",
+      "parent": null,
+      "created": "2026-10-25",
+      "summary": "Initial archived extraction prompt."
+    },
+    {
+      "version": "v1.1",
+      "file": "legacy/v1.1.md",
+      "sha256": "c8acebb5c5cdec449ad76c27fa656499d666d27d442d3a5d4cc21ae27d8f0620",
+      "status": "legacy",
+      "parent": "v1.0",
+      "created": "2026-10-25",
+      "summary": "Archived partial summary with tightened evidence, confidence, status, and null handling."
+    },
+    {
+      "version": "v1.2",
+      "file": "legacy/v1.2.md",
+      "sha256": "04e155b9e90c631494ceb01084318efbc60662160973044aa7fcac9fcbb90f74",
+      "status": "legacy",
+      "parent": "v1.1",
+      "created": "2026-10-25",
+      "summary": "Archived incomplete and reverse-ordered source export."
+    },
+    {
+      "version": "v1.3",
+      "file": "legacy/v1.3.md",
+      "sha256": "dc650889b4df82244f94ad24d1a2cdcd83646c6e6cae2a88b19099c9767f7c97",
+      "status": "legacy",
+      "parent": "v1.2",
+      "created": "2026-10-25",
+      "summary": "Archived prompt with strict gates, contract drift, missing quiz handling, and a gold-specific rule."
+    },
+    {
+      "version": "v2.0",
+      "file": "extraction_v2.0.md",
+      "sha256": "6f93b33da4bf2193641bb47156b1ca090a84f86f718e69085513aae4e6d280d7",
+      "status": "draft",
+      "parent": "v1.3",
+      "created": "2026-10-25",
+      "summary": "Ontology-aligned system prompt with quiz guidance, injection resistance, exact output contract, and gold-leakage tests."
+    }
+  ]
+}
