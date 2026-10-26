@@ -35,6 +35,29 @@ Run the test suite:
 pytest -q
 ```
 
+## Running extraction
+
+Activate `.venv`, configure `GROQ_API_KEY` in `.env`, and repeat each command
+until it prints `RUN COMPLETE`. The runner handles at most 10 items per
+invocation and resumes from saved progress:
+
+```powershell
+python scripts/run_extraction.py --prompt v2.0 --set all --split dev
+python scripts/run_extraction.py --prompt v2.0 --set all --split heldout
+```
+
+Check progress without an API call or preview the next batch with
+`--status` or `--dry-run`:
+
+```powershell
+python scripts/run_extraction.py --prompt v2.0 --set all --split all --status
+python scripts/run_extraction.py --prompt v2.0 --set all --split dev --dry-run
+```
+
+Quota stops exit with code 3; rerun the same command later to resume. Full setup,
+per-set invocation counts, retry behavior, and output locations are in
+[`how_to_run.md`](./docs/tasks/task-4-llm-extraction/how_to_run.md).
+
 ## Data
 
 - `data/gold/` contains the supplied 125-record quiz gold file (unchanged), the
@@ -88,3 +111,4 @@ archived for provenance and are not used for official evaluation.
 - [x] Prompt 2: frozen input/output contracts, validators, examples, and tests.
 - [x] Prompt 3: gold datasets, edge cases, fixed split, and unified evaluation set.
 - [x] Prompt 4: versioned extraction prompt, registry, leakage tests, and review checklist.
+- [x] Prompt 5: resumable, rate-limit-safe extraction runner and run documentation.

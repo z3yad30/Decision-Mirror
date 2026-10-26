@@ -39,7 +39,8 @@ Decision-Mirror/
 |           |-- 01_input_spec.md
 |           |-- 02_output_spec.md
 |           |-- 03_extraction_prompts.md
-|           `-- gold_data.md
+|           |-- gold_data.md
+|           `-- how_to_run.md
 |-- evaluation/  # Evaluation outputs and results
 |   `-- .gitkeep
 |-- experiments/  # Experimental and legacy implementations
@@ -87,6 +88,7 @@ Decision-Mirror/
 |   `-- extraction_result.schema.json
 |-- scripts/  # Project maintenance utilities
 |   |-- build_eval_set.py
+|   |-- run_extraction.py
 |   `-- update_file_structure.py
 |-- src/  # Decision Mirror application source
 |   `-- decision_mirror/
@@ -96,7 +98,9 @@ Decision-Mirror/
 |       |   `-- __init__.py
 |       |-- extraction/
 |       |   |-- __init__.py
+|       |   |-- llm_client.py
 |       |   |-- payloads.py
+|       |   |-- pipeline.py
 |       |   |-- prompt_loader.py
 |       |   `-- validation.py
 |       |-- profiling/
@@ -114,6 +118,7 @@ Decision-Mirror/
 |   |-- test_eval_set.py
 |   |-- test_prompt_leakage.py
 |   |-- test_prompt_loader.py
+|   |-- test_runner.py
 |   `-- test_split.py
 |-- .env
 |-- .env.example
