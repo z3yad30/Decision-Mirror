@@ -40,9 +40,23 @@ Decision-Mirror/
 |           |-- 02_output_spec.md
 |           |-- 03_extraction_prompts.md
 |           |-- 04_evaluation_method.md
+|           |-- 05_error_analysis.md
 |           |-- gold_data.md
 |           `-- how_to_run.md
 |-- evaluation/  # Evaluation outputs and results
+|   |-- results/
+|   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |       |-- difficult_cases.md
+|   |       |-- error_log.jsonl
+|   |       |-- metrics.json
+|   |       |-- per_item.csv
+|   |       |-- schema_compliance.json
+|   |       `-- tables.md
+|   |-- runs/
+|   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |       |-- attempts.log.jsonl
+|   |       |-- manifest.json
+|   |       `-- raw_responses.jsonl
 |   |-- .gitkeep
 |   |-- __init__.py
 |   |-- metrics.py
@@ -61,6 +75,7 @@ Decision-Mirror/
 |       |   `-- v1.3.md
 |       |-- CHANGELOG.md
 |       |-- extraction_v2.0.md
+|       |-- extraction_v2.1.md
 |       `-- registry.json
 |-- schemas/  # Data contracts and validation schemas
 |   |-- examples/

@@ -14,3 +14,11 @@
   Task 4 contracts. Adds injection resistance, four-way context handling,
   distinct quiz guidance, evidence-tier confidence, null rules, exact output
   shape, self-authored illustrations, a registry, and leakage tests.
+- **v2.1 — draft:** **Failure category:** `context_confusion` →
+  **Evidence:** 5 unique dev items, 5/14 organic items →
+  **Change:** require evidence for a factor's causal role and clarify that a
+  circumstance or constraint alone is not trait evidence →
+  **Expected effect:** reduce unsupported family/social/financial factor tags
+  and trait scores derived from constraints while preserving evidence-based
+  preference scores. Requires a separate dev run and paired comparison before
+  it can be kept.

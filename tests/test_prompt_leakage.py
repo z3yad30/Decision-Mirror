@@ -5,7 +5,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 GOLD_DIR = ROOT / "data" / "gold"
-PROMPT_PATH = ROOT / "prompts" / "extraction" / "extraction_v2.0.md"
+PROMPTS_DIR = ROOT / "prompts" / "extraction"
 _WHITESPACE = re.compile(r"\s+")
 _QUOTE_TRANSLATION = str.maketrans(
     {
@@ -35,6 +35,15 @@ def read_gold_files():
     ]
 
 
+def active_prompt_paths():
+    registry = json.loads((PROMPTS_DIR / "registry.json").read_text(encoding="utf-8"))
+    return [
+        PROMPTS_DIR / entry["file"]
+        for entry in registry["prompts"]
+        if entry["status"] in {"draft", "frozen"}
+    ]
+
+
 def walk(value, parent_key=""):
     if isinstance(value, dict):
         for key, nested in value.items():
@@ -47,7 +56,6 @@ def walk(value, parent_key=""):
 
 
 def test_prompt_contains_no_gold_text_or_ids():
-    prompt = normalize(PROMPT_PATH.read_text(encoding="utf-8"))
     gold_files = read_gold_files()
     leakage_candidates = []
     record_ids = []
@@ -62,34 +70,39 @@ def test_prompt_contains_no_gold_text_or_ids():
                 record_ids.append(text)
 
     leakage_candidates.append(_D001_SENTENCE)
-    for candidate in leakage_candidates:
-        normalized_candidate = normalize(candidate)
-        if normalized_candidate:
-            assert normalized_candidate not in prompt, (
-                f"prompt contains gold text: {candidate}"
-            )
+    for prompt_path in active_prompt_paths():
+        prompt = normalize(prompt_path.read_text(encoding="utf-8"))
+        for candidate in leakage_candidates:
+            normalized_candidate = normalize(candidate)
+            if normalized_candidate:
+                assert normalized_candidate not in prompt, (
+                    f"{prompt_path.name} contains gold text: {candidate}"
+                )
 
-    for record_id in record_ids:
-        assert normalize(record_id) not in prompt
+        for record_id in record_ids:
+            assert normalize(record_id) not in prompt, (
+                f"{prompt_path.name} contains gold item ID: {record_id}"
+            )
 
 
 def test_prompt_has_required_trait_ids_names_statuses_and_bands():
-    prompt = PROMPT_PATH.read_text(encoding="utf-8")
-    for trait_id, name in (
-        ("T01", "Risk Tolerance"),
-        ("T02", "Time Horizon"),
-        ("T03", "Locus of Priority"),
-        ("T04", "Decisiveness Speed"),
-        ("T05", "Emotional vs. Analytical Weighting"),
-        ("T06", "Self-Consistency"),
-    ):
-        assert trait_id in prompt
-        assert name in prompt
+    for prompt_path in active_prompt_paths():
+        prompt = prompt_path.read_text(encoding="utf-8")
+        for trait_id, name in (
+            ("T01", "Risk Tolerance"),
+            ("T02", "Time Horizon"),
+            ("T03", "Locus of Priority"),
+            ("T04", "Decisiveness Speed"),
+            ("T05", "Emotional vs. Analytical Weighting"),
+            ("T06", "Self-Consistency"),
+        ):
+            assert trait_id in prompt, f"{prompt_path.name} is missing {trait_id}"
+            assert name in prompt, f"{prompt_path.name} is missing {name}"
 
-    assert '"success"' in prompt
-    assert '"insufficient_evidence"' in prompt
-    assert "[0.0,0.2)" in prompt
-    assert "[0.2,0.4)" in prompt
-    assert "[0.4,0.6)" in prompt
-    assert "[0.6,0.8)" in prompt
-    assert "[0.8,1.0]" in prompt
+        assert '"success"' in prompt
+        assert '"insufficient_evidence"' in prompt
+        assert "[0.0,0.2)" in prompt
+        assert "[0.2,0.4)" in prompt
+        assert "[0.4,0.6)" in prompt
+        assert "[0.6,0.8)" in prompt
+        assert "[0.8,1.0]" in prompt

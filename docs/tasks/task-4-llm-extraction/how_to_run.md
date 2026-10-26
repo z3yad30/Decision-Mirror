@@ -31,12 +31,12 @@ remain pending.
 
 ## Full protocol
 
-Run the development split first, then held-out. Repeat each command unchanged
-until it prints `RUN COMPLETE`:
+Run the current draft on the development split only. Repeat the command
+unchanged until it prints `RUN COMPLETE`. Do not run held-out until the final
+prompt version is confirmed and frozen:
 
 ```powershell
-python scripts/run_extraction.py --prompt v2.0 --set all --split dev
-python scripts/run_extraction.py --prompt v2.0 --set all --split heldout
+python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev
 ```
 
 Progress is persistent across invocations. For the current evaluation set, the

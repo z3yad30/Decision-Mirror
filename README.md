@@ -42,16 +42,19 @@ until it prints `RUN COMPLETE`. The runner handles at most 10 items per
 invocation and resumes from saved progress:
 
 ```powershell
-python scripts/run_extraction.py --prompt v2.0 --set all --split dev
-python scripts/run_extraction.py --prompt v2.0 --set all --split heldout
+python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev
 ```
+
+The current candidate is `v2.1` (draft); its 100-item dev run is pending. Do
+not run the held-out split until the final prompt version has been confirmed
+and frozen.
 
 Check progress without an API call or preview the next batch with
 `--status` or `--dry-run`:
 
 ```powershell
-python scripts/run_extraction.py --prompt v2.0 --set all --split all --status
-python scripts/run_extraction.py --prompt v2.0 --set all --split dev --dry-run
+python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev --status
+python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev --dry-run
 ```
 
 Quota stops exit with code 3; rerun the same command later to resume. Full setup,
@@ -113,7 +116,8 @@ Extraction prompt versions and their SHA-256 hashes are listed in
 [`prompts/extraction/registry.json`](./prompts/extraction/registry.json).
 `load_prompt(version)` returns the prompt text and its calculated hash; frozen
 versions are hash-verified, and legacy versions require an explicit
-`allow_legacy=True`. The current `v2.0` prompt is a draft.
+`allow_legacy=True`. The current `v2.1` prompt is a draft pending a separate
+dev run and comparison; `v2.0` is the evaluated dev baseline.
 
 Never edit a frozen prompt in place. Create a new version, register its
 parentage and hash, and explain the change in
@@ -128,3 +132,4 @@ archived for provenance and are not used for official evaluation.
 - [x] Prompt 4: versioned extraction prompt, registry, leakage tests, and review checklist.
 - [x] Prompt 5: resumable, rate-limit-safe extraction runner and run documentation.
 - [x] Prompt 6: offline evaluation metrics, error taxonomy, paired comparison, and readiness criteria.
+- [x] Prompt 7: dev-split error analysis and evidence-based v2.1 draft revision; dev comparison pending.

@@ -44,6 +44,15 @@
       "parent": "v1.3",
       "created": "2026-10-25",
       "summary": "Ontology-aligned system prompt with quiz guidance, injection resistance, exact output contract, and gold-leakage tests."
+    },
+    {
+      "version": "v2.1",
+      "file": "extraction_v2.1.md",
+      "sha256": "7c66c1eb1f308992bdc77fbe539a87e9cdcadd0ccca5c14662653888139f06e4",
+      "status": "draft",
+      "parent": "v2.0",
+      "created": "2026-10-26",
+      "summary": "Clarifies causal evidence for situational-factor categories and separates constraints from trait evidence."
     }
   ]
 }

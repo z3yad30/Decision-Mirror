@@ -17,6 +17,11 @@ def test_load_prompt_returns_text_and_sha256():
     assert text == prompt_path.read_bytes().decode("utf-8")
     assert sha256 == hashlib.sha256(prompt_path.read_bytes()).hexdigest()
 
+    draft_text, draft_sha256 = prompt_loader.load_prompt("v2.1")
+    draft_path = ROOT / "prompts" / "extraction" / "extraction_v2.1.md"
+    assert draft_text == draft_path.read_bytes().decode("utf-8")
+    assert draft_sha256 == hashlib.sha256(draft_path.read_bytes()).hexdigest()
+
 
 def test_frozen_prompt_hash_is_verified(tmp_path, monkeypatch):
     prompt_dir = tmp_path / "prompts"
