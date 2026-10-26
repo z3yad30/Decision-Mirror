@@ -39,10 +39,14 @@ Decision-Mirror/
 |           |-- 01_input_spec.md
 |           |-- 02_output_spec.md
 |           |-- 03_extraction_prompts.md
+|           |-- 04_evaluation_method.md
 |           |-- gold_data.md
 |           `-- how_to_run.md
 |-- evaluation/  # Evaluation outputs and results
-|   `-- .gitkeep
+|   |-- .gitkeep
+|   |-- __init__.py
+|   |-- metrics.py
+|   `-- runner.py
 |-- experiments/  # Experimental and legacy implementations
 |   `-- legacy/
 |       |-- ahmed_main_v0.py
@@ -88,6 +92,8 @@ Decision-Mirror/
 |   `-- extraction_result.schema.json
 |-- scripts/  # Project maintenance utilities
 |   |-- build_eval_set.py
+|   |-- compare_runs.py
+|   |-- evaluate_run.py
 |   |-- run_extraction.py
 |   `-- update_file_structure.py
 |-- src/  # Decision Mirror application source
@@ -116,6 +122,7 @@ Decision-Mirror/
 |   |-- .gitkeep
 |   |-- test_contract.py
 |   |-- test_eval_set.py
+|   |-- test_evaluation.py
 |   |-- test_prompt_leakage.py
 |   |-- test_prompt_loader.py
 |   |-- test_runner.py

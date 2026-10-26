@@ -58,6 +58,21 @@ Quota stops exit with code 3; rerun the same command later to resume. Full setup
 per-set invocation counts, retry behavior, and output locations are in
 [`how_to_run.md`](./docs/tasks/task-4-llm-extraction/how_to_run.md).
 
+## Evaluating a run
+
+Evaluate saved responses offline (no API calls), then compare two runs on their
+common items:
+
+```powershell
+python scripts/evaluate_run.py --run-id <run_id>
+python scripts/compare_runs.py <run_a> <run_b>
+```
+
+Reports are written under `evaluation/results/<run_id>/` and paired comparisons
+under `evaluation/comparisons/`. Evaluation methodology, metric formulas,
+error taxonomy, and proposed readiness thresholds are documented in
+[`04_evaluation_method.md`](./docs/tasks/task-4-llm-extraction/04_evaluation_method.md).
+
 ## Data
 
 - `data/gold/` contains the supplied 125-record quiz gold file (unchanged), the
@@ -112,3 +127,4 @@ archived for provenance and are not used for official evaluation.
 - [x] Prompt 3: gold datasets, edge cases, fixed split, and unified evaluation set.
 - [x] Prompt 4: versioned extraction prompt, registry, leakage tests, and review checklist.
 - [x] Prompt 5: resumable, rate-limit-safe extraction runner and run documentation.
+- [x] Prompt 6: offline evaluation metrics, error taxonomy, paired comparison, and readiness criteria.
