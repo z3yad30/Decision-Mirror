@@ -1,0 +1,1194 @@
+{
+  "summary": {
+    "strict_json_parse_rate": 1.0,
+    "schema_valid_rate": 1.0,
+    "semantic_valid_rate": 1.0,
+    "recovered_rate": 0.0,
+    "failure_counts": {}
+  },
+  "items": [
+    {
+      "item_id": "Q02_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q02_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q02_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q02_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q02_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q03_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q03_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q03_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q03_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q03_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q04_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q04_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q04_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q04_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q04_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q06_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q06_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q06_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q06_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q06_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q09_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q09_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q09_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q09_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q09_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q10_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q10_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q10_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q10_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q10_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q11_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q11_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q11_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q11_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q11_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q13_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q13_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q13_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q13_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q13_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q14_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q14_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q14_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q14_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q14_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q17_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q17_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q17_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q17_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T04 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q17_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q18_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T04 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q18_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T04 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q18_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T04 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q18_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q18_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T04 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "Q19_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q19_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q19_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q19_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q19_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q21_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q21_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q21_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q21_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q21_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q22_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q22_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q22_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q22_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q22_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q23_A",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q23_B",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q23_C",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q23_D",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "Q23_E",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG02",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "ORG03",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG05",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T04 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "ORG06",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG09",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "ORG10",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG11",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor",
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "ORG12",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "ORG13",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG14",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "evidence_not_grounded: T01 evidence item 1 was not found in decision_text after normalization",
+        "evidence_not_grounded: T02 evidence item 1 was not found in decision_text after normalization",
+        "evidence_not_grounded: T03 evidence item 1 was not found in decision_text after normalization",
+        "evidence_not_grounded: T05 evidence item 1 was not found in decision_text after normalization"
+      ]
+    },
+    {
+      "item_id": "ORG15",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG17",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "ORG18",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T01 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "ORG20",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T02 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "EDGE01",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE02",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE03",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T05 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "EDGE04",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": [
+        "situational_factor_not_in_notes: T03 context_notes does not mention its situational factor"
+      ]
+    },
+    {
+      "item_id": "EDGE05",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE06",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE07",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE08",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE09",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE10",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    },
+    {
+      "item_id": "EDGE11",
+      "strict_json_parse": true,
+      "schema_valid": true,
+      "semantic_valid": true,
+      "recovered": false,
+      "failure_type": null,
+      "schema_errors": [],
+      "semantic_errors": [],
+      "warnings": []
+    }
+  ]
+}
