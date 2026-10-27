@@ -1,50 +1,54 @@
-# Dev-split error analysis and prompt revision
+# Dev-split error analysis and prompt comparison
 
 ## Scope and run
 
 - Baseline run: `v2.0__openai-gpt-oss-120b__all-dev__5825600d`
-- Prompt: `v2.0` (`6f93b33d…`)
+- Candidate run: `v2.1__openai-gpt-oss-120b__all-dev__5825600d`
+- Prompts: `v2.0` (`6f93b33d…`) and `v2.1` (`7c66c1eb…`)
 - Model: `openai/gpt-oss-120b`; 100 responses; dev split only (75 quiz, 14
   organic, 11 edge cases)
-- Evaluation: `evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/`
+- Evaluations: `evaluation/results/` for both runs; paired comparison in
+  `evaluation/comparisons/`
 - No held-out items or results were inspected.
 
 ## Preregistered criteria
 
 The thresholds remain proposed and pending team lead approval, as stated in
-[`04_evaluation_method.md`](./04_evaluation_method.md). Twelve of 13 criteria
-pass; evidence grounding is 0.4 percentage points below its threshold.
+[`04_evaluation_method.md`](./04_evaluation_method.md). The evaluator's quote
+normalization was corrected to ignore balanced surrounding quote delimiters.
+The results below are from both runs re-evaluated with that correction; prompt,
+gold, eval-set, and raw-response files were unchanged. v2.0 passes all 13
+criteria; v2.1 passes 12 and fails organic situational-factor recall.
 
-| Criterion | Observed | Threshold | Result |
-|---|---:|---:|---|
-| Strict schema-valid rate | 100.0% | at least 95.0% | Pass |
-| Schema-valid or recovered rate | 100.0% | at least 99.0% | Pass |
-| Quiz target non-null rate | 97.3% | at least 90.0% | Pass |
-| Quiz exact-band accuracy | 67.1% | at least 60.0% | Pass |
-| Quiz within-one-band rate | 100.0% | at least 90.0% | Pass |
-| Quiz MAE | 0.073 | at most 0.15 | Pass |
-| Quiz direction accuracy | 100.0% | at least 90.0% | Pass |
-| Quiz Spearman rho | 0.918 | at least 0.80 | Pass |
-| Quiz polarity-inversion rate | 0.0% | at most 2.0% | Pass |
-| Evidence grounding | 97.6% | at least 98.0% | **Fail** |
-| T06 violations | 0 | equal 0 | Pass |
-| Edge-case pass rate | 83.0% | at least 80.0% | Pass |
-| Organic situational-factor recall | 100.0% | at least 80.0% | Pass |
+| Criterion | Threshold | v2.0 | v2.1 |
+|---|---:|---:|---:|
+| Strict schema-valid rate | at least 95.0% | 100.0% Pass | 100.0% Pass |
+| Schema-valid or recovered rate | at least 99.0% | 100.0% Pass | 100.0% Pass |
+| Quiz target non-null rate | at least 90.0% | 97.3% Pass | 94.7% Pass |
+| Quiz exact-band accuracy | at least 60.0% | 67.1% Pass | 73.2% Pass |
+| Quiz within-one-band rate | at least 90.0% | 100.0% Pass | 98.6% Pass |
+| Quiz MAE | at most 0.15 | 0.073 Pass | 0.064 Pass |
+| Quiz direction accuracy | at least 90.0% | 100.0% Pass | 100.0% Pass |
+| Quiz Spearman rho | at least 0.80 | 0.918 Pass | 0.916 Pass |
+| Quiz polarity-inversion rate | at most 2.0% | 0.0% Pass | 0.0% Pass |
+| Evidence grounding | at least 98.0% | 100.0% Pass | 100.0% Pass |
+| T06 violations | equal 0 | 0 Pass | 0 Pass |
+| Edge-case pass rate | at least 80.0% | 83.0% Pass | 85.1% Pass |
+| Organic situational-factor recall | at least 80.0% | 100.0% Pass | 66.7% **Fail** |
 
-Other notable results: all 100 responses strictly parsed and passed schema and
-semantic validation; organic situational-factor precision was 60.0%, and
-category agreement was 0.0%. Organic score MAE was 0.105 and exact-band
-accuracy was 46.7%. These organic estimates are based on a small sample.
-
-Quiz target-trait exact-band accuracy was 50.0% for T01 and T04, versus 66.7%
-for T02, 86.7% for T03, and 80.0% for T05. All quiz predictions were within one
-band of gold and none were polarity inversions.
+Both runs strictly parsed and passed schema and semantic validation on all 100
+items. Organic situational-factor precision/category agreement were 60.0%/0.0%
+for v2.0 and 50.0%/0.0% for v2.1. Organic score MAE/exact-band accuracy were
+0.105/46.7% and 0.104/46.2%, respectively. Organic estimates are based on a
+small sample. v2.1 has better quiz score metrics and edge-case pass rate, but
+its factor recall regression fails a readiness criterion; v2.0 is therefore
+the preferred version under the preregistered criteria.
 
 ## Error log by taxonomy, source, and trait
 
-The log contains 72 rows: 62 evaluator error rows and 10 deterministic
-`needs_manual_review` flags. Review flags are not automatic findings. One item
-can contribute multiple rows.
+The regenerated v2.0 log contains 68 rows: 58 evaluator error rows and 10
+deterministic `needs_manual_review` flags. Review flags are not automatic
+findings. One item can contribute multiple rows.
 
 | Taxonomy | Total rows | Quiz | Organic | Edge |
 |---|---:|---:|---:|---:|
@@ -54,13 +58,12 @@ can contribute multiple rows.
 | `unsupported_inference` | 6 | 0 | 6 | 0 |
 | `context_confusion` | 5 | 0 | 5 | 0 |
 | `missed_signal` | 4 | 2 | 2 | 0 |
-| `evidence_not_grounded` | 4 | 0 | 4 | 0 |
 | `status_error` | 1 | 1 | 0 | 0 |
 | `polarity_inversion` | 1 | 0 | 1 | 0 |
 | `confidence_miscalibration` | 1 | 0 | 1 | 0 |
 | `malformed_output` | 0 | 0 | 0 | 0 |
 | `t06_violation` | 0 | 0 | 0 | 0 |
-| **Total** | **72** | **36** | **28** | **8** |
+| **Total** | **68** | **36** | **24** | **8** |
 
 `score_deviation` counts by source and trait:
 
@@ -81,12 +84,12 @@ Other trait-specific errors:
 | `unsupported_inference` | Organic | T02 | 1 | ORG14 |
 | `unsupported_inference` | Organic | T03 | 1 | ORG17 |
 | `unsupported_inference` | Organic | T05 | 3 | ORG09, ORG11, ORG14 |
-| `evidence_not_grounded` | Organic | T01, T02, T03, T05 | 1 each | ORG14 |
 | `polarity_inversion` | Organic | T02 | 1 | ORG11 |
 | `confidence_miscalibration` | Organic | T02 | 1 | ORG11 |
 
 The five `context_confusion` rows are one each for ORG02, ORG09, ORG11, ORG12,
-and ORG20; none is assigned to one particular trait. The eight
+and ORG20; none is assigned to one particular trait. Quote normalization
+removed the four former ORG14 `evidence_not_grounded` rows. The eight
 `edge_case_failure` rows come from four edge items: EDGE03, EDGE04, EDGE06, and
 EDGE09. The 10 manual-review flags cover nine quiz items and ORG11. No
 malformed-output or T06-violation row was recorded.
@@ -284,11 +287,14 @@ gold.
 {"decision_id":"ORG14","extraction_status":"success","traits":[{"trait_id":"T01","trait_name":"Risk Tolerance","score":0.3,"confidence":0.6,"evidence":["\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""],"situational_factor":null,"context_notes":"The decision reflects a trade‑off between career advancement (potential reward) and increased travel (potential negative outcome). The person chooses to avoid the negative outcome, indicating a risk‑averse stance (moderate evidence)."},{"trait_id":"T02","trait_name":"Time Horizon","score":0.15,"confidence":0.6,"evidence":["\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""],"situational_factor":null,"context_notes":"The reasoning explicitly favors present family time over future career benefits, showing a strongly present‑focused orientation (moderate evidence)."},{"trait_id":"T03","trait_name":"Locus of Priority","score":0.1,"confidence":0.6,"evidence":["\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""],"situational_factor":null,"context_notes":"The person prioritizes the interests of their children over their own career advancement, indicating a strongly other‑centered priority (moderate evidence)."},{"trait_id":"T04","trait_name":"Decisiveness Speed","score":null,"confidence":0.0,"evidence":[],"situational_factor":null,"context_notes":"No information about the speed or deliberation process of the decision is provided."},{"trait_id":"T05","trait_name":"Emotional vs. Analytical Weighting","score":0.25,"confidence":0.6,"evidence":["\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""],"situational_factor":null,"context_notes":"The justification is based on personal values (time with kids) rather than analytical data, indicating an emotion‑leaning weighting (moderate evidence)."},{"trait_id":"T06","trait_name":"Self-Consistency","score":null,"confidence":0.0,"evidence":[],"situational_factor":null,"context_notes":"History is unavailable in this task."}]}
 ```
 
-**Diagnosis:** The evidence strings add literal quotation-mark characters that
-are absent from the narrative, causing four grounding errors. The model also
-scores T01, T02, and T05 where gold is null. T06 = null follows the prompt's
-Task 4 rule, even though gold contains a numeric T06 value; that disagreement
-is a gold/contract issue, not a prompt failure to fix by copying gold.
+**Diagnosis:** Each of the four evidence strings is the exact narrative
+excerpt, wrapped in balanced quotation marks. The original matcher treated
+those delimiters as quote content and falsely marked the evidence ungrounded.
+After evaluator normalization was corrected, all four quotes pass grounding;
+this is an evaluator artifact, not fabricated evidence. The model also scores
+T01, T02, and T05 where gold is null. T06 = null follows the prompt's Task 4
+rule, even though gold contains a numeric T06 value; that disagreement is a
+gold/contract issue, not a prompt failure to fix by copying gold.
 
 ## Situational-factor confusion
 
@@ -338,13 +344,13 @@ predictions remain within one band and the 15-item-per-trait samples are small.
 Situational-factor confusion recurs on five distinct organic items, and EDGE03
 shows the related tendency to convert a constraint into trait evidence.
 
-Other issues are localized: all four evidence-grounding rows come from one
-organic item (ORG14), and the single polarity inversion/manual-review concern
-is ORG11. These do not justify broad changes to evidence quoting or score
-calibration without additional evidence. The organic and edge datasets are
-small and their annotations have the limitations above.
+Other issues are localized: the only apparent evidence-grounding issue was
+the ORG14 matcher artifact described above, and the single polarity
+inversion/manual-review concern is ORG11. These do not justify broad changes to
+evidence quoting or score calibration without additional evidence. The organic
+and edge datasets are small and their annotations have the limitations above.
 
-## v2.1 draft and required validation
+## v2.1 dev comparison and decision
 
 The five distinct `context_confusion` items meet the preregistered
 systematic-category threshold (at least five dev items; also 5/14 organic dev
@@ -353,10 +359,24 @@ supported by their causal role, and a circumstance or constraint alone is not
 trait evidence. It contains no item-specific language, gold text, or copied
 edge/gold example.
 
-`v2.1` is registered as **draft**, not frozen or accepted. Its separate dev
-run and comparison have not been performed because this session cannot call
-the model API. It can be kept only if the dev run improves contextual-factor
-errors without a regression greater than two percentage points on any other
-headline metric. The paired numeric comparison does not itself compare factor
-category agreement or edge checks; inspect both run reports for those
-measures. Do not change any gold annotation.
+The separate v2.1 dev run and paired comparison are complete. v2.1 improved
+quiz exact-band accuracy (67.1% to 73.2%), quiz MAE (0.073 to 0.064), and edge
+checks (83.0% to 85.1%). However, organic situational-factor recall fell from
+100.0% to 66.7%, below the proposed 80.0% readiness threshold; precision also
+fell from 60.0% to 50.0%. Both versions had 0.0% category agreement. That
+metric excludes ambiguous-gold records, so v2.0's category matches on
+ambiguous ORG05/ORG18 do not count; its eligible true-positive categories
+(ORG09, ORG11, ORG12) all differ from gold. v2.1's eligible true positives
+(ORG09, ORG12) also both differ.
+
+The evaluator records a factor detection when at least one factor category is
+predicted, and separately compares its category with gold; the 0.0% agreement
+is not a mapping bug. The regression is a model miss on an eligible gold factor
+(ORG05 in v2.1), not a category-name normalization issue.
+
+**Decision:** retain v2.0 as the preferred baseline under the preregistered
+criteria. Keep v2.1 as a draft, not the selected version: its additional edge
+check and quiz-score gains do not compensate for failing the factor-recall
+criterion. Its missed eligible gold factor is ORG11. Reconsider v2.1 only
+after addressing factor recall and evaluating on a separately run dev set; do
+not alter gold annotations to improve either score.

@@ -116,11 +116,12 @@ categories count as a detection once.
 
 Evidence grounding is the fraction of all returned evidence quotes found in
 their item's `decision_text` after normalizing whitespace, typographic quotes,
-and case. Empty evidence contributes no quote to the denominator. For organic
-items, token-overlap F1 compares all predicted evidence to the transcribed
-`gold_evidence` using multiset token overlap and is **report-only**: some gold
-evidence is annotation rationale rather than a literal source quote. The
-templated quiz gold evidence is never text-matched.
+balanced surrounding quote delimiters, and case. Empty evidence contributes no
+quote to the denominator. For organic items, token-overlap F1 compares all
+predicted evidence to the transcribed `gold_evidence` using multiset token
+overlap and is **report-only**: some gold evidence is annotation rationale
+rather than a literal source quote. The templated quiz gold evidence is never
+text-matched.
 
 Confidence distribution counts confidence values for every non-null model
 trait score. Mean confidence when band-correct or band-wrong is calculated on

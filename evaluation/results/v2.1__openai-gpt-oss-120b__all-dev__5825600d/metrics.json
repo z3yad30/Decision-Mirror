@@ -1,0 +1,1655 @@
+{
+  "response_count": 100,
+  "format": {
+    "strict_json_parse_rate": 1.0,
+    "schema_valid_rate": 1.0,
+    "semantic_valid_rate": 1.0,
+    "recovered_rate": 0.0,
+    "failure_counts": {}
+  },
+  "quiz": {
+    "target_trait_scoring": {
+      "T01": {
+        "target_non_null_rate": 0.9333333333333333,
+        "target_n": 15,
+        "n_paired_scores": 14,
+        "mae": 0.09357142857142857,
+        "exact_band_accuracy": 0.5714285714285714,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.8571428571428572,
+        "spearman_rho": 0.9217888419195083,
+        "direction_accuracy": 1.0,
+        "direction_n": 12,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.044999999999999984,
+            "upper": 0.14285714285714285,
+            "n": 14
+          },
+          "accuracy": {
+            "lower": 0.2857142857142857,
+            "upper": 0.8571428571428571,
+            "n": 14
+          },
+          "rho": {
+            "lower": 0.7541455454371315,
+            "upper": 0.9930474243796086,
+            "n": 14
+          }
+        }
+      },
+      "T02": {
+        "target_non_null_rate": 1.0,
+        "target_n": 15,
+        "n_paired_scores": 15,
+        "mae": 0.053333333333333344,
+        "exact_band_accuracy": 0.7333333333333333,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9166666666666666,
+        "spearman_rho": 0.9625595631167604,
+        "direction_accuracy": 1.0,
+        "direction_n": 12,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            1
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.013333333333333338,
+            "upper": 0.10000000000000002,
+            "n": 15
+          },
+          "accuracy": {
+            "lower": 0.4666666666666667,
+            "upper": 0.9333333333333333,
+            "n": 15
+          },
+          "rho": {
+            "lower": 0.8905702431854731,
+            "upper": 0.9972183534434393,
+            "n": 15
+          }
+        }
+      },
+      "T03": {
+        "target_non_null_rate": 1.0,
+        "target_n": 15,
+        "n_paired_scores": 15,
+        "mae": 0.043333333333333335,
+        "exact_band_accuracy": 0.8666666666666667,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9666666666666667,
+        "spearman_rho": 0.9558156927900058,
+        "direction_accuracy": 1.0,
+        "direction_n": 12,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            2,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            3
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.013333333333333338,
+            "upper": 0.08,
+            "n": 15
+          },
+          "accuracy": {
+            "lower": 0.6666666666666666,
+            "upper": 1.0,
+            "n": 15
+          },
+          "rho": {
+            "lower": 0.8000851423199131,
+            "upper": 0.9990267637596959,
+            "n": 15
+          }
+        }
+      },
+      "T04": {
+        "target_non_null_rate": 0.8,
+        "target_n": 15,
+        "n_paired_scores": 12,
+        "mae": 0.10416666666666667,
+        "exact_band_accuracy": 0.5833333333333334,
+        "within_one_band_rate": 0.9166666666666666,
+        "quadratic_weighted_kappa": 0.8,
+        "spearman_rho": 0.7768821221791626,
+        "direction_accuracy": 1.0,
+        "direction_n": 10,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            3,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.037500000000000006,
+            "upper": 0.18333333333333335,
+            "n": 12
+          },
+          "accuracy": {
+            "lower": 0.3333333333333333,
+            "upper": 0.8333333333333334,
+            "n": 12
+          },
+          "rho": {
+            "lower": 0.3301250456480922,
+            "upper": 0.9499177595981665,
+            "n": 12
+          }
+        }
+      },
+      "T05": {
+        "target_non_null_rate": 1.0,
+        "target_n": 15,
+        "n_paired_scores": 15,
+        "mae": 0.03333333333333334,
+        "exact_band_accuracy": 0.8666666666666667,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9666666666666667,
+        "spearman_rho": 0.9824241021325854,
+        "direction_accuracy": 1.0,
+        "direction_n": 12,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            3,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            3,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            2
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.006666666666666669,
+            "upper": 0.06666666666666668,
+            "n": 15
+          },
+          "accuracy": {
+            "lower": 0.6666666666666666,
+            "upper": 1.0,
+            "n": 15
+          },
+          "rho": {
+            "lower": 0.9211419986927063,
+            "upper": 1.0,
+            "n": 15
+          }
+        }
+      },
+      "overall": {
+        "target_non_null_rate": 0.9466666666666667,
+        "target_n": 75,
+        "n_paired_scores": 71,
+        "mae": 0.06352112676056339,
+        "exact_band_accuracy": 0.7323943661971831,
+        "within_one_band_rate": 0.9859154929577465,
+        "quadratic_weighted_kappa": 0.912,
+        "spearman_rho": 0.9157998143328652,
+        "direction_accuracy": 1.0,
+        "direction_n": 58,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            6,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            13,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            11,
+            0,
+            1
+          ],
+          [
+            0,
+            0,
+            0,
+            15,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            7,
+            7
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.042676056338028165,
+            "upper": 0.08535211267605634,
+            "n": 71
+          },
+          "accuracy": {
+            "lower": 0.6197183098591549,
+            "upper": 0.8309859154929577,
+            "n": 71
+          },
+          "rho": {
+            "lower": 0.8548811194806373,
+            "upper": 0.9543244750461455,
+            "n": 71
+          }
+        },
+        "polarity_inversions_by_trait": {
+          "T01": 0,
+          "T02": 0,
+          "T03": 0,
+          "T04": 0,
+          "T05": 0
+        }
+      }
+    },
+    "off_target_extraction": {
+      "non_null_count": 36,
+      "possible_count": 375,
+      "rate": 0.096,
+      "grounded_share": 1.0,
+      "by_trait": {
+        "T01": {
+          "non_null_count": 4,
+          "possible_count": 60,
+          "rate": 0.06666666666666667,
+          "grounded_share": 1.0
+        },
+        "T02": {
+          "non_null_count": 4,
+          "possible_count": 60,
+          "rate": 0.06666666666666667,
+          "grounded_share": 1.0
+        },
+        "T03": {
+          "non_null_count": 1,
+          "possible_count": 60,
+          "rate": 0.016666666666666666,
+          "grounded_share": 1.0
+        },
+        "T04": {
+          "non_null_count": 1,
+          "possible_count": 60,
+          "rate": 0.016666666666666666,
+          "grounded_share": 1.0
+        },
+        "T05": {
+          "non_null_count": 26,
+          "possible_count": 60,
+          "rate": 0.43333333333333335,
+          "grounded_share": 1.0
+        }
+      }
+    }
+  },
+  "organic": {
+    "score_metrics": {
+      "T01": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          },
+          "accuracy": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          },
+          "rho": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          }
+        }
+      },
+      "T02": {
+        "n_paired_scores": 2,
+        "mae": 0.25,
+        "exact_band_accuracy": 0.0,
+        "within_one_band_rate": 0.5,
+        "quadratic_weighted_kappa": 0.2857142857142857,
+        "spearman_rho": 1.0,
+        "direction_accuracy": 0.5,
+        "direction_n": 2,
+        "polarity_inversions": 1,
+        "polarity_inversion_rate": 0.5,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.15000000000000002,
+            "upper": 0.35,
+            "n": 2
+          },
+          "accuracy": {
+            "lower": 0.0,
+            "upper": 0.0,
+            "n": 2
+          },
+          "rho": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "n": 2
+          }
+        }
+      },
+      "T03": {
+        "n_paired_scores": 5,
+        "mae": 0.06000000000000002,
+        "exact_band_accuracy": 0.4,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.8484848484848485,
+        "spearman_rho": 0.4588314677411235,
+        "direction_accuracy": 1.0,
+        "direction_n": 5,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.02,
+            "upper": 0.10000000000000005,
+            "n": 5
+          },
+          "accuracy": {
+            "lower": 0.0,
+            "upper": 0.8,
+            "n": 5
+          },
+          "rho": {
+            "lower": -1.0,
+            "upper": 1.0,
+            "n": 5
+          }
+        }
+      },
+      "T04": {
+        "n_paired_scores": 2,
+        "mae": 0.12500000000000003,
+        "exact_band_accuracy": 0.5,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9230769230769231,
+        "spearman_rho": 1.0,
+        "direction_accuracy": 1.0,
+        "direction_n": 2,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.04999999999999999,
+            "upper": 0.20000000000000007,
+            "n": 2
+          },
+          "accuracy": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "n": 2
+          },
+          "rho": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "n": 2
+          }
+        }
+      },
+      "T05": {
+        "n_paired_scores": 4,
+        "mae": 0.07499999999999998,
+        "exact_band_accuracy": 0.75,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9545454545454546,
+        "spearman_rho": 1.0,
+        "direction_accuracy": 1.0,
+        "direction_n": 4,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.04999999999999995,
+            "upper": 0.125,
+            "n": 4
+          },
+          "accuracy": {
+            "lower": 0.25,
+            "upper": 1.0,
+            "n": 4
+          },
+          "rho": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "n": 4
+          }
+        }
+      },
+      "overall": {
+        "n_paired_scores": 13,
+        "mae": 0.10384615384615385,
+        "exact_band_accuracy": 0.46153846153846156,
+        "within_one_band_rate": 0.9230769230769231,
+        "quadratic_weighted_kappa": 0.859002169197397,
+        "spearman_rho": 0.8441052742375469,
+        "direction_accuracy": 0.9230769230769231,
+        "direction_n": 13,
+        "polarity_inversions": 1,
+        "polarity_inversion_rate": 0.07692307692307693,
+        "confusion_matrix_5x5": [
+          [
+            5,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            4,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.06153846153846153,
+            "upper": 0.15384615384615385,
+            "n": 13
+          },
+          "accuracy": {
+            "lower": 0.23076923076923078,
+            "upper": 0.7692307692307693,
+            "n": 13
+          },
+          "rho": {
+            "lower": 0.4363930240887842,
+            "upper": 0.9755691419447124,
+            "n": 13
+          }
+        },
+        "missed_signal_rate": 0.23529411764705882,
+        "missed_signal_count": 4,
+        "unsupported_inference_rate": 0.08333333333333333,
+        "unsupported_inference_count": 3,
+        "status_accuracy": 1.0,
+        "situational_factor": {
+          "precision": 0.5,
+          "recall": 0.6666666666666666,
+          "category_agreement": 0.0,
+          "true_positive": 2,
+          "false_positive": 2,
+          "false_negative": 1
+        },
+        "confidence_mae": 0.14615384615384613,
+        "confidence_n": 13,
+        "organic_evidence_token_overlap_f1_report_only": 0.28052922907667144
+      }
+    },
+    "ambiguous_gold_item_count": 4,
+    "ambiguous_gold_separate": [
+      {
+        "item_id": "ORG05",
+        "predicted_scores": {
+          "T01": null,
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "predicted_confidence": {
+          "T01": 0.0,
+          "T02": 0.0,
+          "T03": 0.0,
+          "T04": 0.0,
+          "T05": 0.0
+        },
+        "model_status": "insufficient_evidence",
+        "gold_traits": {
+          "T01": {
+            "value": null,
+            "confidence": 0.2
+          },
+          "T02": {
+            "value": null,
+            "confidence": 0.2
+          },
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "situational_factor": {
+          "gold": {
+            "category": "external_constraint",
+            "description": "Pure financial constraint -- no value-based reasoning is present at all."
+          },
+          "predicted": []
+        },
+        "evidence_grounding": []
+      },
+      {
+        "item_id": "ORG10",
+        "predicted_scores": {
+          "T01": 0.7,
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "predicted_confidence": {
+          "T01": 0.55,
+          "T02": 0.0,
+          "T03": 0.0,
+          "T04": 0.0,
+          "T05": 0.0
+        },
+        "model_status": "success",
+        "gold_traits": {
+          "T01": {
+            "value": 0.65,
+            "confidence": 0.6
+          },
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "situational_factor": {
+          "gold": null,
+          "predicted": []
+        },
+        "evidence_grounding": [
+          {
+            "quote": "I pushed back and asked for 15% more.",
+            "grounded": true
+          }
+        ]
+      },
+      {
+        "item_id": "ORG15",
+        "predicted_scores": {
+          "T01": null,
+          "T02": 0.15,
+          "T03": null,
+          "T04": 0.7,
+          "T05": 0.2,
+          "T06": null
+        },
+        "predicted_confidence": {
+          "T01": 0.0,
+          "T02": 0.6,
+          "T03": 0.0,
+          "T04": 0.55,
+          "T05": 0.5
+        },
+        "model_status": "success",
+        "gold_traits": {
+          "T01": null,
+          "T02": {
+            "value": 0.2,
+            "confidence": 0.55
+          },
+          "T03": null,
+          "T04": null,
+          "T05": {
+            "value": 0.35,
+            "confidence": 0.4
+          },
+          "T06": null
+        },
+        "situational_factor": {
+          "gold": {
+            "category": "financial_dependency",
+            "description": "Possible financial pressure implied but not stated -- confidence kept moderate rather than high."
+          },
+          "predicted": []
+        },
+        "evidence_grounding": [
+          {
+            "quote": "lower monthly payment",
+            "grounded": true
+          },
+          {
+            "quote": "without really comparing the total interest over the life of the loan",
+            "grounded": true
+          },
+          {
+            "quote": "without really comparing the total interest over the life of the loan",
+            "grounded": true
+          },
+          {
+            "quote": "without really comparing the total interest over the life of the loan",
+            "grounded": true
+          }
+        ]
+      },
+      {
+        "item_id": "ORG18",
+        "predicted_scores": {
+          "T01": 0.7,
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "predicted_confidence": {
+          "T01": 0.68,
+          "T02": 0.0,
+          "T03": 0.0,
+          "T04": 0.0,
+          "T05": 0.0
+        },
+        "model_status": "success",
+        "gold_traits": {
+          "T01": {
+            "value": 0.65,
+            "confidence": 0.55
+          },
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": {
+            "value": 0.4,
+            "confidence": 0.5
+          }
+        },
+        "situational_factor": {
+          "gold": {
+            "category": "financial_dependency",
+            "description": "Increased financial cushion given as the likely cause -- this should be modeled as a genuine profile shift, not as inconsistency to be penalized."
+          },
+          "predicted": [
+            "other"
+          ]
+        },
+        "evidence_grounding": [
+          {
+            "quote": "more willing to take chances",
+            "grounded": true
+          }
+        ]
+      }
+    ],
+    "ambiguous_gold_score_metrics": {
+      "T01": {
+        "n_paired_scores": 2,
+        "mae": 0.04999999999999993,
+        "exact_band_accuracy": 1.0,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 1.0,
+        "spearman_rho": null,
+        "direction_accuracy": 1.0,
+        "direction_n": 2,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T02": {
+        "n_paired_scores": 1,
+        "mae": 0.05000000000000002,
+        "exact_band_accuracy": 0.0,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.0,
+        "spearman_rho": null,
+        "direction_accuracy": 1.0,
+        "direction_n": 1,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T03": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T04": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T05": {
+        "n_paired_scores": 1,
+        "mae": 0.14999999999999997,
+        "exact_band_accuracy": 1.0,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 1.0,
+        "spearman_rho": null,
+        "direction_accuracy": 1.0,
+        "direction_n": 1,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "overall": {
+        "n_paired_scores": 4,
+        "mae": 0.07499999999999996,
+        "exact_band_accuracy": 0.75,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9090909090909091,
+        "spearman_rho": 1.0,
+        "direction_accuracy": 1.0,
+        "direction_n": 4,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "evidence": {
+    "grounding_rate": 1.0,
+    "grounded_quotes": 159,
+    "quote_count": 159,
+    "quiz_gold_evidence_text_match": "not_applicable: quiz evidence is templated"
+  },
+  "confidence": {
+    "scored_trait_confidence_count": 150,
+    "mean": 0.6846666666666666,
+    "bins": {
+      "[0.0,0.2)": 0,
+      "[0.2,0.4)": 0,
+      "[0.4,0.6)": 17,
+      "[0.6,0.8)": 84,
+      "[0.8,1.0]": 49
+    },
+    "mean_when_band_correct": 0.7039655172413792,
+    "mean_when_band_wrong": 0.7446153846153846,
+    "high_confidence_wrong_count": 1,
+    "high_confidence_wrong_rate": 0.006666666666666667
+  },
+  "edge_cases": {
+    "passed_checks": 40,
+    "total_checks": 47,
+    "pass_rate": 0.851063829787234,
+    "item_checks": [
+      {
+        "item_id": "EDGE01",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true
+      },
+      {
+        "item_id": "EDGE02",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true
+      },
+      {
+        "item_id": "EDGE03",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": false,
+        "max_confidence": true
+      },
+      {
+        "item_id": "EDGE04",
+        "status": true,
+        "null_traits": false,
+        "non_null_traits": true,
+        "situational_factor": true,
+        "max_confidence": false
+      },
+      {
+        "item_id": "EDGE05",
+        "status": true,
+        "null_traits": false,
+        "non_null_traits": true,
+        "situational_factor": true
+      },
+      {
+        "item_id": "EDGE06",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true,
+        "max_confidence": false
+      },
+      {
+        "item_id": "EDGE07",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true
+      },
+      {
+        "item_id": "EDGE08",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true
+      },
+      {
+        "item_id": "EDGE09",
+        "status": true,
+        "null_traits": false,
+        "non_null_traits": true,
+        "situational_factor": false
+      },
+      {
+        "item_id": "EDGE10",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true
+      },
+      {
+        "item_id": "EDGE11",
+        "status": true,
+        "null_traits": true,
+        "non_null_traits": true,
+        "situational_factor": true
+      }
+    ],
+    "failures": [
+      {
+        "item_id": "EDGE03",
+        "failed_checks": [
+          "situational_factor"
+        ]
+      },
+      {
+        "item_id": "EDGE04",
+        "failed_checks": [
+          "null_traits",
+          "max_confidence"
+        ]
+      },
+      {
+        "item_id": "EDGE05",
+        "failed_checks": [
+          "null_traits"
+        ]
+      },
+      {
+        "item_id": "EDGE06",
+        "failed_checks": [
+          "max_confidence"
+        ]
+      },
+      {
+        "item_id": "EDGE09",
+        "failed_checks": [
+          "null_traits",
+          "situational_factor"
+        ]
+      }
+    ]
+  },
+  "t06_violations": {
+    "count": 0,
+    "item_ids": []
+  },
+  "errors_by_type": {
+    "confidence_miscalibration": 1,
+    "context_confusion": 5,
+    "edge_case_failure": 7,
+    "missed_signal": 8,
+    "needs_manual_review": 10,
+    "polarity_inversion": 1,
+    "score_deviation": 26,
+    "status_error": 1,
+    "unsupported_inference": 3
+  },
+  "errors_by_severity": {
+    "critical": 1,
+    "major": 27,
+    "minor": 24,
+    "review": 10
+  },
+  "manual_review_sample": [
+    "Q17_E",
+    "Q02_C",
+    "ORG11",
+    "Q21_C",
+    "Q06_D",
+    "Q06_B",
+    "Q06_A",
+    "Q02_D",
+    "Q22_E",
+    "Q02_B"
+  ],
+  "readiness_criteria": {
+    "strict_schema_valid_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.95,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "schema_valid_or_recovered_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.99,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_target_non_null_rate": {
+      "observed": 0.9466666666666667,
+      "operator": "at_least",
+      "threshold": 0.9,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_exact_band_accuracy": {
+      "observed": 0.7323943661971831,
+      "operator": "at_least",
+      "threshold": 0.6,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_within_one_band_rate": {
+      "observed": 0.9859154929577465,
+      "operator": "at_least",
+      "threshold": 0.9,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_mae": {
+      "observed": 0.06352112676056339,
+      "operator": "at_most",
+      "threshold": 0.15,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_direction_accuracy": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.9,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_spearman_rho": {
+      "observed": 0.9157998143328652,
+      "operator": "at_least",
+      "threshold": 0.8,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_polarity_inversion_rate": {
+      "observed": 0.0,
+      "operator": "at_most",
+      "threshold": 0.02,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "evidence_grounding_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.98,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "t06_violations": {
+      "observed": 0,
+      "operator": "equal",
+      "threshold": 0,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "edge_case_pass_rate": {
+      "observed": 0.851063829787234,
+      "operator": "at_least",
+      "threshold": 0.8,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "organic_situational_factor_recall": {
+      "observed": 0.6666666666666666,
+      "operator": "at_least",
+      "threshold": 0.8,
+      "status": "fail",
+      "approval": "proposed — pending team lead approval"
+    }
+  },
+  "run": {
+    "run_id": "v2.1__openai-gpt-oss-120b__all-dev__5825600d",
+    "prompt_version": "v2.1",
+    "prompt_sha256": "7c66c1eb1f308992bdc77fbe539a87e9cdcadd0ccca5c14662653888139f06e4",
+    "model": "openai/gpt-oss-120b",
+    "temperature": 0.0,
+    "max_completion_tokens": 4096,
+    "reasoning_effort": "medium",
+    "response_format": {
+      "type": "json_object"
+    },
+    "created_at": "2026-10-26T21:18:49.541284+00:00",
+    "split": "dev",
+    "set": "all",
+    "batch_size": 10,
+    "eval_set_sha256": "5825600d6a1962ccb94d288569894d72f9c5e2c440e5ba4fe2bab67650aa31b3",
+    "raw_response_count": 100
+  }
+}

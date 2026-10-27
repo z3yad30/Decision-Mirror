@@ -36,7 +36,16 @@ def score_band(score: float) -> int:
 
 
 def normalize_quote(text: str) -> str:
-    return _WHITESPACE.sub(" ", text.translate(_QUOTE_TRANSLATION)).strip().casefold()
+    normalized = _WHITESPACE.sub(
+        " ", text.translate(_QUOTE_TRANSLATION)
+    ).strip().casefold()
+    if (
+        len(normalized) >= 2
+        and normalized[0] == normalized[-1]
+        and normalized[0] in {"'", '"'}
+    ):
+        normalized = normalized[1:-1].strip()
+    return normalized
 
 
 def is_grounded(quote: str, decision_text: str) -> bool:

@@ -1369,8 +1369,8 @@
     }
   },
   "evidence": {
-    "grounding_rate": 0.9761904761904762,
-    "grounded_quotes": 164,
+    "grounding_rate": 1.0,
+    "grounded_quotes": 168,
     "quote_count": 168,
     "quiz_gold_evidence_text_match": "not_applicable: quiz evidence is templated"
   },
@@ -1514,7 +1514,6 @@
     "confidence_miscalibration": 1,
     "context_confusion": 5,
     "edge_case_failure": 8,
-    "evidence_not_grounded": 4,
     "missed_signal": 4,
     "needs_manual_review": 10,
     "polarity_inversion": 1,
@@ -1524,7 +1523,7 @@
   },
   "errors_by_severity": {
     "critical": 2,
-    "major": 29,
+    "major": 25,
     "minor": 31,
     "review": 10
   },
@@ -1605,10 +1604,10 @@
       "approval": "proposed — pending team lead approval"
     },
     "evidence_grounding_rate": {
-      "observed": 0.9761904761904762,
+      "observed": 1.0,
       "operator": "at_least",
       "threshold": 0.98,
-      "status": "fail",
+      "status": "pass",
       "approval": "proposed — pending team lead approval"
     },
     "t06_violations": {

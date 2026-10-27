@@ -44,8 +44,17 @@ Decision-Mirror/
 |           |-- gold_data.md
 |           `-- how_to_run.md
 |-- evaluation/  # Evaluation outputs and results
+|   |-- comparisons/
+|   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d__vs__v2.1__openai-gpt-oss-120b__all-dev__5825600d.json
 |   |-- results/
-|   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |   |-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |   |   |-- difficult_cases.md
+|   |   |   |-- error_log.jsonl
+|   |   |   |-- metrics.json
+|   |   |   |-- per_item.csv
+|   |   |   |-- schema_compliance.json
+|   |   |   `-- tables.md
+|   |   `-- v2.1__openai-gpt-oss-120b__all-dev__5825600d/
 |   |       |-- difficult_cases.md
 |   |       |-- error_log.jsonl
 |   |       |-- metrics.json
@@ -53,7 +62,11 @@ Decision-Mirror/
 |   |       |-- schema_compliance.json
 |   |       `-- tables.md
 |   |-- runs/
-|   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |   |-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |   |   |-- attempts.log.jsonl
+|   |   |   |-- manifest.json
+|   |   |   `-- raw_responses.jsonl
+|   |   `-- v2.1__openai-gpt-oss-120b__all-dev__5825600d/
 |   |       |-- attempts.log.jsonl
 |   |       |-- manifest.json
 |   |       `-- raw_responses.jsonl

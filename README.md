@@ -45,9 +45,9 @@ invocation and resumes from saved progress:
 python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev
 ```
 
-The current candidate is `v2.1` (draft); its 100-item dev run is pending. Do
-not run the held-out split until the final prompt version has been confirmed
-and frozen.
+The current candidate is `v2.1` (draft); its 100-item dev run and paired
+comparison against `v2.0` are complete. Do not run the held-out split until the
+final prompt version has been confirmed and frozen.
 
 Check progress without an API call or preview the next batch with
 `--status` or `--dry-run`:
@@ -116,8 +116,8 @@ Extraction prompt versions and their SHA-256 hashes are listed in
 [`prompts/extraction/registry.json`](./prompts/extraction/registry.json).
 `load_prompt(version)` returns the prompt text and its calculated hash; frozen
 versions are hash-verified, and legacy versions require an explicit
-`allow_legacy=True`. The current `v2.1` prompt is a draft pending a separate
-dev run and comparison; `v2.0` is the evaluated dev baseline.
+`allow_legacy=True`. The current `v2.1` prompt is a draft; its separate dev run
+and paired comparison with the `v2.0` baseline are complete.
 
 Never edit a frozen prompt in place. Create a new version, register its
 parentage and hash, and explain the change in
@@ -132,4 +132,4 @@ archived for provenance and are not used for official evaluation.
 - [x] Prompt 4: versioned extraction prompt, registry, leakage tests, and review checklist.
 - [x] Prompt 5: resumable, rate-limit-safe extraction runner and run documentation.
 - [x] Prompt 6: offline evaluation metrics, error taxonomy, paired comparison, and readiness criteria.
-- [x] Prompt 7: dev-split error analysis and evidence-based v2.1 draft revision; dev comparison pending.
+- [x] Prompt 7: dev-split error analysis, evidence-based v2.1 draft revision, and paired v2.0/v2.1 dev comparison.

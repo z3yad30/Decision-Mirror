@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 
 from decision_mirror.extraction import validation
-from evaluation.metrics import analyze_items, score_band
+from evaluation.metrics import analyze_items, is_grounded, score_band
 from evaluation.runner import evaluate_run
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -183,6 +183,19 @@ def test_half_open_score_band_boundaries():
         3,
         4,
     ]
+
+
+def test_grounding_accepts_balanced_quote_delimiters_around_excerpt():
+    quote = (
+        "“turned down three promotions in a row because each one would have "
+        "meant more travel and less time with my kids”"
+    )
+    decision_text = (
+        "I've turned down three promotions in a row because each one would "
+        "have meant more travel and less time with my kids."
+    )
+
+    assert is_grounded(quote, decision_text)
 
 
 def test_ambiguous_organic_items_are_excluded_from_headline_metrics():

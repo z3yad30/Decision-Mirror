@@ -61,7 +61,7 @@
 
 | Metric | Value |
 |---|---:|
-| Evidence grounding | 97.6% |
+| Evidence grounding | 100.0% |
 | Edge-case checks | 39/47 (83.0%) |
 | T06 violations | 0 |
 
@@ -78,7 +78,7 @@ Readiness thresholds are proposed and pending team lead approval.
 | quiz_direction_accuracy | 100.0% | at_least 90.0% | pass |
 | quiz_spearman_rho | 0.918 | at_least 0.8 | pass |
 | quiz_polarity_inversion_rate | 0.0% | at_most 2.0% | pass |
-| evidence_grounding_rate | 97.6% | at_least 98.0% | fail |
+| evidence_grounding_rate | 100.0% | at_least 98.0% | pass |
 | t06_violations | 0.000 | equal 0 | pass |
 | edge_case_pass_rate | 83.0% | at_least 80.0% | pass |
 | organic_situational_factor_recall | 100.0% | at_least 80.0% | pass |

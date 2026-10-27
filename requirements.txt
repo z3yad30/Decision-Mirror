@@ -1,5 +1,8 @@
+# Runtime dependencies
 groq==1.7.0
 httpx==0.28.1
 jsonschema==4.26.0
 python-dotenv==1.2.4
+
+# Test dependency
 pytest==9.1.1

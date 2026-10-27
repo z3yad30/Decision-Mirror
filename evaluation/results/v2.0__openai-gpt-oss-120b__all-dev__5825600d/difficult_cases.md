@@ -19,10 +19,6 @@
 | ORG11 | major | context_confusion | `{"category": "other", "description": "Caregiving context noted but framed as a value, not merely a constraint -- raises confidence that this reflects a stable priority."}` | `["family_pressure", "family_pressure", "family_pressure"]` | Detected situational factor category does not match gold. |
 | ORG11 | major | unsupported_inference | `null` | `0.15` | Gold T05 is annotated null. |
 | ORG12 | major | context_confusion | `{"category": "low_stakes", "description": "Extremely low-stakes decision; should contribute minimally to the running profile despite a clear directional signal."}` | `["social_influence"]` | Detected situational factor category does not match gold. |
-| ORG14 | major | evidence_not_grounded | `"evidence quote grounded in decision_text"` | `"\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""` | T01 evidence quote was not found after quote, whitespace, and case normalization. |
-| ORG14 | major | evidence_not_grounded | `"evidence quote grounded in decision_text"` | `"\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""` | T02 evidence quote was not found after quote, whitespace, and case normalization. |
-| ORG14 | major | evidence_not_grounded | `"evidence quote grounded in decision_text"` | `"\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""` | T03 evidence quote was not found after quote, whitespace, and case normalization. |
-| ORG14 | major | evidence_not_grounded | `"evidence quote grounded in decision_text"` | `"\"turned down three promotions in a row because each one would have meant more travel and less time with my kids\""` | T05 evidence quote was not found after quote, whitespace, and case normalization. |
 | ORG14 | major | unsupported_inference | `null` | `0.3` | Gold T01 is annotated null. |
 | ORG14 | major | unsupported_inference | `null` | `0.15` | Gold T02 is annotated null. |
 | ORG14 | major | unsupported_inference | `null` | `0.25` | Gold T05 is annotated null. |

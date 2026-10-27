@@ -1,0 +1,16 @@
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q09_B","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:02:34.927098+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q09_C","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:02:39.354865+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q09_D","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:02:43.601807+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q09_E","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:02:48.098510+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q10_A","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:02:52.281119+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q10_B","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:02:56.584649+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q10_C","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:03:00.801084+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q10_D","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:03:05.176315+00:00","transient":true}
+{"attempt":1,"error_type":"APIConnectionError","item_id":"Q10_E","retry_after_s":null,"status_code":null,"timestamp":"2026-10-26T22:03:09.597990+00:00","transient":true}
+{"attempt":1,"error_type":"RateLimitError","item_id":"Q17_C","retry_after_s":4.0,"status_code":429,"timestamp":"2026-10-26T22:51:59.780684+00:00","transient":true}
+{"attempt":1,"error_type":"RateLimitError","item_id":"Q22_B","retry_after_s":1.0,"status_code":429,"timestamp":"2026-10-27T04:07:12.574614+00:00","transient":true}
+{"attempt":1,"error_type":"APITimeoutError","item_id":"Q23_E","retry_after_s":null,"status_code":null,"timestamp":"2026-10-27T13:42:07.608628+00:00","transient":true}
+{"attempt":1,"error_type":"APITimeoutError","item_id":"ORG11","retry_after_s":null,"status_code":null,"timestamp":"2026-10-27T14:03:35.936452+00:00","transient":true}
+{"attempt":1,"error_type":"APITimeoutError","item_id":"ORG14","retry_after_s":null,"status_code":null,"timestamp":"2026-10-27T14:04:55.668279+00:00","transient":true}
+{"attempt":1,"error_type":"APITimeoutError","item_id":"ORG17","retry_after_s":null,"status_code":null,"timestamp":"2026-10-27T14:07:12.322880+00:00","transient":true}
+{"attempt":1,"error_type":"APITimeoutError","item_id":"ORG18","retry_after_s":null,"status_code":null,"timestamp":"2026-10-27T14:07:49.640276+00:00","transient":true}
