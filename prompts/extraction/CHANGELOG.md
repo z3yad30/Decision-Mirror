@@ -10,7 +10,7 @@
 - **v1.3 — legacy:** Consolidated a stricter extraction prompt. Archived after
   review identified the gold-specific rule, missing quiz handling, field drift,
   and evidence gates that contradicted the ontology.
-- **v2.0 — draft:** Rebuilt as a system prompt aligned with the ontology and
+- **v2.0 — frozen:** Rebuilt as a system prompt aligned with the ontology and
   Task 4 contracts. Adds injection resistance, four-way context handling,
   distinct quiz guidance, evidence-tier confidence, null rules, exact output
   shape, self-authored illustrations, a registry, and leakage tests.
@@ -20,5 +20,8 @@
   circumstance or constraint alone is not trait evidence →
   **Expected effect:** reduce unsupported family/social/financial factor tags
   and trait scores derived from constraints while preserving evidence-based
-  preference scores. Requires a separate dev run and paired comparison before
-  it can be kept.
+  preference scores. **Decision:** not selected; the dev run scored 66.7%
+  organic situational-factor recall against the proposed 80.0% minimum. The
+  missed eligible factor was ORG11; ORG05 was also missed but is
+  `ambiguous_gold` and excluded from headline recall. Keep v2.1 as a draft;
+  v2.0 remains the frozen prompt.

@@ -42,19 +42,30 @@ until it prints `RUN COMPLETE`. The runner handles at most 10 items per
 invocation and resumes from saved progress:
 
 ```powershell
-python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev
+python scripts/run_extraction.py --prompt v2.0 --model openai/gpt-oss-120b --set all --split dev
 ```
 
-The current candidate is `v2.1` (draft); its 100-item dev run and paired
-comparison against `v2.0` are complete. Do not run the held-out split until the
-final prompt version has been confirmed and frozen.
+`v2.0` is the frozen prompt selected for evaluation. `v2.1` remains a rejected
+draft: its dev organic situational-factor recall was 66.7%, below the proposed
+80.0% threshold. Do not use v2.1 as the final prompt. The stored v2.0 held-out
+run is reproduced offline in the final Task 4 report.
+
+To run a new held-out extraction (API call; do not use to reproduce the stored
+evaluation):
+
+```powershell
+python scripts/run_extraction.py --prompt v2.0 --model openai/gpt-oss-120b --set all --split heldout --batch-size 10
+```
+
+The held-out split contains 56 items, so repeat the command until `RUN COMPLETE`
+(six invocations: five batches of 10 and one batch of 6).
 
 Check progress without an API call or preview the next batch with
 `--status` or `--dry-run`:
 
 ```powershell
-python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev --status
-python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev --dry-run
+python scripts/run_extraction.py --prompt v2.0 --model openai/gpt-oss-120b --set all --split dev --status
+python scripts/run_extraction.py --prompt v2.0 --model openai/gpt-oss-120b --set all --split dev --dry-run
 ```
 
 Quota stops exit with code 3; rerun the same command later to resume. Full setup,
@@ -75,6 +86,36 @@ Reports are written under `evaluation/results/<run_id>/` and paired comparisons
 under `evaluation/comparisons/`. Evaluation methodology, metric formulas,
 error taxonomy, and proposed readiness thresholds are documented in
 [`04_evaluation_method.md`](./docs/tasks/task-4-llm-extraction/04_evaluation_method.md).
+
+## Final Task 4 evaluation and reproduction
+
+Task 4 implements frozen v1.0 extraction contracts, a versioned prompt, a
+resumable API runner, offline validation and metrics, and the evaluation
+handoff. **v2.0 is the frozen final prompt**; cite model
+`openai/gpt-oss-120b` on Groq and prompt SHA-256
+`6f93b33da4bf2193641bb47156b1ca090a84f86f718e69085513aae4e6d280d7`.
+Quiz target exact-band accuracy was 67.1% dev / 65.2% held-out; MAE was
+0.073 / 0.069. Organic situational-factor recall was 100% in each split, but
+the held-out result comes from only six organic records and is not statistically
+meaningful. Edge-case pass rate was 83.0% on dev only; there are no held-out
+edge cases. The readiness decision is **Ready with conditions**, not
+unconditional validation.
+
+See the reproducible tables, limitations, criteria, examples, and approval line
+in the [Task 4 evaluation report](./docs/tasks/task-4-llm-extraction/06_evaluation_report.md)
+and the [profile-aggregation handoff](./docs/tasks/task-4-llm-extraction/07_handoff_to_profile_aggregation.md).
+The report's reproduction section gives the exact fresh-clone commands; the
+core offline evaluation commands are:
+
+```powershell
+python scripts/evaluate_run.py --run-id v2.0__openai-gpt-oss-120b__all-dev__5825600d
+python scripts/evaluate_run.py --run-id v2.0__openai-gpt-oss-120b__all-heldout__5825600d
+python scripts/build_task4_report.py
+```
+
+The manifest [`TASK4_MANIFEST.json`](./docs/tasks/task-4-llm-extraction/TASK4_MANIFEST.json)
+freezes SHA-256 hashes for the contracts, prompt, datasets, raw final runs, and
+metrics. No API key is needed for this reproduction.
 
 ## Data
 
@@ -116,8 +157,9 @@ Extraction prompt versions and their SHA-256 hashes are listed in
 [`prompts/extraction/registry.json`](./prompts/extraction/registry.json).
 `load_prompt(version)` returns the prompt text and its calculated hash; frozen
 versions are hash-verified, and legacy versions require an explicit
-`allow_legacy=True`. The current `v2.1` prompt is a draft; its separate dev run
-and paired comparison with the `v2.0` baseline are complete.
+`allow_legacy=True`. `v2.0` is frozen and selected; `v2.1` is an unselected
+draft after its dev comparison failed the proposed situational-factor recall
+threshold.
 
 Never edit a frozen prompt in place. Create a new version, register its
 parentage and hash, and explain the change in
@@ -133,3 +175,8 @@ archived for provenance and are not used for official evaluation.
 - [x] Prompt 5: resumable, rate-limit-safe extraction runner and run documentation.
 - [x] Prompt 6: offline evaluation metrics, error taxonomy, paired comparison, and readiness criteria.
 - [x] Prompt 7: dev-split error analysis, evidence-based v2.1 draft revision, and paired v2.0/v2.1 dev comparison.
+- [x] Prompt 8: final evaluation report, conditional readiness decision, reproducibility freeze, and profile-aggregation handoff.
+
+**Task 4 status:** Complete for a guarded downstream pilot, with conditions.
+Team-lead approval and human evidence cross-review remain required; see the
+report's blank approval line and readiness conditions.

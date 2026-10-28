@@ -1,0 +1,36 @@
+{"item_id": "Q01_A", "expected": 0.1, "actual": null, "error_type": "missed_signal", "severity": "major", "notes": "Target trait T01 was null."}
+{"item_id": "Q01_A", "expected": "success", "actual": "insufficient_evidence", "error_type": "status_error", "severity": "major", "notes": "Model extraction_status disagrees with gold-derived status."}
+{"item_id": "Q01_E", "expected": 0.9, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T01 differs by 1 score band(s)."}
+{"item_id": "Q05_A", "expected": 0.1, "actual": 0.25, "error_type": "score_deviation", "severity": "minor", "notes": "T01 differs by 1 score band(s)."}
+{"item_id": "Q05_E", "expected": 0.9, "actual": 0.73, "error_type": "score_deviation", "severity": "minor", "notes": "T01 differs by 1 score band(s)."}
+{"item_id": "Q07_A", "expected": 0.1, "actual": 0.25, "error_type": "score_deviation", "severity": "minor", "notes": "T02 differs by 1 score band(s)."}
+{"item_id": "Q07_C", "expected": 0.5, "actual": null, "error_type": "missed_signal", "severity": "major", "notes": "Target trait T02 was null."}
+{"item_id": "Q07_E", "expected": 0.9, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T02 differs by 1 score band(s)."}
+{"item_id": "Q08_E", "expected": 0.9, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T02 differs by 1 score band(s)."}
+{"item_id": "Q12_B", "expected": 0.3, "actual": 0.15, "error_type": "score_deviation", "severity": "minor", "notes": "T03 differs by 1 score band(s)."}
+{"item_id": "Q12_C", "expected": 0.5, "actual": null, "error_type": "missed_signal", "severity": "major", "notes": "Target trait T03 was null."}
+{"item_id": "Q12_E", "expected": 0.9, "actual": 0.65, "error_type": "score_deviation", "severity": "minor", "notes": "T03 differs by 1 score band(s)."}
+{"item_id": "Q16_A", "expected": 0.1, "actual": 0.25, "error_type": "score_deviation", "severity": "minor", "notes": "T04 differs by 1 score band(s)."}
+{"item_id": "Q16_C", "expected": 0.5, "actual": 0.3, "error_type": "score_deviation", "severity": "minor", "notes": "T04 differs by 1 score band(s)."}
+{"item_id": "Q16_E", "expected": 0.9, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T04 differs by 1 score band(s)."}
+{"item_id": "Q20_A", "expected": 0.1, "actual": 0.3, "error_type": "score_deviation", "severity": "minor", "notes": "T04 differs by 1 score band(s)."}
+{"item_id": "Q20_B", "expected": 0.3, "actual": null, "error_type": "missed_signal", "severity": "major", "notes": "Target trait T04 was null."}
+{"item_id": "Q20_C", "expected": 0.5, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T04 differs by 1 score band(s)."}
+{"item_id": "Q20_E", "expected": 0.9, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T04 differs by 1 score band(s)."}
+{"item_id": "Q24_E", "expected": 0.9, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T05 differs by 1 score band(s)."}
+{"item_id": "Q25_A", "expected": 0.1, "actual": 0.22, "error_type": "score_deviation", "severity": "minor", "notes": "T05 differs by 1 score band(s)."}
+{"item_id": "ORG01", "expected": 0.4, "actual": 0.3, "error_type": "score_deviation", "severity": "minor", "notes": "T02 differs by 1 score band(s)."}
+{"item_id": "ORG01", "expected": null, "actual": 0.7, "error_type": "unsupported_inference", "severity": "major", "notes": "Gold T05 is annotated null."}
+{"item_id": "ORG07", "expected": 0.85, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T01 differs by 1 score band(s)."}
+{"item_id": "ORG08", "expected": 0.85, "actual": 0.7, "error_type": "score_deviation", "severity": "minor", "notes": "T02 differs by 1 score band(s)."}
+{"item_id": "ORG08", "expected": null, "actual": ["financial_dependency", "financial_dependency"], "error_type": "context_confusion", "severity": "major", "notes": "Situational factor was missed or hallucinated."}
+{"item_id": "Q05_B", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "ORG07", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q12_D", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q25_E", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q25_B", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q01_B", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q16_B", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "ORG16", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q15_D", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}
+{"item_id": "Q24_B", "expected": "human review of evidence support", "actual": "target score in exact gold band", "error_type": "needs_manual_review", "severity": "review", "notes": "Sampled for independent cross-review; numeric score match does not establish evidence support."}

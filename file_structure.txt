@@ -41,13 +41,23 @@ Decision-Mirror/
 |           |-- 03_extraction_prompts.md
 |           |-- 04_evaluation_method.md
 |           |-- 05_error_analysis.md
+|           |-- 06_evaluation_report.md
+|           |-- 07_handoff_to_profile_aggregation.md
 |           |-- gold_data.md
-|           `-- how_to_run.md
+|           |-- how_to_run.md
+|           `-- TASK4_MANIFEST.json
 |-- evaluation/  # Evaluation outputs and results
 |   |-- comparisons/
 |   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d__vs__v2.1__openai-gpt-oss-120b__all-dev__5825600d.json
 |   |-- results/
 |   |   |-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |   |   |-- difficult_cases.md
+|   |   |   |-- error_log.jsonl
+|   |   |   |-- metrics.json
+|   |   |   |-- per_item.csv
+|   |   |   |-- schema_compliance.json
+|   |   |   `-- tables.md
+|   |   |-- v2.0__openai-gpt-oss-120b__all-heldout__5825600d/
 |   |   |   |-- difficult_cases.md
 |   |   |   |-- error_log.jsonl
 |   |   |   |-- metrics.json
@@ -63,6 +73,10 @@ Decision-Mirror/
 |   |       `-- tables.md
 |   |-- runs/
 |   |   |-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
+|   |   |   |-- attempts.log.jsonl
+|   |   |   |-- manifest.json
+|   |   |   `-- raw_responses.jsonl
+|   |   |-- v2.0__openai-gpt-oss-120b__all-heldout__5825600d/
 |   |   |   |-- attempts.log.jsonl
 |   |   |   |-- manifest.json
 |   |   |   `-- raw_responses.jsonl
@@ -120,6 +134,7 @@ Decision-Mirror/
 |   `-- extraction_result.schema.json
 |-- scripts/  # Project maintenance utilities
 |   |-- build_eval_set.py
+|   |-- build_task4_report.py
 |   |-- compare_runs.py
 |   |-- evaluate_run.py
 |   |-- run_extraction.py

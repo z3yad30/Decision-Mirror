@@ -40,10 +40,10 @@
       "version": "v2.0",
       "file": "extraction_v2.0.md",
       "sha256": "6f93b33da4bf2193641bb47156b1ca090a84f86f718e69085513aae4e6d280d7",
-      "status": "draft",
+      "status": "frozen",
       "parent": "v1.3",
       "created": "2026-10-25",
-      "summary": "Ontology-aligned system prompt with quiz guidance, injection resistance, exact output contract, and gold-leakage tests."
+      "summary": "Frozen ontology-aligned system prompt with quiz guidance, injection resistance, exact output contract, and gold-leakage tests."
     },
     {
       "version": "v2.1",
@@ -52,7 +52,7 @@
       "status": "draft",
       "parent": "v2.0",
       "created": "2026-10-26",
-      "summary": "Clarifies causal evidence for situational-factor categories and separates constraints from trait evidence."
+      "summary": "Draft candidate clarifying causal evidence for situational-factor categories; not selected after dev evaluation missed the organic situational-factor recall threshold."
     }
   ]
 }

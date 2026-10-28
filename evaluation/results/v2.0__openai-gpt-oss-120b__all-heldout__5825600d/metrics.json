@@ -1,0 +1,1445 @@
+{
+  "response_count": 56,
+  "format": {
+    "strict_json_parse_rate": 1.0,
+    "schema_valid_rate": 1.0,
+    "semantic_valid_rate": 1.0,
+    "recovered_rate": 0.0,
+    "failure_counts": {}
+  },
+  "quiz": {
+    "target_trait_scoring": {
+      "T01": {
+        "target_non_null_rate": 0.9,
+        "target_n": 10,
+        "n_paired_scores": 9,
+        "mae": 0.06333333333333334,
+        "exact_band_accuracy": 0.6666666666666666,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.8669950738916257,
+        "spearman_rho": 0.978549784986749,
+        "direction_accuracy": 1.0,
+        "direction_n": 7,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.011111111111111096,
+            "upper": 0.11777777777777781,
+            "n": 9
+          },
+          "accuracy": {
+            "lower": 0.3333333333333333,
+            "upper": 1.0,
+            "n": 9
+          },
+          "rho": {
+            "lower": 0.8716219195512478,
+            "upper": 1.0,
+            "n": 9
+          }
+        }
+      },
+      "T02": {
+        "target_non_null_rate": 0.9,
+        "target_n": 10,
+        "n_paired_scores": 9,
+        "mae": 0.06333333333333334,
+        "exact_band_accuracy": 0.6666666666666666,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9032258064516129,
+        "spearman_rho": 0.9604649301246597,
+        "direction_accuracy": 1.0,
+        "direction_n": 8,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.006666666666666664,
+            "upper": 0.12222222222222226,
+            "n": 9
+          },
+          "accuracy": {
+            "lower": 0.3333333333333333,
+            "upper": 1.0,
+            "n": 9
+          },
+          "rho": {
+            "lower": 0.7770286898858113,
+            "upper": 1.0,
+            "n": 9
+          }
+        }
+      },
+      "T03": {
+        "target_non_null_rate": 0.9,
+        "target_n": 10,
+        "n_paired_scores": 9,
+        "mae": 0.052222222222222205,
+        "exact_band_accuracy": 0.7777777777777778,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.95,
+        "spearman_rho": 0.902201178283859,
+        "direction_accuracy": 1.0,
+        "direction_n": 8,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            2,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            1,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.004444444444444424,
+            "upper": 0.11333333333333334,
+            "n": 9
+          },
+          "accuracy": {
+            "lower": 0.4444444444444444,
+            "upper": 1.0,
+            "n": 9
+          },
+          "rho": {
+            "lower": 0.5337605126836238,
+            "upper": 1.0,
+            "n": 9
+          }
+        }
+      },
+      "T04": {
+        "target_non_null_rate": 0.9,
+        "target_n": 10,
+        "n_paired_scores": 9,
+        "mae": 0.1277777777777778,
+        "exact_band_accuracy": 0.3333333333333333,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.784,
+        "spearman_rho": 0.8528602990262663,
+        "direction_accuracy": 1.0,
+        "direction_n": 7,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.06111111111111113,
+            "upper": 0.17777777777777778,
+            "n": 9
+          },
+          "accuracy": {
+            "lower": 0.1111111111111111,
+            "upper": 0.6666666666666666,
+            "n": 9
+          },
+          "rho": {
+            "lower": 0.5786375623578447,
+            "upper": 0.9622504486493763,
+            "n": 9
+          }
+        }
+      },
+      "T05": {
+        "target_non_null_rate": 1.0,
+        "target_n": 10,
+        "n_paired_scores": 10,
+        "mae": 0.042000000000000016,
+        "exact_band_accuracy": 0.8,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.9411764705882353,
+        "spearman_rho": 0.975,
+        "direction_accuracy": 1.0,
+        "direction_n": 8,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            1,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            2,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            2,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            1
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.0050000000000000044,
+            "upper": 0.08600000000000002,
+            "n": 10
+          },
+          "accuracy": {
+            "lower": 0.5,
+            "upper": 1.0,
+            "n": 10
+          },
+          "rho": {
+            "lower": 0.877039888721299,
+            "upper": 1.0,
+            "n": 10
+          }
+        }
+      },
+      "overall": {
+        "target_non_null_rate": 0.92,
+        "target_n": 50,
+        "n_paired_scores": 46,
+        "mae": 0.0691304347826087,
+        "exact_band_accuracy": 0.6521739130434783,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.897521581732108,
+        "spearman_rho": 0.9266742984189785,
+        "direction_accuracy": 1.0,
+        "direction_n": 38,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            4,
+            5,
+            0,
+            0,
+            0
+          ],
+          [
+            1,
+            8,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            6,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            10,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            8,
+            2
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.04413043478260869,
+            "upper": 0.09434782608695652,
+            "n": 46
+          },
+          "accuracy": {
+            "lower": 0.5217391304347826,
+            "upper": 0.782608695652174,
+            "n": 46
+          },
+          "rho": {
+            "lower": 0.8614244324946569,
+            "upper": 0.9640203893028215,
+            "n": 46
+          }
+        },
+        "polarity_inversions_by_trait": {
+          "T01": 0,
+          "T02": 0,
+          "T03": 0,
+          "T04": 0,
+          "T05": 0
+        }
+      }
+    },
+    "off_target_extraction": {
+      "non_null_count": 31,
+      "possible_count": 250,
+      "rate": 0.124,
+      "grounded_share": 1.0,
+      "by_trait": {
+        "T01": {
+          "non_null_count": 1,
+          "possible_count": 40,
+          "rate": 0.025,
+          "grounded_share": 1.0
+        },
+        "T02": {
+          "non_null_count": 8,
+          "possible_count": 40,
+          "rate": 0.2,
+          "grounded_share": 1.0
+        },
+        "T03": {
+          "non_null_count": 1,
+          "possible_count": 40,
+          "rate": 0.025,
+          "grounded_share": 1.0
+        },
+        "T04": {
+          "non_null_count": 0,
+          "possible_count": 40,
+          "rate": 0.0,
+          "grounded_share": null
+        },
+        "T05": {
+          "non_null_count": 21,
+          "possible_count": 40,
+          "rate": 0.525,
+          "grounded_share": 1.0
+        }
+      }
+    }
+  },
+  "organic": {
+    "score_metrics": {
+      "T01": {
+        "n_paired_scores": 3,
+        "mae": 0.0666666666666667,
+        "exact_band_accuracy": 0.6666666666666666,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.8695652173913043,
+        "spearman_rho": 0.8660254037844387,
+        "direction_accuracy": 1.0,
+        "direction_n": 3,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.0,
+            "upper": 0.15000000000000002,
+            "n": 3
+          },
+          "accuracy": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "n": 3
+          },
+          "rho": {
+            "lower": 0.8660254037844387,
+            "upper": 1.0,
+            "n": 3
+          }
+        }
+      },
+      "T02": {
+        "n_paired_scores": 3,
+        "mae": 0.08333333333333336,
+        "exact_band_accuracy": 0.3333333333333333,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.6666666666666667,
+        "spearman_rho": 1.0,
+        "direction_accuracy": 1.0,
+        "direction_n": 3,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.0,
+            "upper": 0.15000000000000002,
+            "n": 3
+          },
+          "accuracy": {
+            "lower": 0.0,
+            "upper": 1.0,
+            "n": 3
+          },
+          "rho": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "n": 3
+          }
+        }
+      },
+      "T03": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          },
+          "accuracy": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          },
+          "rho": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          }
+        }
+      },
+      "T04": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          },
+          "accuracy": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          },
+          "rho": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          }
+        }
+      },
+      "T05": {
+        "n_paired_scores": 1,
+        "mae": 0.09999999999999998,
+        "exact_band_accuracy": 1.0,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 1.0,
+        "spearman_rho": null,
+        "direction_accuracy": 1.0,
+        "direction_n": 1,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            1,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.09999999999999998,
+            "upper": 0.09999999999999998,
+            "n": 1
+          },
+          "accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "n": 1
+          },
+          "rho": {
+            "lower": null,
+            "upper": null,
+            "n": 0
+          }
+        }
+      },
+      "overall": {
+        "n_paired_scores": 7,
+        "mae": 0.07857142857142858,
+        "exact_band_accuracy": 0.5714285714285714,
+        "within_one_band_rate": 1.0,
+        "quadratic_weighted_kappa": 0.7835051546391752,
+        "spearman_rho": 0.9141379262169075,
+        "direction_accuracy": 1.0,
+        "direction_n": 7,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": 0.0,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            1,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            3,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        ],
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.03571428571428573,
+            "upper": 0.12142857142857144,
+            "n": 7
+          },
+          "accuracy": {
+            "lower": 0.14285714285714285,
+            "upper": 0.8571428571428571,
+            "n": 7
+          },
+          "rho": {
+            "lower": 0.6614378277661476,
+            "upper": 1.0,
+            "n": 7
+          }
+        },
+        "missed_signal_rate": 0.0,
+        "missed_signal_count": 0,
+        "unsupported_inference_rate": 0.07142857142857142,
+        "unsupported_inference_count": 1,
+        "status_accuracy": 1.0,
+        "situational_factor": {
+          "precision": 0.5,
+          "recall": 1.0,
+          "category_agreement": 1.0,
+          "true_positive": 1,
+          "false_positive": 1,
+          "false_negative": 0
+        },
+        "confidence_mae": 0.07714285714285711,
+        "confidence_n": 7,
+        "organic_evidence_token_overlap_f1_report_only": 0.2265625
+      }
+    },
+    "ambiguous_gold_item_count": 2,
+    "ambiguous_gold_separate": [
+      {
+        "item_id": "ORG04",
+        "predicted_scores": {
+          "T01": 0.7,
+          "T02": null,
+          "T03": 0.25,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "predicted_confidence": {
+          "T01": 0.62,
+          "T02": 0.0,
+          "T03": 0.6,
+          "T04": 0.0,
+          "T05": 0.0
+        },
+        "model_status": "success",
+        "gold_traits": {
+          "T01": {
+            "value": null,
+            "confidence": 0.35
+          },
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "situational_factor": {
+          "gold": {
+            "category": "family_pressure",
+            "description": "Family pressure explicitly named as the deciding factor, not the person's own risk stance."
+          },
+          "predicted": [
+            "social_influence",
+            "social_influence"
+          ]
+        },
+        "evidence_grounding": [
+          {
+            "quote": "I wanted to take the risky opportunity",
+            "grounded": true
+          },
+          {
+            "quote": "my family convinced me not to",
+            "grounded": true
+          }
+        ]
+      },
+      {
+        "item_id": "ORG19",
+        "predicted_scores": {
+          "T01": null,
+          "T02": 0.3,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": null
+        },
+        "predicted_confidence": {
+          "T01": 0.0,
+          "T02": 0.55,
+          "T03": 0.0,
+          "T04": 0.0,
+          "T05": 0.0
+        },
+        "model_status": "success",
+        "gold_traits": {
+          "T01": null,
+          "T02": null,
+          "T03": null,
+          "T04": null,
+          "T05": null,
+          "T06": {
+            "value": 0.25,
+            "confidence": 0.6
+          }
+        },
+        "situational_factor": {
+          "gold": {
+            "category": "other",
+            "description": "Recurring situational pressure (work busyness) is the repeated trigger -- itself a pattern worth surfacing to the user descriptively."
+          },
+          "predicted": [
+            "external_constraint"
+          ]
+        },
+        "evidence_grounding": [
+          {
+            "quote": "every time work gets busy I skip the gym and work late instead.",
+            "grounded": true
+          }
+        ]
+      }
+    ],
+    "ambiguous_gold_score_metrics": {
+      "T01": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T02": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T03": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T04": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "T05": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      },
+      "overall": {
+        "n_paired_scores": 0,
+        "mae": null,
+        "exact_band_accuracy": null,
+        "within_one_band_rate": null,
+        "quadratic_weighted_kappa": null,
+        "spearman_rho": null,
+        "direction_accuracy": null,
+        "direction_n": 0,
+        "polarity_inversions": 0,
+        "polarity_inversion_rate": null,
+        "confusion_matrix_5x5": [
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        ]
+      }
+    }
+  },
+  "evidence": {
+    "grounding_rate": 1.0,
+    "grounded_quotes": 93,
+    "quote_count": 93,
+    "quiz_gold_evidence_text_match": "not_applicable: quiz evidence is templated"
+  },
+  "confidence": {
+    "scored_trait_confidence_count": 88,
+    "mean": 0.6835227272727272,
+    "bins": {
+      "[0.0,0.2)": 0,
+      "[0.2,0.4)": 0,
+      "[0.4,0.6)": 8,
+      "[0.6,0.8)": 53,
+      "[0.8,1.0]": 27
+    },
+    "mean_when_band_correct": 0.7188235294117648,
+    "mean_when_band_wrong": 0.7052631578947368,
+    "high_confidence_wrong_count": 0,
+    "high_confidence_wrong_rate": 0.0
+  },
+  "edge_cases": {
+    "passed_checks": 0,
+    "total_checks": 0,
+    "pass_rate": null,
+    "item_checks": [],
+    "failures": []
+  },
+  "t06_violations": {
+    "count": 0,
+    "item_ids": []
+  },
+  "errors_by_type": {
+    "context_confusion": 1,
+    "missed_signal": 4,
+    "needs_manual_review": 10,
+    "score_deviation": 19,
+    "status_error": 1,
+    "unsupported_inference": 1
+  },
+  "errors_by_severity": {
+    "major": 7,
+    "minor": 19,
+    "review": 10
+  },
+  "manual_review_sample": [
+    "Q05_B",
+    "ORG07",
+    "Q12_D",
+    "Q25_E",
+    "Q25_B",
+    "Q01_B",
+    "Q16_B",
+    "ORG16",
+    "Q15_D",
+    "Q24_B"
+  ],
+  "readiness_criteria": {
+    "strict_schema_valid_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.95,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "schema_valid_or_recovered_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.99,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_target_non_null_rate": {
+      "observed": 0.92,
+      "operator": "at_least",
+      "threshold": 0.9,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_exact_band_accuracy": {
+      "observed": 0.6521739130434783,
+      "operator": "at_least",
+      "threshold": 0.6,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_within_one_band_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.9,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_mae": {
+      "observed": 0.0691304347826087,
+      "operator": "at_most",
+      "threshold": 0.15,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_direction_accuracy": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.9,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_spearman_rho": {
+      "observed": 0.9266742984189785,
+      "operator": "at_least",
+      "threshold": 0.8,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "quiz_polarity_inversion_rate": {
+      "observed": 0.0,
+      "operator": "at_most",
+      "threshold": 0.02,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "evidence_grounding_rate": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.98,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "t06_violations": {
+      "observed": 0,
+      "operator": "equal",
+      "threshold": 0,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    },
+    "edge_case_pass_rate": {
+      "observed": null,
+      "operator": "at_least",
+      "threshold": 0.8,
+      "status": "not_applicable",
+      "approval": "proposed — pending team lead approval"
+    },
+    "organic_situational_factor_recall": {
+      "observed": 1.0,
+      "operator": "at_least",
+      "threshold": 0.8,
+      "status": "pass",
+      "approval": "proposed — pending team lead approval"
+    }
+  },
+  "run": {
+    "run_id": "v2.0__openai-gpt-oss-120b__all-heldout__5825600d",
+    "prompt_version": "v2.0",
+    "prompt_sha256": "6f93b33da4bf2193641bb47156b1ca090a84f86f718e69085513aae4e6d280d7",
+    "model": "openai/gpt-oss-120b",
+    "temperature": 0.0,
+    "max_completion_tokens": 4096,
+    "reasoning_effort": "medium",
+    "response_format": {
+      "type": "json_object"
+    },
+    "created_at": "2026-10-28T13:50:14.973768+00:00",
+    "split": "heldout",
+    "set": "all",
+    "batch_size": 10,
+    "eval_set_sha256": "5825600d6a1962ccb94d288569894d72f9c5e2c440e5ba4fe2bab67650aa31b3",
+    "raw_response_count": 56
+  }
+}

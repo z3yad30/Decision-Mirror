@@ -44,6 +44,76 @@ small sample. v2.1 has better quiz score metrics and edge-case pass rate, but
 its factor recall regression fails a readiness criterion; v2.0 is therefore
 the preferred version under the preregistered criteria.
 
+### Situational factors: headline and all organic items
+
+The headline metrics exclude `ambiguous_gold` records. The additional metrics
+below include them; factor presence is evaluated as a binary detection, and
+category agreement requires an exact gold-category match on a true positive.
+
+| Metric | Headline v2.0 (exclude ambiguous) | Headline v2.1 (exclude ambiguous) | Including ambiguous v2.0 | Including ambiguous v2.1 |
+|---|---:|---:|---:|---:|
+| Precision | 60.0% (3/5) | 50.0% (2/4) | 71.4% (5/7) | 60.0% (3/5) |
+| Recall | 100.0% (3/3) | 66.7% (2/3) | 83.3% (5/6) | 50.0% (3/6) |
+| Category agreement among true positives | 0.0% (0/3) | 0.0% (0/2) | 40.0% (2/5) | 0.0% (0/3) |
+
+| Item | Gold category | Gold ambiguous? | v2.0 predicted category | v2.0 detected? | v2.1 predicted category | v2.1 detected? |
+|---|---|---:|---|---:|---|---:|
+| ORG02 | — | No | `family_pressure` (FP) | Yes | `social_influence` (FP) | Yes |
+| ORG03 | — | No | — (TN) | No | — (TN) | No |
+| ORG05 | `external_constraint` | Yes | `external_constraint` (TP, match) | Yes | — (FN) | No |
+| ORG06 | — | No | — (TN) | No | — (TN) | No |
+| ORG09 | `low_stakes` | No | `social_influence` (TP, mismatch) | Yes | `social_influence` (TP, mismatch) | Yes |
+| ORG10 | — | Yes | — (TN) | No | — (TN) | No |
+| ORG11 | `other` | No | `family_pressure` (TP, mismatch) | Yes | — (FN) | No |
+| ORG12 | `low_stakes` | No | `social_influence` (TP, mismatch) | Yes | `social_influence` (TP, mismatch) | Yes |
+| ORG13 | — | No | — (TN) | No | — (TN) | No |
+| ORG14 | — | No | — (TN) | No | — (TN) | No |
+| ORG15 | `financial_dependency` | Yes | — (FN) | No | — (FN) | No |
+| ORG17 | — | No | — (TN) | No | — (TN) | No |
+| ORG18 | `financial_dependency` | Yes | `financial_dependency` (TP, match) | Yes | `other` (TP, mismatch) | Yes |
+| ORG20 | — | No | `financial_dependency` (FP) | Yes | `financial_dependency` (FP) | Yes |
+
+ORG05 is a true positive in the inclusive analysis but is excluded from
+headline recall because it is ambiguous. The eligible missed factor in v2.1
+is ORG11; ORG05 is an additional miss only when ambiguous records are included.
+
+### v2.0 to v2.1 score-to-null transitions
+
+These are trait-level cases where v2.0 returned a numeric score and v2.1
+returned null. “Removed unsupported score” means the gold trait was null;
+“lost gold-supported score” means gold has a numeric value. This classification
+does not imply that every removed null-gold score was necessarily wrong for
+every other evaluation purpose.
+
+**Removed off-target or gold-null scores (14):**
+
+| Item | Trait | v2.0 score |
+|---|---|---:|
+| Q02_C | T02 | 0.5 |
+| Q03_A | T05 | 0.7 |
+| Q06_A | T01 | 0.3 |
+| Q09_B | T04 | 0.7 |
+| Q11_A | T05 | 0.3 |
+| Q11_B | T05 | 0.1 |
+| Q13_E | T05 | 0.3 |
+| Q18_A | T02 | 0.7 |
+| ORG11 | T05 | 0.15 |
+| ORG14 | T01 | 0.3 |
+| ORG14 | T05 | 0.25 |
+| ORG17 | T03 | 0.7 |
+| EDGE03 | T05 | 0.7 |
+| EDGE06 | T05 | 0.3 |
+
+**Lost gold-supported scores (5):**
+
+| Item | Trait | v2.0 score | Gold score |
+|---|---|---:|---:|
+| Q17_A | T04 | 0.3 | 0.1 |
+| Q19_E | T04 | 0.7 | 0.9 |
+| ORG02 | T01 | 0.68 | 0.6 |
+| ORG02 | T02 | 0.72 | 0.7 |
+| ORG17 | T01 | 0.3 | 0.25 |
+
 ## Error log by taxonomy, source, and trait
 
 The regenerated v2.0 log contains 68 rows: 58 evaluator error rows and 10
@@ -350,6 +420,21 @@ inversion/manual-review concern is ORG11. These do not justify broad changes to
 evidence quoting or score calibration without additional evidence. The organic
 and edge datasets are small and their annotations have the limitations above.
 
+### Known weaknesses of v2.0
+
+- **Score compression at extremes:** predictions tend toward inner bands;
+  extreme low anchors are often one band higher and extreme high anchors one
+  band lower than gold.
+- **Over-extraction:** unsupported trait scores occur on gold-null traits,
+  including ORG14 (T01/T02/T05), ORG17 (T03), and ORG09/ORG11 (T05).
+- **Constraint treated as a trait:** EDGE03 turns a budget-imposed lack of
+  alternatives into a T05 analytical-weighting score.
+- **False or misclassified factor tags:** ORG02 and ORG20 receive factor tags
+  despite null gold factors; ORG11 is tagged `family_pressure` instead of the
+  gold `other` caregiving context.
+- **Overconfidence on conflicted narratives:** EDGE04 T01 confidence is 0.68
+  and EDGE06 T01 confidence is 0.82, exceeding their expected maximum of 0.6.
+
 ## v2.1 dev comparison and decision
 
 The five distinct `context_confusion` items meet the preregistered
@@ -370,9 +455,11 @@ ambiguous ORG05/ORG18 do not count; its eligible true-positive categories
 (ORG09, ORG12) also both differ.
 
 The evaluator records a factor detection when at least one factor category is
-predicted, and separately compares its category with gold; the 0.0% agreement
-is not a mapping bug. The regression is a model miss on an eligible gold factor
-(ORG05 in v2.1), not a category-name normalization issue.
+predicted, and separately compares its category with gold; the 0.0% headline
+agreement is not a mapping bug. The regression is a model miss on the eligible
+gold factor ORG11. ORG05 is also missed in v2.1, but is ambiguous and excluded
+from the headline recall; it is included in the additional all-items metrics
+above.
 
 **Decision:** retain v2.0 as the preferred baseline under the preregistered
 criteria. Keep v2.1 as a draft, not the selected version: its additional edge
@@ -380,3 +467,18 @@ check and quiz-score gains do not compensate for failing the factor-recall
 criterion. Its missed eligible gold factor is ORG11. Reconsider v2.1 only
 after addressing factor recall and evaluating on a separately run dev set; do
 not alter gold annotations to improve either score.
+
+## Frozen v2.0 held-out run
+
+The held-out split contains 56 items (50 quiz and 6 organic; there are no
+held-out edge cases). With the project environment active, run:
+
+```powershell
+python scripts/run_extraction.py --prompt v2.0 --model openai/gpt-oss-120b --set all --split heldout --batch-size 10
+```
+
+The runner processes at most 10 items per invocation. Repeat the exact command
+until it prints `RUN COMPLETE`: six invocations total (five batches of 10 and
+one batch of 6). Use the run ID printed by the runner to evaluate the saved
+held-out responses; do not evaluate or tune against the held-out results before
+the prompt decision is finalized.

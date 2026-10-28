@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "hash_algorithm": "SHA-256",
+  "frozen_prompt_version": "v2.0",
+  "frozen_prompt_status": "frozen",
+  "contract_version": "v1.0",
+  "artifacts": {
+    "schemas/extraction_input.schema.json": "adb29e206165812279accadc1e1c1850e8640661dfeb144815977334ecade9c8",
+    "schemas/extraction_output.schema.json": "b6c37fd660965ff3c21ee9fbddae629c0395b4795ab729183ff105aef199cb73",
+    "schemas/extraction_result.schema.json": "fcda7932242ad56c70be741dd1ee1cdbb0c9bc7593ca299a24353bd57f70b0c8",
+    "prompts/extraction/extraction_v2.0.md": "6f93b33da4bf2193641bb47156b1ca090a84f86f718e69085513aae4e6d280d7",
+    "prompts/extraction/registry.json": "5b75c74a5f6b2ff02d9706ff29b9a345ad96ffbb0db00562f4ae5f6b04b5fddb",
+    "data/gold/quiz_gold_v1.0.json": "fc0c39a69da072c532a8abe54d5cfddfee6d0437dbe7ab16d41ed9fc7fafaba8",
+    "data/gold/organic_gold_v1.0.json": "c071a2b3da5bf68f2c5edf28d83e7638aaa705d9bb768db32fd61b05991951e6",
+    "data/gold/edge_cases_v1.0.json": "27f94d88fba1063302251fdc0651b4b0938a4190ee3e8ecac4e330b098d83919",
+    "data/processed/eval_set_v1.json": "5825600d6a1962ccb94d288569894d72f9c5e2c440e5ba4fe2bab67650aa31b3",
+    "data/processed/split_v1.json": "3571248fb4a011dddc84f81de7bf13062e49b8528a2c7196a5dd24c4ee50b1c5",
+    "evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/manifest.json": "b8c9552c38f2f60cd00069df4415a05372dcc1a6369c183b6c5235a2431ef5e1",
+    "evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/raw_responses.jsonl": "9f680e0ea053ee860aa533c606be2ee622a0203720d8850e3fc1ebf7b01f766a",
+    "evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/attempts.log.jsonl": "eb0222fc2008680a95da631164fda161f0904c965e3a022b7050116d9c2718d0",
+    "evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/metrics.json": "b53b949e737adceb18abee7879cb70a07fc6e629b048ed9f9d66a5b360ba9804",
+    "evaluation/runs/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/manifest.json": "fe73cc14fec5cbc8a9cfc76d309c56ee8c95db9dbbfc48aa7b642bc677c838ba",
+    "evaluation/runs/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/raw_responses.jsonl": "d19b05b8101bc16f3f3e19de5acc11a076936a638181df4848b44339639dbd7f",
+    "evaluation/runs/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/attempts.log.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/metrics.json": "46308f51add147938b2347f3de454cbeca4370136636366de1020ba80f4e008c"
+  }
+}
