@@ -22,30 +22,31 @@ Decision-Mirror/
 |   |   |-- Decision_Mirror_Proposal.pdf
 |   |   |-- Decision_Mirror_Proposal_main.pdf
 |   |   `-- Use_Case.pdf
-|   `-- tasks/
-|       |-- task-1-project-analysis/
-|       |   `-- .gitkeep
-|       |-- task-2-trait-ontology/
-|       |   |-- Decision Mirror Trait Ontology.docx
-|       |   `-- Decision_Mirror_Trait_Ontology.pdf
-|       |-- task-3-onboarding-quiz/
-|       |   `-- Decision_Mirror_Task_3_Onboarding_Quiz_and_Labeled_Dataset.docx
-|       `-- task-4-llm-extraction/
-|           |-- source/
-|           |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
-|           |   |-- Decision_Mirror_Task4_Shams_Amr.docx
-|           |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
-|           |-- 00_team_review.md
-|           |-- 01_input_spec.md
-|           |-- 02_output_spec.md
-|           |-- 03_extraction_prompts.md
-|           |-- 04_evaluation_method.md
-|           |-- 05_error_analysis.md
-|           |-- 06_evaluation_report.md
-|           |-- 07_handoff_to_profile_aggregation.md
-|           |-- gold_data.md
-|           |-- how_to_run.md
-|           `-- TASK4_MANIFEST.json
+|   |-- tasks/
+|   |   |-- task-1-project-analysis/
+|   |   |   `-- .gitkeep
+|   |   |-- task-2-trait-ontology/
+|   |   |   |-- Decision Mirror Trait Ontology.docx
+|   |   |   `-- Decision_Mirror_Trait_Ontology.pdf
+|   |   |-- task-3-onboarding-quiz/
+|   |   |   `-- Decision_Mirror_Task_3_Onboarding_Quiz_and_Labeled_Dataset.docx
+|   |   `-- task-4-llm-extraction/
+|   |       |-- source/
+|   |       |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
+|   |       |   |-- Decision_Mirror_Task4_Shams_Amr.docx
+|   |       |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
+|   |       |-- 00_team_review.md
+|   |       |-- 01_input_spec.md
+|   |       |-- 02_output_spec.md
+|   |       |-- 03_extraction_prompts.md
+|   |       |-- 04_evaluation_method.md
+|   |       |-- 05_error_analysis.md
+|   |       |-- 06_evaluation_report.md
+|   |       |-- 07_handoff_to_profile_aggregation.md
+|   |       |-- gold_data.md
+|   |       |-- how_to_run.md
+|   |       `-- TASK4_MANIFEST.json
+|   `-- PROJECT_GUIDE.md
 |-- evaluation/  # Evaluation outputs and results
 |   |-- comparisons/
 |   |   `-- v2.0__openai-gpt-oss-120b__all-dev__5825600d__vs__v2.1__openai-gpt-oss-120b__all-dev__5825600d.json

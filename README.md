@@ -20,6 +20,7 @@ Set `GROQ_API_KEY` in `.env` before running any code that calls the Groq API. Do
 ## Repository layout
 
 See [file_structure.txt](./file_structure.txt) for the generated repository tree.
+For a complete onboarding and handoff, see the [project guide](./docs/PROJECT_GUIDE.md).
 
 ## Available commands
 
