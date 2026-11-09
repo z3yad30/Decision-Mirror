@@ -1,6 +1,6 @@
 # Task 4.5 — Evaluation report
 
-**Report generated:** 2026-10-28  
+**Report generated:** 2026-11-10  
 **Decision:** Ready with conditions  
 **Frozen prompt:** v2.0
 
@@ -474,3 +474,69 @@ The report tables are rebuilt from the stored metrics with:
 ```
 
 The evaluator verifies the frozen eval-set hash and writes the derived results under `evaluation/results/<run_id>/`. Compare each regenerated `metrics.json` with its frozen SHA-256 in [`TASK4_MANIFEST.json`](./TASK4_MANIFEST.json); any difference indicates the evaluation is not reproducible and must be investigated before relying on this report.
+
+## Post-freeze addendum
+
+**post-hoc: added after dev and held-out results were seen.** This addendum and the linked supplementary reports do not modify `metrics.json`, `tables.md`, the headline results, or the 13 pre-registered thresholds.
+
+### Pipeline envelope and held-out guard
+
+`build_result_envelope()` constructs the existing `schemas/extraction_result.schema.json` shape with pipeline-owned model/prompt metadata, validation summary, and pipeline-only error status. New runs append envelopes to `evaluation/runs/<run_id>/result_envelopes.jsonl`; the historical `raw_responses.jsonl` record format is unchanged and the three existing runs were schema-checked in memory without backfilling envelope files. The runner requires registry status `frozen` for `--split heldout` and `--split all`; `--dry-run` and `--new-run` do not bypass the guard. `--status` remains available for existing runs.
+
+### Gold scope and quiz non-target scoring
+
+Quiz gold supplies one target trait per item and no non-target trait labels. Off-target scoring is therefore descriptive, not an error rate; quiz non-target traits and T06 remain unassessed against gold. Quiz target traits, organic T01–T05 (including gold-null unsupported-inference opportunities), and edge-case behavior are evaluated against their respective existing references.
+
+| Run | Non-target scored / possible | Off-target rate | Human-review candidates |
+|---|---:|---:|---:|
+| [v2.0 dev](../../../evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/supplementary.md) | 36 / 300 | 12.0% | 31 |
+| [v2.0 held-out](../../../evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/supplementary.md) | 31 / 200 | 15.5% | 23 |
+| [v2.1 dev](../../../evaluation/results/v2.1__openai-gpt-oss-120b__all-dev__5825600d/supplementary.md) | 36 / 300 | 12.0% | 31 |
+
+### Situational-factor metrics
+
+The existing `metrics.json` files report precision, recall, and category agreement separately. The table keeps their original values and makes denominators explicit; category agreement is among true positives.
+
+| Run | TP / FP / FN | Precision TP/(TP+FP) | Recall TP/(TP+FN) | Category agreement matches/TP |
+|---|---:|---:|---:|---:|
+| v2.0 dev | 3 / 2 / 0 | 3/5 = 60.0% | 3/3 = 100.0% | 0/3 = 0.0% |
+| v2.0 held-out | 1 / 1 / 0 | 1/2 = 50.0% | 1/1 = 100.0% | 1/1 = 100.0% |
+| v2.1 dev | 2 / 2 / 1 | 2/4 = 50.0% | 2/3 = 66.7% | 0/2 = 0.0% |
+
+Organic denominators are small; the held-out split has only six organic records and one positive factor. Category agreement is not interchangeable with factor-detection precision or recall.
+
+### Quote-normalizer comparison
+
+The original normalizer was recovered from Git at `523adc3:evaluation/metrics.py` (function-source SHA-256 `13c87f186970111d09641cb0ee3aa2678722300d6a44eeac350472c301fa7e6c`). The corrected official normalizer has function-source SHA-256 `45ce8a0186c85b7949ecb0579c41b42c3c55ae005aa5268cb145190682df8ef4`.
+
+| Run | Original grounded | Corrected grounded | Quotes with changed status |
+|---|---:|---:|---:|
+| v2.0 dev | 164/168 (97.6%) | 168/168 (100.0%) | 4 |
+| v2.0 held-out | 93/93 (100.0%) | 93/93 (100.0%) | 0 |
+| v2.1 dev | 159/159 (100.0%) | 159/159 (100.0%) | 0 |
+
+All changed quote statuses, including the four ORG14 quotes in v2.0 dev, are listed in the corresponding supplementary reports. The corrected normalizer remains official.
+
+### Question-level cluster bootstrap
+
+Quiz questions (five answer options per question) were resampled as clusters using 2,000 replicates and seed 42. The table compares the existing item-level CIs with post-hoc cluster CIs for the v2.0 dev and held-out overall quiz metrics.
+
+| Split | Clusters | Metric | Item-level point [95% CI] | Cluster point [95% CI] |
+|---|---:|---|---|---|
+| v2.0 dev | 15 | MAE | 0.073 [0.053, 0.094] | 0.073 [0.057, 0.089] |
+| v2.0 dev | 15 | Exact-band accuracy | 67.1% [56.2%, 78.1%] | 67.1% [57.7%, 76.0%] |
+| v2.0 dev | 15 | Spearman rho | 0.918 [0.873, 0.947] | 0.918 [0.888, 0.948] |
+| v2.0 dev | 15 | Direction accuracy | 100.0% (no stored item-level CI) | 100.0% [100.0%, 100.0%] |
+| v2.0 held-out | 10 | MAE | 0.069 [0.044, 0.094] | 0.069 [0.045, 0.096] |
+| v2.0 held-out | 10 | Exact-band accuracy | 65.2% [52.2%, 78.3%] | 65.2% [51.2%, 77.1%] |
+| v2.0 held-out | 10 | Spearman rho | 0.927 [0.861, 0.964] | 0.927 [0.862, 0.971] |
+| v2.0 held-out | 10 | Direction accuracy | 100.0% (no stored item-level CI) | 100.0% [100.0%, 100.0%] |
+
+There are only 15 dev / 10 held-out question clusters overall (three / two clusters per trait), too few for stable intervals. The cluster exact-band lower bounds are below the preregistered 60% threshold in both splits; the cluster MAE upper bounds, Spearman lower bounds, and direction lower bounds remain on the passing side of their respective thresholds. Organic narratives remain record-level in the existing analysis. These are information-only comparisons and do not change any threshold or readiness result.
+
+### Human evidence review
+
+- v2.0 dev: 10 cross-review flags.
+- v2.0 held-out: 10 cross-review flags.
+- Pack: 20 trait-level rows; 20 PENDING; 0 rows contain a decision or comment. No human review decision has been entered.
+- Instructions and pending-only CSV: [human review pack](./human_review/README.md).

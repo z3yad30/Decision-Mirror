@@ -25,3 +25,8 @@
   missed eligible factor was ORG11; ORG05 was also missed but is
   `ambiguous_gold` and excluded from headline recall. Keep v2.1 as a draft;
   v2.0 remains the frozen prompt.
+- **v2.1 title discrepancy:** the first heading inside
+  `extraction_v2.1.md` still says “System Prompt v2.0”. The filename and
+  registry entry identify the prompt as v2.1. The prompt file is intentionally
+  unchanged because its byte-level hash is recorded in the registry and the
+  v2.1 dev run manifest.

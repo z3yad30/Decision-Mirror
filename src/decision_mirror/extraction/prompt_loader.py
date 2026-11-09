@@ -12,6 +12,17 @@ _PROMPTS_DIR = (
 _REGISTRY_PATH = _PROMPTS_DIR / "registry.json"
 
 
+def get_prompt_status(version: str) -> str:
+    """Return a registered prompt's status without loading its prompt text."""
+    registry: dict[str, Any] = json.loads(
+        _REGISTRY_PATH.read_text(encoding="utf-8")
+    )
+    entries = {entry["version"]: entry for entry in registry["prompts"]}
+    if version not in entries:
+        raise ValueError(f"unknown extraction prompt version: {version}")
+    return entries[version]["status"]
+
+
 def load_prompt(version: str, *, allow_legacy: bool = False) -> tuple[str, str]:
     """Load a registered extraction prompt and return its text and SHA-256."""
     registry: dict[str, Any] = json.loads(

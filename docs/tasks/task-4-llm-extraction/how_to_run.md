@@ -33,7 +33,10 @@ remain pending.
 
 Run the current draft on the development split only. Repeat the command
 unchanged until it prints `RUN COMPLETE`. Do not run held-out until the final
-prompt version is confirmed and frozen:
+prompt version is confirmed and frozen. The runner enforces registry status
+`frozen` for both `--split heldout` and `--split all`; a draft prompt is rejected
+with exit code 2 before dry-run or new-run processing. `--status` remains
+available for existing runs.
 
 ```powershell
 python scripts/run_extraction.py --prompt v2.1 --model openai/gpt-oss-120b --set all --split dev
@@ -80,8 +83,39 @@ There is no reset command. Removing a run folder is a manual operation.
 ## Output files
 
 Each run is stored under `evaluation/runs/<run_id>/` with a `manifest.json`,
-`raw_responses.jsonl`, and `attempts.log.jsonl`. The manifest records the prompt
-and evaluation-set hashes plus model settings. Response records preserve the
-verbatim message content; reasoning text, when returned separately by the
-SDK, is stored in its own field. Transient failures are only written to the
-attempt log.
+`raw_responses.jsonl`, and `attempts.log.jsonl`. New runs additionally write
+schema-shaped pipeline result envelopes to `result_envelopes.jsonl`, including
+explicit error envelopes for API failures. This additional file is not part of
+the resume manifest check. The raw-response record format remains unchanged:
+response records preserve verbatim message content; reasoning text, when
+returned separately by the SDK, is stored in its own field. Transient API
+failures remain recorded in the attempt log.
+
+The envelope follows the existing
+`schemas/extraction_result.schema.json`: the pipeline injects model version,
+prompt version and hash, validation summary, and pipeline-only `error` status
+for API or output-format failures. The historical runs are not backfilled.
+An API-error envelope does not mark its decision as complete; a resumed run can
+append a later envelope for the same `decision_id`. Multiple rows per decision
+are therefore valid, and the last row for each `decision_id` is the current
+envelope. For completed model responses, the raw record is synced before
+classification or envelope construction; an envelope-generation failure is
+typed and recorded in `attempts.log.jsonl` without discarding that raw record.
+
+## Offline post-hoc supplementary analyses
+
+After saved runs have been evaluated, the supplementary command makes no API
+calls and does not rewrite `metrics.json` or `tables.md`:
+
+```powershell
+python scripts/evaluate_supplementary.py
+```
+
+It writes `supplementary_metrics.json` and `supplementary.md` beside the
+existing results for the three saved runs. These files are labeled
+**post-hoc: added after dev and held-out results were seen**. The report
+includes quiz non-target scoring as a descriptive rate (not an error rate),
+factor precision/recall/category agreement, the recovered original quote
+normalizer comparison, and question-cluster bootstrap results. Existing
+held-out evaluations of a prompt not registered as `frozen` emit a loud
+warning when run through `evaluate_run.py`.

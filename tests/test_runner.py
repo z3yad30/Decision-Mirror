@@ -27,6 +27,7 @@ def _configure(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> list[dict]:
     eval_path.write_text(json.dumps(items), encoding="utf-8")
     monkeypatch.setattr(runner, "EVAL_PATH", eval_path)
     monkeypatch.setattr(runner, "RUNS_DIR", tmp_path / "runs")
+    monkeypatch.setattr(runner, "load_dotenv", lambda: None)
     monkeypatch.setenv("REQUEST_DELAY_SECONDS", "0")
     monkeypatch.setenv("GROQ_API_KEY", "secret-test-key-must-not-be-written")
     return items
@@ -68,6 +69,14 @@ def test_batches_resume_without_skips_or_duplicates_and_completed_run_is_noop(
     first = _records(run_folder)
     assert len(first) == 10
     assert len({row["item_id"] for row in first}) == 10
+    envelopes = [
+        json.loads(line)
+        for line in (run_folder / "result_envelopes.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+    ]
+    assert len(envelopes) == 10
+    assert envelopes[0]["model_version"] == first[0]["model"]
 
     assert _invoke(client) == 0
     second = _records(run_folder)
@@ -90,6 +99,36 @@ def test_batches_resume_without_skips_or_duplicates_and_completed_run_is_noop(
     assert _invoke(client) == 0
     assert len(client.captured_requests) == captured_before
     assert "RUN COMPLETE" in capsys.readouterr().out
+
+
+def test_frozen_heldout_run_resumes_and_status_remains_available(
+    tmp_path, monkeypatch, capsys
+):
+    _configure(tmp_path, monkeypatch)
+    client = MockClient()
+
+    assert _invoke(
+        client, gold_set="all", split="heldout", batch_size=1
+    ) == 0
+    run_folder = _run_folder()
+    assert len(_records(run_folder)) == 1
+    assert _invoke(
+        client, gold_set="all", split="heldout", batch_size=1
+    ) == 0
+    assert len(_records(run_folder)) == 2
+
+    assert runner.main(
+        [
+            "--prompt",
+            "v2.1",
+            "--set",
+            "all",
+            "--split",
+            "heldout",
+            "--status",
+        ]
+    ) == 0
+    assert "2/56 final" in capsys.readouterr().out
 
 
 def test_interrupted_batch_resumes_after_saved_items(tmp_path, monkeypatch):
@@ -157,6 +196,73 @@ def test_malformed_response_is_final_and_not_recalled(tmp_path, monkeypatch):
     assert records[0]["response_text"] == "not valid JSON"
     assert records[0]["item_id"] != records[1]["item_id"]
     assert len(client.captured_requests) == 2
+
+
+def test_raw_response_is_saved_when_envelope_building_fails(
+    tmp_path, monkeypatch
+):
+    items = _configure(tmp_path, monkeypatch)
+    item_id = runner._select_items(items, "quiz", "dev")[0]["item_id"]
+
+    def fail_envelope(*args, **kwargs):
+        raise RuntimeError("simulated envelope failure")
+
+    monkeypatch.setattr(runner, "build_result_envelope", fail_envelope)
+
+    assert _invoke(MockClient(), batch_size=1) == 0
+
+    run_folder = _run_folder()
+    records = _records(run_folder)
+    assert len(records) == 1
+    assert records[0]["item_id"] == item_id
+    assert records[0]["response_text"]
+    attempts = [
+        json.loads(line)
+        for line in (run_folder / "attempts.log.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+    ]
+    assert attempts[-1]["item_id"] == item_id
+    assert attempts[-1]["error_type"] == "RuntimeError"
+    assert attempts[-1]["failure_stage"] == "result_envelope"
+    assert attempts[-1]["message"] == "simulated envelope failure"
+
+
+def test_latest_envelope_after_api_error_and_resume_is_success(
+    tmp_path, monkeypatch
+):
+    _configure(tmp_path, monkeypatch)
+
+    assert _invoke(MockClient(mode="server_error"), batch_size=1) == 0
+    run_folder = _run_folder()
+    error_envelopes = [
+        json.loads(line)
+        for line in (run_folder / "result_envelopes.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+    ]
+    assert len(error_envelopes) == 1
+    assert error_envelopes[0]["extraction_status"] == "error"
+
+    assert _invoke(MockClient(), batch_size=1) == 0
+    envelopes = [
+        json.loads(line)
+        for line in (run_folder / "result_envelopes.jsonl")
+        .read_text(encoding="utf-8")
+        .splitlines()
+    ]
+    assert len(envelopes) == 2
+    assert envelopes[0]["decision_id"] == envelopes[1]["decision_id"]
+    assert envelopes[-1]["extraction_status"] == "success"
+    assert envelopes[-1]["traits"] is not None
+    from jsonschema import validate
+
+    schema = json.loads(
+        (ROOT / "schemas" / "extraction_result.schema.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    validate(envelopes[-1], schema)
 
 
 def test_resume_rejects_manifest_mismatch_and_new_run_preserves_prior_data(
@@ -228,6 +334,70 @@ def test_dry_run_and_status_do_not_call_client(tmp_path, monkeypatch, capsys):
     assert _invoke(client, status=True) == 0
     assert len(client.captured_requests) == calls_before_status
     assert "1/75 final" in capsys.readouterr().out
+
+
+@pytest.mark.parametrize("split", ["heldout", "all"])
+@pytest.mark.parametrize("flags", [[], ["--dry-run"], ["--new-run"]])
+def test_draft_prompt_is_rejected_for_heldout_selections(
+    tmp_path, monkeypatch, capsys, split, flags
+):
+    _configure(tmp_path, monkeypatch)
+    args = [
+        "--prompt",
+        "v2.1",
+        "--set",
+        "all",
+        "--split",
+        split,
+        *flags,
+    ]
+
+    assert runner.main(args) == 2
+    assert "require a frozen prompt" in capsys.readouterr().err
+    assert not runner.RUNS_DIR.exists()
+
+
+@pytest.mark.parametrize("split", ["dev", "heldout", "all"])
+def test_frozen_prompt_is_allowed_for_each_split(
+    tmp_path, monkeypatch, capsys, split
+):
+    _configure(tmp_path, monkeypatch)
+
+    assert runner.main(
+        ["--prompt", "v2.0", "--set", "all", "--split", split, "--dry-run"]
+    ) == 0
+    output = capsys.readouterr().out
+    assert "dry run" in output or "No evaluation items" in output
+
+
+def test_draft_prompt_is_allowed_for_dev_and_legacy_prompt_is_still_rejected(
+    tmp_path, monkeypatch, capsys
+):
+    _configure(tmp_path, monkeypatch)
+
+    assert runner.main(
+        ["--prompt", "v2.1", "--set", "all", "--split", "dev", "--dry-run"]
+    ) == 0
+    assert "dry run" in capsys.readouterr().out
+
+    assert runner.main(
+        ["--prompt", "v1.0", "--set", "all", "--split", "dev", "--dry-run"]
+    ) == 2
+    assert "Refusing to run a legacy prompt" in capsys.readouterr().err
+
+
+def test_status_is_not_blocked_by_prompt_freeze_guard(
+    tmp_path, monkeypatch
+):
+    _configure(tmp_path, monkeypatch)
+    monkeypatch.setattr(runner, "_status", lambda: None)
+
+    assert runner.run_invocation(
+        prompt_version="v2.1",
+        gold_set="all",
+        split="heldout",
+        status=True,
+    ) == 0
 
 
 def test_pipeline_preserves_verbatim_malformed_content():

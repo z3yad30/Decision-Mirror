@@ -31,6 +31,9 @@ Decision-Mirror/
 |   |   |-- task-3-onboarding-quiz/
 |   |   |   `-- Decision_Mirror_Task_3_Onboarding_Quiz_and_Labeled_Dataset.docx
 |   |   `-- task-4-llm-extraction/
+|   |       |-- human_review/
+|   |       |   |-- cross_review.csv
+|   |       |   `-- README.md
 |   |       |-- source/
 |   |       |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
 |   |       |   |-- Decision_Mirror_Task4_Shams_Amr.docx
@@ -57,6 +60,8 @@ Decision-Mirror/
 |   |   |   |-- metrics.json
 |   |   |   |-- per_item.csv
 |   |   |   |-- schema_compliance.json
+|   |   |   |-- supplementary.md
+|   |   |   |-- supplementary_metrics.json
 |   |   |   `-- tables.md
 |   |   |-- v2.0__openai-gpt-oss-120b__all-heldout__5825600d/
 |   |   |   |-- difficult_cases.md
@@ -64,6 +69,8 @@ Decision-Mirror/
 |   |   |   |-- metrics.json
 |   |   |   |-- per_item.csv
 |   |   |   |-- schema_compliance.json
+|   |   |   |-- supplementary.md
+|   |   |   |-- supplementary_metrics.json
 |   |   |   `-- tables.md
 |   |   `-- v2.1__openai-gpt-oss-120b__all-dev__5825600d/
 |   |       |-- difficult_cases.md
@@ -71,6 +78,8 @@ Decision-Mirror/
 |   |       |-- metrics.json
 |   |       |-- per_item.csv
 |   |       |-- schema_compliance.json
+|   |       |-- supplementary.md
+|   |       |-- supplementary_metrics.json
 |   |       `-- tables.md
 |   |-- runs/
 |   |   |-- v2.0__openai-gpt-oss-120b__all-dev__5825600d/
@@ -88,7 +97,8 @@ Decision-Mirror/
 |   |-- .gitkeep
 |   |-- __init__.py
 |   |-- metrics.py
-|   `-- runner.py
+|   |-- runner.py
+|   `-- supplementary.py
 |-- experiments/  # Experimental and legacy implementations
 |   `-- legacy/
 |       |-- ahmed_main_v0.py
@@ -138,6 +148,7 @@ Decision-Mirror/
 |   |-- build_task4_report.py
 |   |-- compare_runs.py
 |   |-- evaluate_run.py
+|   |-- evaluate_supplementary.py
 |   |-- run_extraction.py
 |   `-- update_file_structure.py
 |-- src/  # Decision Mirror application source
@@ -166,11 +177,13 @@ Decision-Mirror/
 |   |-- .gitkeep
 |   |-- test_contract.py
 |   |-- test_eval_set.py
+|   |-- test_evaluate_run_cli.py
 |   |-- test_evaluation.py
 |   |-- test_prompt_leakage.py
 |   |-- test_prompt_loader.py
 |   |-- test_runner.py
-|   `-- test_split.py
+|   |-- test_split.py
+|   `-- test_supplementary.py
 |-- .env
 |-- .env.example
 |-- .gitignore

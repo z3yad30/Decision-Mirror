@@ -81,6 +81,93 @@ def test_result_schema_accepts_success_and_pipeline_error_envelopes():
     )
 
 
+def test_pipeline_builds_schema_valid_success_and_error_envelopes():
+    from decision_mirror.extraction.pipeline import build_result_envelope
+    from decision_mirror.extraction.validation import classify_api_error
+
+    example = json.loads(
+        (EXAMPLES / "valid" / "fully_scored_narrative.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    raw_completion = {
+        "item_id": example["payload"]["decision_id"],
+        "response_text": json.dumps(example["response"]),
+        "model": "model-1",
+        "prompt_version": "v2.0",
+        "prompt_sha256": "a" * 64,
+    }
+    schema = read_schema("extraction_result.schema.json")
+    success = build_result_envelope(
+        raw_completion,
+        example["payload"],
+        classify_response(raw_completion["response_text"], example["payload"]),
+    )
+
+    validate(success, schema)
+    assert success["extraction_status"] == example["response"]["extraction_status"]
+    assert success["validation"] == {
+        "schema_valid": True,
+        "semantic_valid": True,
+        "warnings": [],
+    }
+
+    failure_cases = [
+        ("", classify_response("", example["payload"]), "empty_response"),
+        (
+            "not JSON",
+            classify_response("not JSON", example["payload"]),
+            "not_json",
+        ),
+        (
+            raw_completion["response_text"],
+            classify_api_error(RuntimeError("service unavailable")),
+            "api_error",
+        ),
+    ]
+    for raw_text, outcome, expected_type in failure_cases:
+        failed_completion = {**raw_completion, "response_text": raw_text}
+        envelope = build_result_envelope(
+            failed_completion, example["payload"], outcome
+        )
+        validate(envelope, schema)
+        assert envelope["extraction_status"] == "error"
+        assert envelope["traits"] is None
+        assert envelope["error"]["type"] == expected_type
+        assert envelope["validation"]["schema_valid"] is False
+        assert envelope["validation"]["semantic_valid"] is False
+
+
+def test_existing_run_responses_produce_schema_valid_envelopes_in_memory():
+    from decision_mirror.extraction.pipeline import build_result_envelope
+
+    run_ids = (
+        "v2.0__openai-gpt-oss-120b__all-dev__5825600d",
+        "v2.0__openai-gpt-oss-120b__all-heldout__5825600d",
+        "v2.1__openai-gpt-oss-120b__all-dev__5825600d",
+    )
+    items = json.loads(
+        (ROOT / "data" / "processed" / "eval_set_v1.json").read_text(
+            encoding="utf-8"
+        )
+    )
+    items_by_id = {item["item_id"]: item for item in items}
+    schema = read_schema("extraction_result.schema.json")
+
+    for run_id in run_ids:
+        raw_path = ROOT / "evaluation" / "runs" / run_id / "raw_responses.jsonl"
+        rows = [
+            json.loads(line)
+            for line in raw_path.read_text(encoding="utf-8").splitlines()
+        ]
+        assert rows
+        for row in rows:
+            item = items_by_id[row["item_id"]]
+            outcome = classify_response(row["response_text"], item["payload"])
+            envelope = build_result_envelope(row, item["payload"], outcome)
+            validate(envelope, schema)
+
+
 @pytest.mark.parametrize("example_path", fixture_cases("valid"), ids=lambda path: path.stem)
 def test_valid_examples_pass_schema_and_semantics(example_path):
     example = json.loads(example_path.read_text(encoding="utf-8"))

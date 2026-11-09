@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import csv
 import hashlib
 import json
 import math
@@ -336,6 +337,240 @@ def render_errors(dev: dict[str, Any], heldout: dict[str, Any]) -> str:
     return "\n".join(rows)
 
 
+def render_post_freeze_addendum() -> str:
+    run_ids = (DEV_ID, HELDOUT_ID, CANDIDATE_ID)
+    supplementary = {
+        run_id: read_json(RESULTS_DIR / run_id / "supplementary_metrics.json")
+        for run_id in run_ids
+    }
+    labels = {
+        DEV_ID: "v2.0 dev",
+        HELDOUT_ID: "v2.0 held-out",
+        CANDIDATE_ID: "v2.1 dev",
+    }
+    lines = [
+        "## Post-freeze addendum",
+        "",
+        "**post-hoc: added after dev and held-out results were seen.** "
+        "This addendum and the linked supplementary reports do not modify "
+        "`metrics.json`, `tables.md`, the headline results, or the 13 "
+        "pre-registered thresholds.",
+        "",
+        "### Pipeline envelope and held-out guard",
+        "",
+        "`build_result_envelope()` constructs the existing "
+        "`schemas/extraction_result.schema.json` shape with pipeline-owned "
+        "model/prompt metadata, validation summary, and pipeline-only error "
+        "status. New runs append envelopes to "
+        "`evaluation/runs/<run_id>/result_envelopes.jsonl`; the historical "
+        "`raw_responses.jsonl` record format is unchanged and the three "
+        "existing runs were schema-checked in memory without backfilling "
+        "envelope files. The runner requires registry status `frozen` for "
+        "`--split heldout` and `--split all`; `--dry-run` and `--new-run` do "
+        "not bypass the guard. `--status` remains available for existing runs.",
+        "",
+        "### Gold scope and quiz non-target scoring",
+        "",
+        "Quiz gold supplies one target trait per item and no non-target trait "
+        "labels. Off-target scoring is therefore descriptive, not an error "
+        "rate; quiz non-target traits and T06 remain unassessed against gold. "
+        "Quiz target traits, organic T01–T05 (including gold-null "
+        "unsupported-inference opportunities), and edge-case behavior are "
+        "evaluated against their respective existing references.",
+        "",
+        "| Run | Non-target scored / possible | Off-target rate | Human-review candidates |",
+        "|---|---:|---:|---:|",
+    ]
+    for run_id in run_ids:
+        off_target = supplementary[run_id]["non_target_traits"]
+        counts = off_target["off_target_scoring_rate"]
+        lines.append(
+            f"| [{labels[run_id]}](../../../evaluation/results/{run_id}/supplementary.md) | "
+            f"{counts['scored_non_target_trait_count']} / "
+            f"{counts['possible_non_target_trait_count']} | "
+            f"{percentage(counts['rate'])} | "
+            f"{len(off_target['human_review_candidates'])} |"
+        )
+    lines.extend(
+        [
+            "",
+            "### Situational-factor metrics",
+            "",
+            "The existing `metrics.json` files report precision, recall, and "
+            "category agreement separately. The table keeps their original "
+            "values and makes denominators explicit; category agreement is "
+            "among true positives.",
+            "",
+            "| Run | TP / FP / FN | Precision TP/(TP+FP) | Recall TP/(TP+FN) | Category agreement matches/TP |",
+            "|---|---:|---:|---:|---:|",
+        ]
+    )
+    for run_id in run_ids:
+        factor = supplementary[run_id]["situational_factors"]
+        lines.append(
+            f"| {labels[run_id]} | {factor['precision']['true_positive']} / "
+            f"{factor['precision']['false_positive']} / "
+            f"{factor['recall']['false_negative']} | "
+            f"{factor['precision']['true_positive']}/"
+            f"{factor['precision']['denominator']} = "
+            f"{percentage(factor['precision']['value'])} | "
+            f"{factor['recall']['true_positive']}/"
+            f"{factor['recall']['denominator']} = "
+            f"{percentage(factor['recall']['value'])} | "
+            f"{factor['category_agreement']['category_matches']}/"
+            f"{factor['category_agreement']['true_positive_denominator']} = "
+            f"{percentage(factor['category_agreement']['value'])} |"
+        )
+    lines.extend(
+        [
+            "",
+            "Organic denominators are small; the held-out split has only six "
+            "organic records and one positive factor. Category agreement is "
+            "not interchangeable with factor-detection precision or recall.",
+            "",
+            "### Quote-normalizer comparison",
+            "",
+        ]
+    )
+    first_quote = supplementary[DEV_ID]["quote_normalizer_comparison"]
+    lines.extend(
+        [
+            f"The original normalizer was recovered from Git at "
+            f"`{first_quote['original_source']['git_ref']}` (function-source "
+            f"SHA-256 `{first_quote['original_source']['sha256']}`). The "
+            f"corrected official normalizer has function-source SHA-256 "
+            f"`{first_quote['corrected_source']['sha256']}`.",
+            "",
+            "| Run | Original grounded | Corrected grounded | Quotes with changed status |",
+            "|---|---:|---:|---:|",
+        ]
+    )
+    for run_id in run_ids:
+        quote = supplementary[run_id]["quote_normalizer_comparison"]
+        lines.append(
+            f"| {labels[run_id]} | {quote['original_grounded_count']}/"
+            f"{quote['quote_count']} ({percentage(quote['original_grounding_rate'])}) | "
+            f"{quote['corrected_grounded_count']}/{quote['quote_count']} "
+            f"({percentage(quote['corrected_grounding_rate'])}) | "
+            f"{len(quote['differing_quotes'])} |"
+        )
+    lines.extend(
+        [
+            "",
+            "All changed quote statuses, including the four ORG14 quotes in "
+            "v2.0 dev, are listed in the corresponding supplementary reports. "
+            "The corrected normalizer remains official.",
+            "",
+            "### Question-level cluster bootstrap",
+            "",
+            "Quiz questions (five answer options per question) were resampled "
+            "as clusters using 2,000 replicates and seed 42. The table compares "
+            "the existing item-level CIs with post-hoc cluster CIs for the "
+            "v2.0 dev and held-out overall quiz metrics.",
+            "",
+            "| Split | Clusters | Metric | Item-level point [95% CI] | Cluster point [95% CI] |",
+            "|---|---:|---|---|---|",
+        ]
+    )
+    def render_ci_estimate(
+        point: float | None,
+        bounds: dict[str, Any],
+        *,
+        is_percent: bool,
+    ) -> str:
+        render = percentage if is_percent else number
+        return (
+            f"{render(point)} [{render(bounds['lower'])}, "
+            f"{render(bounds['upper'])}]"
+        )
+
+    for run_id in (DEV_ID, HELDOUT_ID):
+        boot = supplementary[run_id]["quiz_question_cluster_bootstrap"]
+        overall = boot["metrics"]["overall"]
+        old_ci = overall["existing_item_level"]["bootstrap_95_ci"]
+        new_ci = overall["bootstrap_95_ci"]
+        old_points = overall["existing_item_level"]["point_estimates"]
+        new_points = overall["point_estimates"]
+        for metric, old_key, new_key in (
+            ("MAE", "mae", "mae"),
+            ("Exact-band accuracy", "accuracy", "exact_band_accuracy"),
+            ("Spearman rho", "rho", "spearman_rho"),
+            ("Direction accuracy", None, "direction_accuracy"),
+        ):
+            if old_key is None:
+                old_text = (
+                    f"{percentage(old_points['direction_accuracy'])} "
+                    "(no stored item-level CI)"
+                )
+            else:
+                old_point_key = {
+                    "MAE": "mae",
+                    "Exact-band accuracy": "exact_band_accuracy",
+                    "Spearman rho": "spearman_rho",
+                }[metric]
+                old_text = render_ci_estimate(
+                    old_points[old_point_key],
+                    old_ci[old_key],
+                    is_percent=metric
+                    in {"Exact-band accuracy", "Direction accuracy"},
+                )
+            new_point = new_points[new_key]
+            new_ci_value = new_ci[new_key]
+            new_text = render_ci_estimate(
+                new_point,
+                new_ci_value,
+                is_percent=metric
+                in {"Exact-band accuracy", "Direction accuracy"},
+            )
+            lines.append(
+                f"| {labels[run_id]} | {boot['cluster_count']} | {metric} | "
+                f"{old_text} | {new_text} |"
+            )
+    lines.extend(
+        [
+            "",
+            "There are only 15 dev / 10 held-out question clusters overall "
+            "(three / two clusters per trait), too few for stable intervals. "
+            "The cluster exact-band lower bounds are below the preregistered "
+            "60% threshold in both splits; the cluster MAE upper bounds, "
+            "Spearman lower bounds, and direction lower bounds remain on the "
+            "passing side of their respective thresholds. Organic narratives "
+            "remain record-level in the existing analysis. These are "
+            "information-only comparisons and do not change any threshold or "
+            "readiness result.",
+            "",
+            "### Human evidence review",
+            "",
+        ]
+    )
+    review_path = TASK_DIR / "human_review" / "cross_review.csv"
+    with review_path.open(encoding="utf-8", newline="") as stream:
+        review_rows = list(csv.DictReader(stream))
+    for split_name, run_id in (("dev", DEV_ID), ("held-out", HELDOUT_ID)):
+        error_path = RESULTS_DIR / run_id / "error_log.jsonl"
+        flags = sum(
+            json.loads(line).get("error_type") == "needs_manual_review"
+            for line in error_path.read_text(encoding="utf-8").splitlines()
+            if line.strip()
+        )
+        lines.append(f"- v2.0 {split_name}: {flags} cross-review flags.")
+    pending_count = sum(row["review_status"] == "PENDING" for row in review_rows)
+    incomplete_decisions = sum(
+        bool(row["reviewer_decision"] or row["reviewer_comments"])
+        for row in review_rows
+    )
+    lines.append(
+        f"- Pack: {len(review_rows)} trait-level rows; {pending_count} PENDING; "
+        f"{incomplete_decisions} rows contain a decision or comment. No human "
+        "review decision has been entered."
+    )
+    lines.append(
+        "- Instructions and pending-only CSV: "
+        "[human review pack](./human_review/README.md)."
+    )
+    return "\n".join(lines)
+
+
 def raw_records(run_id: str) -> dict[str, dict[str, Any]]:
     path = RUNS_DIR / run_id / "raw_responses.jsonl"
     return {
@@ -668,6 +903,8 @@ The report tables are rebuilt from the stored metrics with:
 ```
 
 The evaluator verifies the frozen eval-set hash and writes the derived results under `evaluation/results/<run_id>/`. Compare each regenerated `metrics.json` with its frozen SHA-256 in [`TASK4_MANIFEST.json`](./TASK4_MANIFEST.json); any difference indicates the evaluation is not reproducible and must be investigated before relying on this report.
+
+{render_post_freeze_addendum()}
 """
 
 
@@ -687,10 +924,29 @@ def create_manifest() -> dict[str, Any]:
         f"evaluation/runs/{DEV_ID}/raw_responses.jsonl",
         f"evaluation/runs/{DEV_ID}/attempts.log.jsonl",
         f"evaluation/results/{DEV_ID}/metrics.json",
+        f"evaluation/results/{DEV_ID}/error_log.jsonl",
+        f"evaluation/results/{DEV_ID}/difficult_cases.md",
         f"evaluation/runs/{HELDOUT_ID}/manifest.json",
         f"evaluation/runs/{HELDOUT_ID}/raw_responses.jsonl",
         f"evaluation/runs/{HELDOUT_ID}/attempts.log.jsonl",
         f"evaluation/results/{HELDOUT_ID}/metrics.json",
+        f"evaluation/results/{HELDOUT_ID}/error_log.jsonl",
+        f"evaluation/results/{HELDOUT_ID}/difficult_cases.md",
+        f"evaluation/runs/{CANDIDATE_ID}/manifest.json",
+        f"evaluation/runs/{CANDIDATE_ID}/raw_responses.jsonl",
+        f"evaluation/results/{CANDIDATE_ID}/metrics.json",
+        "evaluation/metrics.py",
+        f"evaluation/results/{DEV_ID}/supplementary_metrics.json",
+        f"evaluation/results/{DEV_ID}/supplementary.md",
+        f"evaluation/results/{HELDOUT_ID}/supplementary_metrics.json",
+        f"evaluation/results/{HELDOUT_ID}/supplementary.md",
+        f"evaluation/results/{CANDIDATE_ID}/supplementary_metrics.json",
+        f"evaluation/results/{CANDIDATE_ID}/supplementary.md",
+        "evaluation/supplementary.py",
+        "scripts/evaluate_supplementary.py",
+        "scripts/build_task4_report.py",
+        "docs/tasks/task-4-llm-extraction/human_review/README.md",
+        "docs/tasks/task-4-llm-extraction/human_review/cross_review.csv",
     ]
     return {
         "version": "1.0",

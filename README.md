@@ -50,6 +50,9 @@ python scripts/run_extraction.py --prompt v2.0 --model openai/gpt-oss-120b --set
 draft: its dev organic situational-factor recall was 66.7%, below the proposed
 80.0% threshold. Do not use v2.1 as the final prompt. The stored v2.0 held-out
 run is reproduced offline in the final Task 4 report.
+The runner rejects draft prompts for `--split heldout` and `--split all`,
+including `--dry-run` and `--new-run`; `--status` remains available for
+existing runs.
 
 To run a new held-out extraction (API call; do not use to reproduce the stored
 evaluation):
@@ -87,6 +90,25 @@ Reports are written under `evaluation/results/<run_id>/` and paired comparisons
 under `evaluation/comparisons/`. Evaluation methodology, metric formulas,
 error taxonomy, and proposed readiness thresholds are documented in
 [`04_evaluation_method.md`](./docs/tasks/task-4-llm-extraction/04_evaluation_method.md).
+New extraction runs also write schema-shaped pipeline envelopes to
+`evaluation/runs/<run_id>/result_envelopes.jsonl`; the verbatim
+`raw_responses.jsonl` evidence format is unchanged. For post-hoc analyses of
+the three saved runs, without API calls or changes to headline metrics, run:
+
+```powershell
+python scripts/evaluate_supplementary.py
+```
+
+The supplementary outputs are labeled post-hoc and include non-target quiz
+scoring diagnostics, factor category agreement, quote-normalizer comparison,
+and question-cluster bootstrap results. The human evidence-review pack remains
+`PENDING`; its CSV and instructions are under
+[`human_review/`](./docs/tasks/task-4-llm-extraction/human_review/README.md).
+Quiz gold labels only the target trait, so non-target scoring is descriptive
+(not an error rate), and quiz non-target traits plus T06 are unassessed against
+gold. Factor precision, recall, and category agreement remain separate; the
+cluster intervals use only 15 dev / 10 held-out question clusters and are not
+stable estimates.
 
 ## Final Task 4 evaluation and reproduction
 
@@ -115,8 +137,10 @@ python scripts/build_task4_report.py
 ```
 
 The manifest [`TASK4_MANIFEST.json`](./docs/tasks/task-4-llm-extraction/TASK4_MANIFEST.json)
-freezes SHA-256 hashes for the contracts, prompt, datasets, raw final runs, and
-metrics. No API key is needed for this reproduction.
+freezes SHA-256 hashes for the contracts, prompt, datasets, saved runs,
+metrics, and post-hoc analysis sources/outputs. The final report preserves its
+original headline numbers and adds a separately labeled post-freeze
+supplementary addendum. No API key is needed for this reproduction.
 
 ## Data
 

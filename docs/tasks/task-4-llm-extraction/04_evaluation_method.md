@@ -208,3 +208,56 @@ research evaluation, not clinical or population-level validation. The final
 decision for downstream profile aggregation remains a team-lead decision and
 must consider the quantitative results, manual evidence review, and these
 limitations.
+
+## Post-hoc supplementary analyses
+
+**post-hoc: added after dev and held-out results were seen.** These analyses
+are descriptive additions only: they do not change `metrics.json`, `tables.md`,
+the report's headline values, or any of the 13 preregistered thresholds. The
+offline command is `python scripts/evaluate_supplementary.py`; it writes
+`supplementary_metrics.json` and `supplementary.md` under each selected run's
+existing `evaluation/results/<run_id>/` directory.
+
+Quiz gold contains one target-trait label per record and no non-target trait
+labels. Accordingly, quiz non-target T01–T05 predictions are described as an
+**off-target scoring rate**, not an error rate: v2.0 dev 36/375 (9.6%), v2.0
+held-out 31/250 (12.4%), and v2.1 dev 36/375 (9.6%). The reports itemize each
+scored non-target trait, score, confidence, quote presence and grounding, and
+human-review candidates. Evaluated-against-gold sets are quiz target traits,
+organic T01–T05 (including gold-null unsupported-inference opportunities
+already reported by the existing evaluator), and edge-case behavior checks.
+Quiz non-target traits and T06 are unassessed against gold.
+
+The existing organic `metrics.json` reports factor precision, recall, and
+category agreement separately. Their TP/FP/FN and category-agreement
+denominators are shown in the post-freeze report addendum. They are descriptive
+small-sample results: dev has 14 organic records and held-out has six.
+Category agreement means the predicted category set contains the gold
+category among true-positive detections; it is not factor-detection precision
+or recall.
+
+The original quote normalizer was recovered from Git history
+(`523adc3:evaluation/metrics.py`), not reconstructed. Its function-source
+SHA-256 is
+`13c87f186970111d09641cb0ee3aa2678722300d6a44eeac350472c301fa7e6c`;
+the corrected official normalizer's function-source SHA-256 is
+`45ce8a0186c85b7949ecb0579c41b42c3c55ae005aa5268cb145190682df8ef4`.
+Both were applied to all three saved runs. Four quote statuses differ, all
+four ORG14 trait quotes in v2.0 dev; no statuses differ in v2.0 held-out or
+v2.1 dev. The corrected normalizer remains official, and the changed quotes
+are listed in the corresponding supplementary reports.
+
+Question-level bootstrap resampling treats the five answer options from one
+quiz question as a single cluster. The supplementary intervals use 2,000
+replicates and seed 42, and report MAE, exact-band accuracy, Spearman rho,
+and direction accuracy beside the existing item-level intervals where
+available. There are 15 dev clusters and 10 held-out clusters overall (three
+and two per trait); these counts are too small for stable intervals. The
+exact-band cluster-CI lower bounds fall below the existing 60% threshold in
+both splits. Threshold comparisons are informational only; no threshold is
+changed. Organic narratives remain resampled at the record level in the
+existing analysis.
+
+The human evidence cross-review pack contains the counted v2.0 dev and
+held-out `needs_manual_review` flags and is still **PENDING**. It contains no
+human decisions; automated flags must not be interpreted as review findings.

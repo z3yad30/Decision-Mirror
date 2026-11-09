@@ -79,7 +79,8 @@ Copy-Item .env.example .env
 | Prompt version | A named revision of the system instruction, such as `v2.0` or `v2.1`. |
 | Registry | `prompts/extraction/registry.json`, mapping prompt versions to files, SHA-256 values, status, parent, date, and summary. |
 | Frozen | A version intended not to change in place; the loader verifies a frozen prompt's file hash against the registry. |
-| Raw response | The verbatim model response plus per-call metadata saved to `evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/raw_responses.jsonl`; it is not the scored results table. |
+| Raw response | The verbatim model response plus per-call metadata saved to `evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/raw_responses.jsonl`; this evidence format is unchanged and is not the scored results table. |
+| Result envelope | A schema-shaped pipeline record in `result_envelopes.jsonl`, with injected model/prompt metadata, validation summary, and pipeline-only error status; the last row per decision ID is current when retries/resumes append multiple rows. |
 | Run | One extraction configuration over a selected set and split, with its run manifest, raw responses, and attempt log. |
 | Run ID | `<prompt>__<model-slug>__<set>-<split>__<first-8-eval-set-SHA-256>`; `--new-run` adds a UTC timestamp suffix to the directory name. |
 | Manifest | A JSON record of the inputs/configuration and hashes that identify a dataset or run. |
@@ -115,7 +116,8 @@ prompts/extraction/extraction_v2.0.md
            scripts/run_extraction.py  [API CALL]
                       |
                       v
-evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/raw_responses.jsonl
+evaluation/runs/<run_id>/raw_responses.jsonl
+evaluation/runs/<run_id>/result_envelopes.jsonl  [new runs]
                       |
                       v
        scripts/evaluate_run.py  [NO API]
@@ -130,11 +132,11 @@ evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/
 docs/tasks/task-4-llm-extraction/06_evaluation_report.md
 ```
 
-The only API-calling step in this flow is `run_extraction.py`. `compare_runs.py` also evaluates saved responses and writes a paired comparison, without an API call. The report builder reads stored run metrics and writes the report plus `TASK4_MANIFEST.json`.
+The only API-calling step in this flow is `run_extraction.py`. `compare_runs.py` also evaluates saved responses and writes a paired comparison, without an API call. The report builder reads stored metrics and supplementary outputs and writes the report plus `TASK4_MANIFEST.json`.
 
 ## 5. Script-by-script execution walkthrough
 
-All commands below use the repository root as the working directory. Only `run_extraction.py`, `evaluate_run.py`, and `compare_runs.py` define command-line parsers. The other three scripts have no `--help` implementation: passing `--help` to them runs their normal operation.
+All commands below use the repository root as the working directory. `run_extraction.py`, `evaluate_run.py`, `compare_runs.py`, and `evaluate_supplementary.py` define command-line parsers. `build_eval_set.py`, `build_task4_report.py`, and `update_file_structure.py` have no `--help` implementation: passing `--help` to them runs their normal operation.
 
 ### `scripts/build_eval_set.py`
 
@@ -149,12 +151,13 @@ All commands below use the repository root as the working directory. Only `run_e
 - **Purpose:** send one batch of evaluation items to Groq and resume a persistent run.
 - **Flags and defaults:** `--prompt` (required; no default); `--set {quiz,organic,edge,all}` (required); `--split {dev,heldout,all}` (required); `--batch-size` (10, permitted 1–10); `--model` (unset means `GROQ_MODEL`, then `openai/gpt-oss-20b`); `--status` (false); `--dry-run` (false); `--retry-api-failures` (false); `--new-run` (false). `-h/--help` is provided by `argparse`.
 - **Environment defaults:** `GROQ_TEMPERATURE=0`, `GROQ_MAX_TOKENS=4096`, `GROQ_REASONING_EFFORT=medium`, `REQUEST_DELAY_SECONDS=3`; see [`.env.example`](../.env.example). `GROQ_API_KEY` is required when the client is constructed.
-- **When you run it:** (1) parses flags; `--status` reports existing run folders and exits before API setup; (2) loads the prompt with `load_prompt()` from `src/decision_mirror/extraction/prompt_loader.py`; (3) reads the eval set, hashes its bytes, filters by set/split, and derives the run ID; (4) builds/compares the manifest and reads saved response/attempt JSONL; (5) selects the first pending items up to batch size (or prints them for `--dry-run`); (6) creates a `GroqClient` unless a test client was injected; (7) for each selected item calls `run_item()` in `src/decision_mirror/extraction/pipeline.py`, which builds the model whitelist via `build_model_request()` in `payloads.py`, computes a request hash, and calls the client; (8) appends each successful model completion verbatim to `raw_responses.jsonl`, or logs API failures in `attempts.log.jsonl`; (9) classifies completed response text with `classify_response()` in `src/decision_mirror/extraction/validation.py` for the printed strict-valid count.
+- **When you run it:** (1) `--status` reports existing run folders and exits before prompt checks; (2) for run/dry-run requests, checks registry status and requires a `frozen` prompt for `heldout` or `all`, then loads the prompt; (3) reads and hashes the eval set, filters by set/split, and derives the run ID; (4) builds/compares the manifest and reads saved response/attempt JSONL; (5) selects pending items (or prints them for `--dry-run`); (6) calls `run_item()` in `pipeline.py` for each item; (7) appends the verbatim completion and a separate schema-shaped envelope, or logs API failures and writes an explicit error envelope; (8) reports strict-valid counts.
 - **Inputs:** eval set, registered prompt, environment, and—on resume—existing run manifest and JSONL files.
-- **Outputs:** a folder under `evaluation/runs/` containing `manifest.json`, `raw_responses.jsonl`, and `attempts.log.jsonl`; these are the files present in each of the three checked-in run folders. Each response record includes the item ID, verbatim response, reasoning when separately returned, finish reason, usage, latency, timestamp, request hash, model/prompt data, and attempt count.
+- **Outputs:** a folder under `evaluation/runs/` containing `manifest.json`, `raw_responses.jsonl`, `attempts.log.jsonl`, and—on new runs—`result_envelopes.jsonl`. The raw-response JSONL format is unchanged and the envelope file does not participate in resume-manifest checks. Existing runs are not backfilled. Each raw record includes item ID, verbatim response, reasoning when separately returned, finish reason, usage, latency, timestamp, request hash, model/prompt data, and attempt count.
+- A completed raw response is synced before classification or envelope construction. Envelope failures are recorded with their type and `item_id` in `attempts.log.jsonl`, while the raw record remains saved. API-error envelopes can be followed by a success envelope after resume; multiple rows per `decision_id` are valid, and the last row is the current envelope.
 - **Resume and mismatches:** already completed item IDs are skipped; duplicate final IDs and invalid JSONL fail. Partial final JSONL tails are repaired on normal resume. An existing run without a manifest is refused. A manifest mismatch in prompt/version hash, model/settings, response format, eval-set hash, split, or batch size is refused with guidance to change nothing or use `--new-run`; new runs preserve old folders.
 - **Rate limits and malformed responses:** typed 429s are attempted up to three times, honoring `Retry-After` when supplied and sleeping between attempts; after the third, completed work is retained, the item remains pending, and the script returns **3**. Other transient API failures get in-invocation retries only with `--retry-api-failures` (up to three attempts). Completed malformed model text is still saved as a final response and is not called again; evaluation reports it as invalid.
-- **What it refuses / does not enforce:** refuses legacy or unknown prompts, frozen prompts whose registered hash differs, invalid batch sizes, missing/invalid existing run state, and mismatched resume configuration. It does **not** enforce that a held-out run uses a frozen (rather than draft) prompt; the operator must enforce this invariant. Normal success/incomplete batch returns 0; quota exhaustion returns 3; caught `ValueError`/`RuntimeError` returns 2.
+- **What it refuses / does not enforce:** refuses legacy or unknown prompts, non-frozen prompts for `heldout`/`all`, frozen prompts whose registered hash differs, invalid batch sizes, missing/invalid existing run state, and mismatched resume configuration. The guard applies to `--dry-run` and `--new-run`; `--status` remains available for existing runs. Normal success/incomplete batch returns 0; quota exhaustion returns 3; caught `ValueError`/`RuntimeError` returns 2.
 
 ### `scripts/evaluate_run.py`
 
@@ -163,6 +166,14 @@ All commands below use the repository root as the working directory. Only `run_e
 - **Inputs:** run manifest/raw responses, `data/processed/eval_set_v1.json`, organic gold.
 - **Outputs:** six files under `evaluation/results/`: `metrics.json`, `per_item.csv`, `error_log.jsonl`, `schema_compliance.json`, `tables.md`, and `difficult_cases.md`.
 - **Refusal and exit:** a missing run/input, invalid JSONL, duplicate/unknown response IDs, or eval-set hash mismatch fails; the hash error explicitly requires the original matching eval set. No API calls, resume, or response repair. Success returns 0; caught `OSError`, `ValueError`, or `KeyError` returns 2.
+- For a recorded `heldout` or `all` run, the CLI emits a loud warning if its recorded prompt version is not currently registered as `frozen`; this does not block offline analysis of historical runs.
+
+### `scripts/evaluate_supplementary.py`
+
+- **Purpose and CLI:** write post-hoc supplementary analyses for saved runs. `--run-id` may be repeated; if omitted, the three Task 4 saved runs are analyzed.
+- **Outputs:** `supplementary_metrics.json` and `supplementary.md` under each selected run's existing results directory. This is offline and does not rewrite `metrics.json` or `tables.md`.
+- The outputs are explicitly labeled **post-hoc: added after dev and held-out results were seen**. The analyses cover quiz non-target scoring diagnostics, situational-factor category agreement, original/corrected quote normalizers, and question-cluster bootstrap intervals.
+- The quiz off-target scoring denominator counts four possible non-target T01–T05 traits per item (the one target trait is excluded); T06 is excluded. Thus 75 dev quiz items have 300 possible slots and 50 held-out items have 200. This is descriptive, not an error rate, because quiz gold labels only the target trait.
 
 ### `scripts/compare_runs.py`
 
@@ -174,8 +185,8 @@ All commands below use the repository root as the working directory. Only `run_e
 ### `scripts/build_task4_report.py`
 
 - **Purpose and CLI:** rebuild the Task 4 report and its freeze manifest. No flags or arguments.
-- **When you run it:** (1) `validate_frozen_status()` checks that the registry records v2.0 as frozen with the expected hash and that both v1.0 contract docs say they are frozen; (2) `load_run()` reads and checks v2.0 dev, v2.0 held-out, and v2.1 dev metrics/manifests; (3) verifies the candidate is v2.1 and raw response counts match metrics; (4) `create_report()` reads gold/split/eval data and saved raw responses and renders report tables/cases; (5) overwrites `docs/tasks/task-4-llm-extraction/06_evaluation_report.md` and writes `docs/tasks/task-4-llm-extraction/TASK4_MANIFEST.json`.
-- **Inputs/outputs:** frozen registry/contracts, three metrics/manifests/runs, gold/split/eval data, and prompt text; report and Task 4 artifact manifest. No API calls.
+- **When you run it:** (1) `validate_frozen_status()` checks that the registry records v2.0 as frozen with the expected hash and that both v1.0 contract docs say they are frozen; (2) loads and checks v2.0 dev, v2.0 held-out, and v2.1 dev metrics/manifests; (3) verifies the candidate is v2.1 and raw response counts match metrics; (4) reads gold/split/eval data, saved raw responses, and supplementary outputs; (5) overwrites the report and writes the Task 4 artifact manifest.
+- **Inputs/outputs:** frozen registry/contracts, three metrics/manifests/runs, supplementary results, gold/split/eval data, and prompt text; report and Task 4 artifact manifest. No API calls. The report appends a separately labeled post-freeze addendum without changing headline numbers.
 - **Refusal and exit:** aborts on a frozen-status/hash, run ID/prompt hash, candidate version, or response-count mismatch and on missing/malformed inputs. No CLI parser means `--help` does not display help: it runs the builder. Success exits 0; uncaught errors exit non-zero. The report's generated date changes on each run.
 
 ### `scripts/update_file_structure.py`
@@ -222,11 +233,12 @@ The “editable?” column describes intended stewardship, not filesystem permis
 | `docs/tasks/task-4-llm-extraction/03_extraction_prompts.md` | Prompt review notes | Prompt-to-ontology mapping, design decisions, review checklist | Hand-written | Prompt maintainers | Hand-written |
 | `docs/tasks/task-4-llm-extraction/04_evaluation_method.md` | Metric/evaluation specification | Metric definitions, denominators, taxonomy, 13 proposed criteria | Hand-written | Evaluator users/reviewers | Hand-written; thresholds pending |
 | `docs/tasks/task-4-llm-extraction/05_error_analysis.md` | Dev error analysis | Per-error diagnoses and v2.1 rationale | Hand-written from saved results | Prompt review | Hand-written |
-| `docs/tasks/task-4-llm-extraction/06_evaluation_report.md` | Final Task 4 report | Setup, dev/held-out metrics, cases, criteria, conditions and approval line | `build_task4_report.py` | Team and downstream stage | Generated report |
+| `docs/tasks/task-4-llm-extraction/06_evaluation_report.md` | Final Task 4 report | Setup, headline metrics, cases, criteria, conditions, approval line, and post-freeze addendum | `build_task4_report.py` | Team and downstream stage | Generated report |
 | `docs/tasks/task-4-llm-extraction/07_handoff_to_profile_aggregation.md` | Next-stage handoff | How to interpret scores/confidence/factors and T06 limitations | Hand-written | Profile-aggregation team | Hand-written |
-| `docs/tasks/task-4-llm-extraction/TASK4_MANIFEST.json` | Task 4 reproducibility manifest | SHA-256 values for schemas, frozen prompt, datasets, runs, and metrics | `build_task4_report.py` | Reproduction checks | Generated |
+| `docs/tasks/task-4-llm-extraction/TASK4_MANIFEST.json` | Task 4 reproducibility manifest | SHA-256 values for contracts, prompt, datasets, saved runs, metrics, and post-hoc sources/outputs | `build_task4_report.py` | Reproduction checks | Generated |
 | `docs/tasks/task-4-llm-extraction/gold_data.md` | Gold provenance notes | Dataset origins, split design, ambiguity and known issues | Hand-written | Dataset users | Hand-written |
 | `docs/tasks/task-4-llm-extraction/how_to_run.md` | Runner instructions | Setup, settings, batch counts, resume/rate-limit and outputs | Hand-written | Operators | Hand-written |
+| `docs/tasks/task-4-llm-extraction/human_review/README.md`, `cross_review.csv` | Pending evidence cross-review pack | Instructions and deterministically ordered, pending-only review rows | Created from v2.0 error logs | Human reviewers | Review decisions must be human-entered |
 | `docs/tasks/task-4-llm-extraction/source/Decision_Mirror_Task4_Habiba_Final.pdf` | Task 4 source archive | Original Task 4 assignment material | Project source archive | Contract provenance | Source archive |
 | `docs/tasks/task-4-llm-extraction/source/Decision_Mirror_Task4_Shams_Amr.docx` | Task 4 source archive | Prompt-related assignment material | Project source archive | Prompt provenance | Source archive |
 | `docs/tasks/task-4-llm-extraction/source/Decision_Mirror_Task_4_Team_Assignments.docx` | Task 4 source archive | Team assignment source | Project source archive | Task context | Source archive |
@@ -239,11 +251,13 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 |---|---|---|---|---|---|
 | `evaluation/__init__.py` | Python package marker | Evaluation package initialization | Hand-written | Script imports | Hand-written |
 | `evaluation/metrics.py` | Metric and error-analysis implementation | `score_band`, `score_metrics`, `spearman_rho`, `quadratic_weighted_kappa`, `normalize_quote`, `is_grounded`, `analyze_items` and helpers | Hand-written | `evaluation/runner.py`, compare/report scripts, tests | Code |
+| `evaluation/supplementary.py` | Post-hoc analysis implementation | Non-target scoring, factor agreement, normalizer comparison, and question-cluster bootstrap | Hand-written | Supplementary CLI/report, tests | Post-hoc code |
 | `evaluation/runner.py` | Offline result writer | `evaluate_run`, run/hash loading, CSV/JSONL output, table and difficult-case renderers | Hand-written | Evaluate/compare/report scripts | Code |
 | `evaluation/.gitkeep` | Directory placeholder | Keeps evaluation directory present | Repository scaffold | Git | Placeholder |
 | `evaluation/comparisons/v2.0__openai-gpt-oss-120b__all-dev__5825600d__vs__v2.1__openai-gpt-oss-120b__all-dev__5825600d.json` | Paired comparison | Common-item v2.0 vs v2.1 dev deltas, per-trait metrics and paired items | `compare_runs.py` | Prompt decision record | Generated |
 | `evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/manifest.json`, `evaluation/runs/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/manifest.json`, `evaluation/runs/v2.1__openai-gpt-oss-120b__all-dev__5825600d/manifest.json` | Run manifests | Prompt/model/eval-set hashes, split, settings, and run metadata | `run_extraction.py` | Resume, evaluation, and report | Generated; preserve |
 | `evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/raw_responses.jsonl`, `evaluation/runs/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/raw_responses.jsonl`, `evaluation/runs/v2.1__openai-gpt-oss-120b__all-dev__5825600d/raw_responses.jsonl` | Raw responses | Verbatim model records, one per completed item | `run_extraction.py` | Offline evaluator/report | Frozen evidence; never edit |
+| `evaluation/runs/<run_id>/result_envelopes.jsonl` | Pipeline result envelopes | Schema-shaped result plus injected versions/hash and validation summary; API/format errors use pipeline-only error status; last row per `decision_id` is current | `run_extraction.py` on new runs | Contract/review tooling | Separate output; not used by resume checks |
 | `evaluation/runs/v2.0__openai-gpt-oss-120b__all-dev__5825600d/attempts.log.jsonl`, `evaluation/runs/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/attempts.log.jsonl`, `evaluation/runs/v2.1__openai-gpt-oss-120b__all-dev__5825600d/attempts.log.jsonl` | Attempt logs | Transient API failures, typed status and retry metadata | `run_extraction.py` | Status/resume/audit | Generated; preserve |
 | `evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/metrics.json`, `evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/metrics.json`, `evaluation/results/v2.1__openai-gpt-oss-120b__all-dev__5825600d/metrics.json` | Metric summaries | Aggregate scores, diagnostics and readiness criteria | `evaluate_run.py` | Report/research | Generated |
 | `evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/per_item.csv`, `evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/per_item.csv`, `evaluation/results/v2.1__openai-gpt-oss-120b__all-dev__5825600d/per_item.csv` | Per-item tables | Gold/model scores and validation/error status per item | `evaluate_run.py` | Review/analysis | Generated |
@@ -251,6 +265,7 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 | `evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/schema_compliance.json`, `evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/schema_compliance.json`, `evaluation/results/v2.1__openai-gpt-oss-120b__all-dev__5825600d/schema_compliance.json` | Schema-compliance summaries | Overall and per-item strict/schema/semantic/recovery status | `evaluate_run.py` | Compliance review | Generated |
 | `evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/tables.md`, `evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/tables.md`, `evaluation/results/v2.1__openai-gpt-oss-120b__all-dev__5825600d/tables.md` | Readable metric tables | Formatted metric and readiness tables | `evaluate_run.py` | Human review | Generated |
 | `evaluation/results/v2.0__openai-gpt-oss-120b__all-dev__5825600d/difficult_cases.md`, `evaluation/results/v2.0__openai-gpt-oss-120b__all-heldout__5825600d/difficult_cases.md`, `evaluation/results/v2.1__openai-gpt-oss-120b__all-dev__5825600d/difficult_cases.md` | Difficult-case reports | Failures, manual cross-review sample, ambiguous-gold items | `evaluate_run.py` | Human review | Generated |
+| Each saved run's `supplementary_metrics.json` and `supplementary.md` | Post-hoc supplementary results | Item-level quiz off-target diagnostics, factor metrics, quote comparison and cluster-bootstrap results | `evaluate_supplementary.py` | Supplementary report/review | Post-hoc; existing metrics/tables unchanged |
 | `evaluation/runs/` and `evaluation/results/` | Stored run and result collections | The three run IDs are `v2.0__openai-gpt-oss-120b__all-dev__5825600d`, `v2.0__openai-gpt-oss-120b__all-heldout__5825600d`, and `v2.1__openai-gpt-oss-120b__all-dev__5825600d`; file types are detailed above | Runner/evaluator | Reproduction/reporting | Preserve; generated evidence |
 
 ### `experiments/`
@@ -266,7 +281,7 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 |---|---|---|---|---|---|
 | `prompts/extraction/registry.json` | Prompt registry | v1.x legacy, v2.0 frozen, v2.1 draft; file hashes/status/parentage/metadata | Hand-maintained | `load_prompt()` and leakage tests | Update only for a new prompt version |
 | `prompts/extraction/extraction_v2.0.md` | Selected frozen prompt | Nine sections: role/boundaries; ontology/scoring and T01–T06; trait/preference/situation/constraint; evidence/confidence; nulls; source handling; status/output; illustrative examples; final self-check | Hand-written; registered | Extraction runner | Frozen; never edit in place |
-| `prompts/extraction/extraction_v2.1.md` | Rejected candidate prompt | Draft revision clarifying evidence for situational-factor causality | Hand-written; registered | Dev comparison only | Draft; do not use as final |
+| `prompts/extraction/extraction_v2.1.md` | Rejected candidate prompt | Draft revision clarifying evidence for situational-factor causality; first heading still says “System Prompt v2.0” | Hand-written; registered as v2.1 | Dev comparison only | Draft; do not edit in place; title discrepancy documented in changelog |
 | `prompts/extraction/CHANGELOG.md` | Version history | Why v1.x were archived, v2.0 frozen, and v2.1 not selected | Hand-written | Prompt maintainers/reviewers | Hand-written |
 | `prompts/extraction/legacy/README.md` | Legacy archive note | States v1.x are provenance only and not official-evaluation prompts | Hand-written | Historical reference | Hand-written |
 | `prompts/extraction/legacy/v1.0.md`, `prompts/extraction/legacy/v1.1.md`, `prompts/extraction/legacy/v1.2.md`, `prompts/extraction/legacy/v1.3.md` | Archived prompts | Four earlier prompt versions, preserved with registry hashes | Archived source versions | Prompt history only; loader requires explicit legacy opt-in | Legacy; do not edit |
@@ -277,7 +292,7 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 |---|---|---|---|---|---|
 | `schemas/extraction_input.schema.json` | Input JSON Schema | Required IDs/source/text/ontology; optional timestamp/language/context; rejects unknown fields | Hand-written contract | `payloads.py`, tests | Frozen contract |
 | `schemas/extraction_output.schema.json` | Model response JSON Schema | Exact response fields, six ordered trait slots, score/factor constraints | Hand-written contract | `validation.py`, tests | Frozen contract |
-| `schemas/extraction_result.schema.json` | Pipeline envelope JSON Schema | Result metadata, pipeline-only error status, validation summary and trait envelope | Hand-written contract | Contract tests; not currently assembled by the extraction runner | Frozen contract |
+| `schemas/extraction_result.schema.json` | Pipeline envelope JSON Schema | Result metadata, pipeline-only error status, validation summary and trait envelope | Hand-written contract | Contract tests; runner writes a separate envelope file for new runs | Frozen contract |
 | `schemas/examples/valid/fully_scored_narrative.json`, `schemas/examples/valid/insufficient_evidence_short_text.json`, `schemas/examples/valid/multi_trait_narrative.json`, `schemas/examples/valid/quiz_success_off_target_null.json`, `schemas/examples/valid/situational_constraint.json`, `schemas/examples/valid/t06_null_without_history.json` | Valid contract fixtures | Six examples covering scored, null, quiz, context, and T06 cases | Hand-written | `test_contract.py` | Hand-written fixtures |
 | `schemas/examples/invalid/duplicate_trait.json`, `schemas/examples/invalid/evidence_is_string.json`, `schemas/examples/invalid/extra_top_level_field.json`, `schemas/examples/invalid/five_traits.json`, `schemas/examples/invalid/markdown_fenced_json.json`, `schemas/examples/invalid/model_emits_error_status.json`, `schemas/examples/invalid/null_score_nonzero_confidence.json`, `schemas/examples/invalid/null_score_with_evidence.json`, `schemas/examples/invalid/plain_text_response.json`, `schemas/examples/invalid/score_above_one.json`, `schemas/examples/invalid/score_string_null.json`, `schemas/examples/invalid/success_all_null_scores.json`, `schemas/examples/invalid/t06_scored_without_history.json`, `schemas/examples/invalid/wrong_trait_name_for_id.json`, `schemas/examples/invalid/wrong_trait_order.json` | Invalid contract fixtures | Fifteen malformed/schema/semantic counterexamples | Hand-written | `test_contract.py` | Hand-written fixtures |
 
@@ -288,6 +303,7 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 | `scripts/build_eval_set.py` | Dataset builder | Reads gold/split, maps payloads, writes eval set and manifest | Hand-written | Dataset maintenance | Code |
 | `scripts/run_extraction.py` | Resumable API runner | Flags, manifest checks, batch/retry/resume, raw response writes | Hand-written | Extraction operation | Code |
 | `scripts/evaluate_run.py` | Offline CLI | Loads one run and writes its result files | Hand-written | Evaluation | Code |
+| `scripts/evaluate_supplementary.py` | Offline post-hoc CLI | Writes supplementary JSON/Markdown for saved runs; accepts repeated `--run-id` | Hand-written | Supplementary evaluation | Code |
 | `scripts/compare_runs.py` | Offline paired comparison | Evaluates two runs and writes common-item comparison JSON | Hand-written | Prompt comparisons | Code |
 | `scripts/build_task4_report.py` | Report generator | Verifies frozen artifacts and renders report + artifact manifest | Hand-written | Final report reproduction | Code |
 | `scripts/update_file_structure.py` | Tree generator | Recursively renders repository entries into `file_structure.txt` | Hand-written | Repository housekeeping | Code |
@@ -301,7 +317,7 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 | `src/decision_mirror/extraction/payloads.py` | Request payload helpers | `build_quiz_payload()` maps scenario/selected answer; `build_model_request()` validates and strips application-only fields | Hand-written | Builder, pipeline, tests | Code |
 | `src/decision_mirror/extraction/prompt_loader.py` | Prompt registry loader | `load_prompt()` resolves registry entry, enforces legacy opt-in, checks frozen hash | Hand-written | Runner, tests | Code |
 | `src/decision_mirror/extraction/validation.py` | Output validation | `ValidationOutcome`; strict JSON duplicate/nonfinite checks; `classify_response()`, semantic checks, recovery diagnostic; `classify_api_error()` | Hand-written | Runner, evaluator, tests | Code |
-| `src/decision_mirror/extraction/pipeline.py` | Single-item call flow | `run_item()` builds whitelisted request, hashes request+prompt, calls client, returns raw completion metadata | Hand-written | Extraction runner | Code |
+| `src/decision_mirror/extraction/pipeline.py` | Single-item call flow | `run_item()` returns raw completion metadata; `build_result_envelope()` creates the schema-shaped envelope | Hand-written | Extraction runner | Code |
 | `src/decision_mirror/extraction/llm_client.py` | LLM client abstraction | `Completion`, `LLMClient`, `GroqClient`, and test `MockClient`; reads API key and calls Groq | Hand-written | Runner/tests | Code |
 | `src/decision_mirror/quiz/__init__.py`, `src/decision_mirror/profiling/__init__.py`, `src/decision_mirror/retrieval/__init__.py`, `src/decision_mirror/advisory/__init__.py`, `src/decision_mirror/storage/__init__.py`, `src/decision_mirror/common/__init__.py` | Placeholder packages | Only package initialization; no feature functions/classes | Scaffold | Future work | Empty placeholders |
 
@@ -313,9 +329,11 @@ Detailed field rules and evaluation methodology remain in the linked Task 4 docu
 | `tests/test_contract.py` | Contract and fixture tests | Draft-07 schemas, valid/invalid examples, semantic rules, payload allowlist, malformed output classification |
 | `tests/test_eval_set.py` | Eval-set tests | Full gold-set coverage, schema-valid payloads, quiz leakage exclusion, deterministic eval set and manifest hashes |
 | `tests/test_evaluation.py` | Metrics/evaluation tests | Metric correctness, T06 violations, recovered JSON policy, band boundaries, evidence normalization, ambiguity handling, raw-response immutability, paired comparisons |
+| `tests/test_supplementary.py` | Post-hoc analysis tests | Non-target coverage, factor metrics, normalizer status differences, and cluster-bootstrap outputs |
+| `tests/test_evaluate_run_cli.py` | Evaluation CLI warning tests | Loud warning for held-out/all runs with non-frozen prompts |
 | `tests/test_prompt_leakage.py` | Prompt safety/regression tests | No gold text/IDs in draft/frozen prompts; required traits/statuses/bands remain represented |
 | `tests/test_prompt_loader.py` | Prompt-loader tests | Registry loading/hash return, frozen hash mismatch, legacy opt-in, unknown versions |
-| `tests/test_runner.py` | Runner/client tests | Batch resume, interruption, rate limits, malformed final outputs, manifest mismatch, API-key non-persistence, status/dry-run, verbatim response/reasoning, SDK parameter checks |
+| `tests/test_runner.py` | Runner/client tests | Batch/held-out resume, interruption, frozen-prompt guard and status bypass, rate limits, malformed final outputs, manifest mismatch, API-key non-persistence, verbatim response/reasoning, SDK parameter checks |
 | `tests/test_split.py` | Split tests | Seed-42 reproducibility, whole quiz-question grouping and stratification, organic holdout selection, edge dev-only rule |
 
 ### Root files
@@ -359,7 +377,7 @@ The authoritative input/output field details are in [the input spec](tasks/task-
 - **Null/confidence/evidence:** a null score requires confidence exactly `0.0` and empty evidence; scored traits require evidence; null T01–T05 require explanatory notes. These semantic checks are in `validation.py`, and related constraints also appear in `schemas/extraction_output.schema.json`. T06 must be null when history is absent/empty.
 - **Evidence grounding:** evidence is intended to be an exact quote. The validator warns (does not reject) when whitespace/quote-normalized evidence is missing from input; the evaluation grounding metric uses `evaluation.metrics.is_grounded()`.
 - **Situational factor:** null or an object with `category` and `description`; categories are `financial_dependency`, `family_pressure`, `external_deadline`, `external_constraint`, `limited_alternatives`, `social_influence`, `low_stakes`, or `other`. It belongs to each trait output rather than a top-level response field.
-- **Pipeline versions and result envelope:** `schemas/extraction_result.schema.json` defines an envelope where model version, prompt version/hash, error, and validation are pipeline-owned—not LLM-generated. In the actual runner, `run_item()` returns raw completion data and `run_extraction.py` adds model/prompt metadata to that stored record; the current runner does not construct or validate the full result envelope.
+- **Pipeline versions and result envelope:** `schemas/extraction_result.schema.json` defines a pipeline-owned envelope; `build_result_envelope()` constructs it from a stored completion and `classify_response()` outcome. New runs write these records to `evaluation/runs/<run_id>/result_envelopes.jsonl`, separate from the unchanged, verbatim `raw_responses.jsonl`. The envelope includes injected model/prompt version and hash, validation summary, and pipeline-only `error` status for API/format failures. The additional file is not part of resume-manifest validation; existing runs are not backfilled.
 - **Malformed output:** `classify_response()` distinguishes `empty_response`, `not_json`, `schema_violation`, and `semantic_violation`; API errors are classified separately. Duplicate JSON keys and non-finite numeric values are rejected. A lenient recovery pass only marks whether fenced/prose-wrapped JSON could be recovered; it never substitutes recovered text. Evaluation records the invalid first response. The runner persists malformed completions as final raw responses and does not retry them.
 
 ## 9. Prompts
@@ -368,6 +386,7 @@ The authoritative input/output field details are in [the input spec](tasks/task-
 
 - **v2.0:** frozen, parent v1.3, selected for final evaluation. Registered SHA-256: `6f93b33da4bf2193641bb47156b1ca090a84f86f718e69085513aae4e6d280d7`.
 - **v2.1:** draft, parent v2.0. It clarified causal evidence for factor categories and constraints; the dev organic factor-recall result was 66.7%, below the proposed 80% threshold, so it was not selected. Missed eligible factor ORG11; ORG05 was also missed but ambiguous and excluded from headline recall.
+- The v2.1 prompt file's first heading still says “System Prompt v2.0”. The file is intentionally unchanged because its hash is recorded in the registry and its dev run manifest; the discrepancy is documented in the [prompt changelog](../prompts/extraction/CHANGELOG.md).
 - **v1.0–v1.3:** legacy prompt files in `prompts/extraction/legacy/`; retained for provenance, not official evaluation. The loader requires `allow_legacy=True`.
 
 The v2.0 file sections are: (1) role and boundaries; (2) ontology and score direction for T01–T06; (3) trait vs preference vs situation vs constraint; (4) evidence tiers and confidence; (5) null scores; (6) source handling; (7) status/output shape; (8) self-authored examples; (9) final self-check. Design rationale and mapping to ontology are documented in [the prompt review](tasks/task-4-llm-extraction/03_extraction_prompts.md).
@@ -400,7 +419,22 @@ The five half-open score bands are `[0.0,0.2)`, `[0.2,0.4)`, `[0.4,0.6)`, `[0.6,
 | Edge pass rate | Passed defined qualitative expected checks / all defined checks | `_expected_edge_checks()` and `analyze_items()` |
 | Evidence token-overlap F1 | Multiset token-overlap F1 against organic annotation evidence; report-only, not a source-grounding metric | `_token_f1()` |
 
-The evidence normalizer has a post-hoc fix: after the initial development results, it was changed to accept balanced surrounding quote delimiters in addition to collapsing whitespace, normalizing typographic quotes, and case-folding. The corrected evaluator was applied to all saved runs, with a regression test. `validation.py` independently emits an `evidence_not_grounded` warning using whitespace and quote normalization; it does not reject a response for that warning.
+The evidence normalizer has a post-hoc fix: after the initial development results, it was changed to accept balanced surrounding quote delimiters in addition to collapsing whitespace, normalizing typographic quotes, and case-folding. The corrected evaluator was applied to all saved runs, with a regression test. The original implementation was recovered from Git and compared against the corrected official normalizer in the post-hoc supplement. `validation.py` independently emits an `evidence_not_grounded` warning using whitespace and quote normalization; it does not reject a response for that warning.
+
+### Post-hoc analyses
+
+The supplementary CLI emits files explicitly labeled **post-hoc: added after
+dev and held-out results were seen**. Quiz non-target scores are an off-target
+scoring diagnostic, not an error rate: quiz gold labels only one target trait,
+so non-target quiz traits and T06 are unassessed against gold. Situational
+factor precision, recall, and category agreement remain separate; category
+agreement is reported among true positives with its denominator. The
+supplement compares the recovered original and corrected quote normalizers
+and resamples quiz answers by question cluster (five options per question).
+There are only 15 dev and 10 held-out quiz question clusters, too few for
+stable cluster-bootstrap intervals. Organic narratives remain record-level.
+All detailed values and item-level quote status differences are in the
+[post-freeze report addendum](tasks/task-4-llm-extraction/06_evaluation_report.md).
 
 ### Error taxonomy
 
@@ -463,10 +497,21 @@ Headline figures below were read from the stored `metrics.json` files, not trans
 
 Known weaknesses matter more than the headline alone: held-out organic recall is based on only six organic records and one positive factor; factor category agreement is 0% on dev; quiz scores compress toward inner bands; quiz tasks are short/templated; T04 exact-band accuracy is only 33.3% held-out (MAE 0.128); model confidence is not calibrated; and human evidence cross-review is outstanding. The complete result tables and caveats are in the [Task 4 evaluation report](tasks/task-4-llm-extraction/06_evaluation_report.md).
 
+**Post-hoc only:** quiz off-target scoring was 12.0% (36/300) for v2.0 dev,
+15.5% (31/200) for v2.0 held-out, and 12.0% (36/300) for v2.1 dev. Each
+denominator counts four possible non-target T01–T05 traits per quiz item,
+excluding the target trait and T06. These are not error rates because
+non-target gold labels do not exist. Existing
+situational-factor metrics separately report precision/recall/category
+agreement: v2.0 dev TP/FP/FN = 3/2/0, precision 60%, recall 100%, agreement
+0/3; held-out = 1/1/0, 50%, 100%, agreement 1/1; v2.1 dev = 2/2/1, 50%,
+66.7%, agreement 0/2. Full item details and bootstrap comparisons are in the
+post-freeze report addendum and per-run supplementary reports.
+
 ## 12. Invariants and do not do this
 
 1. Never edit gold files, the three checked-in `raw_responses.jsonl` files listed in the inventory, frozen prompts, or `data/processed/split_v1.json` after runs have begun.
-2. Never use a non-frozen prompt for held-out evaluation. The runner currently does not enforce this; check registry status yourself.
+2. Never use a non-frozen prompt for held-out evaluation. The runner enforces `frozen` status for `heldout` and `all` selections, including dry runs and new runs; status-only queries remain available.
 3. Do not resume a run after changing the model, prompt/version hash, evaluation set, split, batch size, or other manifest-checked settings. Use a new run instead.
 4. Do not copy gold fields into model-facing payloads, prompt text, or API requests.
 5. Do not treat recovered JSON as valid output, model confidence as calibrated probability, or the held-out organic estimate as statistically stable.
@@ -500,7 +545,22 @@ Repeat the second command until `RUN COMPLETE`; completed IDs are skipped.
 .\.venv\Scripts\python.exe scripts\evaluate_run.py --run-id v2.0__openai-gpt-oss-120b__all-dev__5825600d
 ```
 
-This is offline and refreshes the six files in that run's results folder.
+This is offline and refreshes the six files in that run's results folder. A
+held-out or `all` run whose recorded prompt is not currently registered as
+frozen emits a loud warning; evaluation still completes for historical runs.
+
+### Regenerate supplementary analyses
+
+The post-hoc command reads saved runs and existing metrics without API calls:
+
+```powershell
+.\.venv\Scripts\python.exe scripts\evaluate_supplementary.py
+```
+
+It writes only `supplementary_metrics.json` and `supplementary.md` under each
+selected run's result directory; it does not overwrite `metrics.json` or
+`tables.md`. Outputs are labeled **post-hoc: added after dev and held-out
+results were seen**.
 
 ### Compare two prompt versions
 
@@ -534,10 +594,11 @@ py -3 -m venv .venv
 .\.venv\Scripts\python.exe -m pytest -q
 .\.venv\Scripts\python.exe scripts\evaluate_run.py --run-id v2.0__openai-gpt-oss-120b__all-dev__5825600d
 .\.venv\Scripts\python.exe scripts\evaluate_run.py --run-id v2.0__openai-gpt-oss-120b__all-heldout__5825600d
+.\.venv\Scripts\python.exe scripts\evaluate_supplementary.py
 .\.venv\Scripts\python.exe scripts\build_task4_report.py
 ```
 
-The report builder regenerates the report date and `TASK4_MANIFEST.json`; compare regenerated metrics with the committed values in the manifest before relying on the result.
+The report builder regenerates the report date and `TASK4_MANIFEST.json`; compare regenerated metrics with the committed values in the manifest before relying on the result. It also writes the post-freeze addendum from the supplementary files; report headline numbers remain unchanged.
 
 ## 14. FAQ and troubleshooting
 
@@ -554,8 +615,10 @@ The report builder regenerates the report date and `TASK4_MANIFEST.json`; compar
 ## 15. Open items and limitations
 
 - Team-lead approval of the proposed readiness criteria and report is pending; the report's approval line is blank.
-- Human evidence-support cross-review remains outstanding. The deterministic `needs_manual_review` sample is a queue, not a finding.
+- Human evidence-support cross-review remains outstanding. The CSV contains the 20 counted v2.0 `needs_manual_review` flags (10 dev and 10 held-out), as trait-level rows; every row is `PENDING` and the queue is not a finding.
 - Quiz confidence gold has a documented 0.70/0.90 source inconsistency; organic gold is only 20 records; edge checks are self-authored; and the held-out organic split is only six records.
 - `docs/tasks/task-4-llm-extraction/07_handoff_to_profile_aggregation.md` expects downstream aggregation to keep T01–T05 evidence distinct from context, treat confidence as relative evidence weight only after defining policy, down-weight contextual observations via a documented policy, and leave T06 null until a future history-capable contract.
-- **Documentation/code inconsistencies found (not changed):** the output spec describes a pipeline result envelope with injected version fields, but the current extraction runner stores raw completion records with model/prompt metadata and does not build/validate that envelope; the runner permits a registered draft prompt on `--split heldout` despite docs saying held-out must use a frozen prompt; and `extraction_v2.1.md`'s title still says “System Prompt v2.0” although the registry identifies it as v2.1. The initial `00_team_review.md` also describes missing deliverables from an earlier planning state; the later evaluation report documents those deliverables as completed.
+- The question-cluster bootstrap has only 15 dev / 10 held-out clusters and does not provide stable intervals. The original/corrected normalizer comparison is complete; the corrected normalizer remains official.
+- The v2.1 prompt heading discrepancy (“System Prompt v2.0”) is documented in the prompt changelog and intentionally left unchanged because its hash is recorded in the registry and run manifest.
+- `00_team_review.md` is retained as historical review material; its initial planning-state findings are not a current implementation status.
 - **UNVERIFIED:** the Task 4 source archive's original assignment requirements were not independently reconciled against every final implementation detail; this guide relies on current repository code and checked-in Task 4 Markdown/specifications.

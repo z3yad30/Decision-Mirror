@@ -20,9 +20,12 @@ if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
 from decision_mirror.extraction.llm_client import GroqClient, LLMClient
-from decision_mirror.extraction.pipeline import run_item
-from decision_mirror.extraction.prompt_loader import load_prompt
-from decision_mirror.extraction.validation import classify_response
+from decision_mirror.extraction.pipeline import build_result_envelope, run_item
+from decision_mirror.extraction.prompt_loader import get_prompt_status, load_prompt
+from decision_mirror.extraction.validation import (
+    classify_api_error,
+    classify_response,
+)
 
 EVAL_PATH = ROOT / "data" / "processed" / "eval_set_v1.json"
 RUNS_DIR = ROOT / "evaluation" / "runs"
@@ -245,6 +248,13 @@ def run_invocation(
         return 0
     if not 1 <= batch_size <= MAX_BATCH_SIZE:
         raise ValueError(f"--batch-size must be between 1 and {MAX_BATCH_SIZE}")
+    prompt_status = get_prompt_status(prompt_version)
+    if split in {"heldout", "all"} and prompt_status != "frozen":
+        raise ValueError(
+            f"Refusing prompt {prompt_version!r} with registry status "
+            f"{prompt_status!r} for split {split!r}; held-out selections "
+            "require a frozen prompt."
+        )
 
     load_dotenv()
     try:
@@ -291,6 +301,7 @@ def run_invocation(
     manifest_path = run_dir / "manifest.json"
     responses_path = run_dir / "raw_responses.jsonl"
     attempts_path = run_dir / "attempts.log.jsonl"
+    envelopes_path = run_dir / "result_envelopes.jsonl"
     if run_dir.exists():
         if new_run:
             raise RuntimeError("Could not create a unique --new-run directory.")
@@ -378,11 +389,37 @@ def run_invocation(
                             else float(attempts)
                         )
                         continue
+                    _append_jsonl(
+                        envelopes_path,
+                        build_result_envelope(
+                            {
+                                "item_id": item["item_id"],
+                                "model": model,
+                                "prompt_version": prompt_version,
+                                "prompt_sha256": prompt_sha256,
+                            },
+                            item["payload"],
+                            classify_api_error(error),
+                        ),
+                    )
                     quota_reached = True
                     break
                 if transient and retry_api_failures and attempts < 3:
                     sleep(float(attempts))
                     continue
+                _append_jsonl(
+                    envelopes_path,
+                    build_result_envelope(
+                        {
+                            "item_id": item["item_id"],
+                            "model": model,
+                            "prompt_version": prompt_version,
+                            "prompt_sha256": prompt_sha256,
+                        },
+                        item["payload"],
+                        classify_api_error(error),
+                    ),
+                )
                 break
 
             record.update(
@@ -397,6 +434,25 @@ def run_invocation(
             _append_jsonl(responses_path, record)
             current_final.append(record)
             final_ids.add(item["item_id"])
+            try:
+                outcome = classify_response(
+                    record["response_text"], item["payload"]
+                )
+                envelope = build_result_envelope(record, item["payload"], outcome)
+                _append_jsonl(envelopes_path, envelope)
+            except Exception as error:
+                _append_jsonl(
+                    attempts_path,
+                    {
+                        "item_id": item["item_id"],
+                        "timestamp": _utc_now(),
+                        "attempt": prior_attempt_counts.get(item["item_id"], 0)
+                        + attempts,
+                        "error_type": type(error).__name__,
+                        "failure_stage": "result_envelope",
+                        "message": str(error),
+                    },
+                )
             break
 
         if quota_reached:

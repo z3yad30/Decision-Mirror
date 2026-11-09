@@ -1,0 +1,1869 @@
+{
+  "label": "post-hoc: added after dev and held-out results were seen",
+  "run_id": "v2.0__openai-gpt-oss-120b__all-heldout__5825600d",
+  "split": "heldout",
+  "non_target_traits": {
+    "gold_verification": {
+      "quiz_gold_record_count": 125,
+      "non_target_trait_label_count": 0,
+      "finding": "Each quiz gold record contains one target trait and one score; no non-target trait labels are supplied."
+    },
+    "off_target_scoring_rate": {
+      "scored_non_target_trait_count": 31,
+      "possible_non_target_trait_count": 200,
+      "rate": 0.155,
+      "interpretation": "Descriptive off-target scoring rate, not an error rate."
+    },
+    "quiz_items": [
+      {
+        "item_id": "Q01_A",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q01_B",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.25,
+            "confidence": 0.8,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would probably choose the stable offer unless the startup had unusually strong evidence of success.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.85,
+            "confidence": 0.9,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would probably choose the stable offer unless the startup had unusually strong evidence of success.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q01_C",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.8,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare both carefully",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q01_D",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.65,
+            "confidence": 0.8,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "could grow substantially if the company succeeds.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q01_E",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.65,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "could grow substantially if the company succeeds",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "uncertainty is acceptable when the potential upside is much larger",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q05_A",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.15,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would avoid depending on it until it becomes proven.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.63,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would avoid depending on it until it becomes proven.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q05_B",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q05_C",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q05_D",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q05_E",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.32,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I am comfortable betting on emerging opportunities.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_A",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q07_B",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would lean toward buying now unless the better version is clearly worth waiting for.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_C",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.85,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare the immediate usefulness with the long-term value.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_D",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.65,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would wait if the long-term improvement is substantial.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_E",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q08_A",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q08_B",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q08_C",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would consider both the effort now and the future payoff.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q08_D",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would accept the short-term effort for a strong future opportunity.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q08_E",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.5,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I am comfortable making a major short-term sacrifice for a payoff several years away.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q12_A",
+        "question_id": "Q12",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q12_B",
+        "question_id": "Q12",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q12_C",
+        "question_id": "Q12",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare my workload with the team benefit.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q12_D",
+        "question_id": "Q12",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q12_E",
+        "question_id": "Q12",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q15_A",
+        "question_id": "Q15",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q15_B",
+        "question_id": "Q15",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q15_C",
+        "question_id": "Q15",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q15_D",
+        "question_id": "Q15",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q15_E",
+        "question_id": "Q15",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q16_A",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "research for a long time",
+                "grounded": true
+              },
+              {
+                "quote": "revisit the decision",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "research for a long time, compare many models",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_B",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.73,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would spend considerable time researching before committing.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_C",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.7,
+            "confidence": 0.65,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would research the main options and decide once I have enough information.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.85,
+            "confidence": 0.85,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would research the main options and decide once I have enough information.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_D",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would narrow it to a few options and decide fairly quickly.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_E",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.3,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would pick one that seems right and commit quickly.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_A",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.75,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would still research extensively before buying.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_B",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.65,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare several options carefully.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_C",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would check the basics and decide.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_D",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q20_E",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.3,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would trust my first acceptable option and move on.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.2,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would trust my first acceptable option and move on.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q24_A",
+        "question_id": "Q24",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q24_B",
+        "question_id": "Q24",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q24_C",
+        "question_id": "Q24",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q24_D",
+        "question_id": "Q24",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q24_E",
+        "question_id": "Q24",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q25_A",
+        "question_id": "Q25",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T01",
+            "score": 0.68,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would choose the exciting and meaningful path because that feeling matters most.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T02",
+            "score": 0.35,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would choose the exciting and meaningful path because that feeling matters most.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T03",
+            "score": 0.72,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would choose the exciting and meaningful path because that feeling matters most.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q25_B",
+        "question_id": "Q25",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q25_C",
+        "question_id": "Q25",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q25_D",
+        "question_id": "Q25",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      },
+      {
+        "item_id": "Q25_E",
+        "question_id": "Q25",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": []
+      }
+    ],
+    "human_review_candidates": [
+      {
+        "item_id": "Q01_B",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.25,
+            "confidence": 0.8,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would probably choose the stable offer unless the startup had unusually strong evidence of success.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.85,
+            "confidence": 0.9,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would probably choose the stable offer unless the startup had unusually strong evidence of success.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q01_C",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.8,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare both carefully",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q01_D",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.65,
+            "confidence": 0.8,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "could grow substantially if the company succeeds.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q01_E",
+        "question_id": "Q01",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.65,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "could grow substantially if the company succeeds",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "uncertainty is acceptable when the potential upside is much larger",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q05_A",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.15,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would avoid depending on it until it becomes proven.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.63,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would avoid depending on it until it becomes proven.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q05_E",
+        "question_id": "Q05",
+        "target_trait": "T01",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.32,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I am comfortable betting on emerging opportunities.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_B",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would lean toward buying now unless the better version is clearly worth waiting for.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_C",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.85,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare the immediate usefulness with the long-term value.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q07_D",
+        "question_id": "Q07",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.65,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would wait if the long-term improvement is substantial.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q08_C",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would consider both the effort now and the future payoff.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q08_D",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would accept the short-term effort for a strong future opportunity.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q08_E",
+        "question_id": "Q08",
+        "target_trait": "T02",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.5,
+            "confidence": 0.62,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I am comfortable making a major short-term sacrifice for a payoff several years away.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q12_C",
+        "question_id": "Q12",
+        "target_trait": "T03",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare my workload with the team benefit.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_A",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "research for a long time",
+                "grounded": true
+              },
+              {
+                "quote": "revisit the decision",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "research for a long time, compare many models",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_B",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.73,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would spend considerable time researching before committing.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_C",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.7,
+            "confidence": 0.65,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would research the main options and decide once I have enough information.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.85,
+            "confidence": 0.85,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would research the main options and decide once I have enough information.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_D",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would narrow it to a few options and decide fairly quickly.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q16_E",
+        "question_id": "Q16",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.3,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would pick one that seems right and commit quickly.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_A",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.75,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would still research extensively before buying.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_B",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.7,
+            "confidence": 0.65,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would compare several options carefully.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_C",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T05",
+            "score": 0.65,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would check the basics and decide.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q20_E",
+        "question_id": "Q20",
+        "target_trait": "T04",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T02",
+            "score": 0.3,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would trust my first acceptable option and move on.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T05",
+            "score": 0.2,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would trust my first acceptable option and move on.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "item_id": "Q25_A",
+        "question_id": "Q25",
+        "target_trait": "T05",
+        "response_present": true,
+        "scored_non_target_traits": [
+          {
+            "trait_id": "T01",
+            "score": 0.68,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would choose the exciting and meaningful path because that feeling matters most.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T02",
+            "score": 0.35,
+            "confidence": 0.55,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would choose the exciting and meaningful path because that feeling matters most.",
+                "grounded": true
+              }
+            ]
+          },
+          {
+            "trait_id": "T03",
+            "score": 0.72,
+            "confidence": 0.6,
+            "evidence_quotes_exist": true,
+            "evidence_quotes_grounded": true,
+            "evidence_quotes": [
+              {
+                "quote": "I would choose the exciting and meaningful path because that feeling matters most.",
+                "grounded": true
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "unassessed": [
+      "quiz non-target traits",
+      "T06"
+    ],
+    "evaluated_against_gold": [
+      "quiz target traits",
+      "organic T01-T05, including gold-null unsupported-inference opportunities already in metrics.json",
+      "edge-case behavior checks"
+    ]
+  },
+  "situational_factors": {
+    "reported_separately_in_existing_metrics_json": true,
+    "precision": {
+      "value": 0.5,
+      "true_positive": 1,
+      "false_positive": 1,
+      "denominator": 2
+    },
+    "recall": {
+      "value": 1.0,
+      "true_positive": 1,
+      "false_negative": 0,
+      "denominator": 1
+    },
+    "category_agreement": {
+      "value": 1.0,
+      "category_matches": 1,
+      "true_positive_denominator": 1
+    },
+    "small_n_warning": "Organic split sizes and positive-factor counts are small; these rates are descriptive and should not be treated as stable estimates."
+  },
+  "quote_normalizer_comparison": {
+    "original_source": {
+      "git_ref": "523adc3:evaluation/metrics.py",
+      "sha256": "13c87f186970111d09641cb0ee3aa2678722300d6a44eeac350472c301fa7e6c"
+    },
+    "corrected_source": {
+      "file": "evaluation/metrics.py",
+      "sha256": "45ce8a0186c85b7949ecb0579c41b42c3c55ae005aa5268cb145190682df8ef4",
+      "official": true
+    },
+    "quote_count": 93,
+    "original_grounded_count": 93,
+    "corrected_grounded_count": 93,
+    "original_grounding_rate": 1.0,
+    "corrected_grounding_rate": 1.0,
+    "differing_quotes": []
+  },
+  "quiz_question_cluster_bootstrap": {
+    "replicates": 2000,
+    "seed": 42,
+    "cluster_definition": "One question ID, including its five answer-option records, is one resampling unit.",
+    "cluster_count": 10,
+    "expected_cluster_count_check": {
+      "actual": 10,
+      "expected": 10,
+      "matches_expected_dev_or_heldout_count": true
+    },
+    "metrics": {
+      "T01": {
+        "cluster_count": 2,
+        "point_estimates": {
+          "n_paired_scores": 9,
+          "mae": 0.06333333333333334,
+          "exact_band_accuracy": 0.6666666666666666,
+          "spearman_rho": 0.978549784986749,
+          "direction_accuracy": 1.0,
+          "direction_n": 7
+        },
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.05000000000000002,
+            "upper": 0.074,
+            "valid_replicates": 2000
+          },
+          "exact_band_accuracy": {
+            "lower": 0.6,
+            "upper": 0.75,
+            "valid_replicates": 2000
+          },
+          "spearman_rho": {
+            "lower": 0.9486832980505138,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          },
+          "direction_accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          }
+        },
+        "existing_item_level": {
+          "bootstrap_95_ci": {
+            "mae": {
+              "lower": 0.011111111111111096,
+              "upper": 0.11777777777777781,
+              "n": 9
+            },
+            "accuracy": {
+              "lower": 0.3333333333333333,
+              "upper": 1.0,
+              "n": 9
+            },
+            "rho": {
+              "lower": 0.8716219195512478,
+              "upper": 1.0,
+              "n": 9
+            }
+          },
+          "point_estimates": {
+            "mae": 0.06333333333333334,
+            "exact_band_accuracy": 0.6666666666666666,
+            "spearman_rho": 0.978549784986749,
+            "direction_accuracy": 1.0
+          },
+          "direction_accuracy": 1.0,
+          "direction_n": 7,
+          "direction_ci": null
+        }
+      },
+      "T02": {
+        "cluster_count": 2,
+        "point_estimates": {
+          "n_paired_scores": 9,
+          "mae": 0.06333333333333334,
+          "exact_band_accuracy": 0.6666666666666666,
+          "spearman_rho": 0.9604649301246597,
+          "direction_accuracy": 1.0,
+          "direction_n": 8
+        },
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.04400000000000001,
+            "upper": 0.08750000000000002,
+            "valid_replicates": 2000
+          },
+          "exact_band_accuracy": {
+            "lower": 0.5,
+            "upper": 0.8,
+            "valid_replicates": 2000
+          },
+          "spearman_rho": {
+            "lower": 0.9486832980505138,
+            "upper": 0.9746794344808964,
+            "valid_replicates": 2000
+          },
+          "direction_accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          }
+        },
+        "existing_item_level": {
+          "bootstrap_95_ci": {
+            "mae": {
+              "lower": 0.006666666666666664,
+              "upper": 0.12222222222222226,
+              "n": 9
+            },
+            "accuracy": {
+              "lower": 0.3333333333333333,
+              "upper": 1.0,
+              "n": 9
+            },
+            "rho": {
+              "lower": 0.7770286898858113,
+              "upper": 1.0,
+              "n": 9
+            }
+          },
+          "point_estimates": {
+            "mae": 0.06333333333333334,
+            "exact_band_accuracy": 0.6666666666666666,
+            "spearman_rho": 0.9604649301246597,
+            "direction_accuracy": 1.0
+          },
+          "direction_accuracy": 1.0,
+          "direction_n": 8,
+          "direction_ci": null
+        }
+      },
+      "T03": {
+        "cluster_count": 2,
+        "point_estimates": {
+          "n_paired_scores": 9,
+          "mae": 0.052222222222222205,
+          "exact_band_accuracy": 0.7777777777777778,
+          "spearman_rho": 0.902201178283859,
+          "direction_accuracy": 1.0,
+          "direction_n": 8
+        },
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.0,
+            "upper": 0.11749999999999997,
+            "valid_replicates": 2000
+          },
+          "exact_band_accuracy": {
+            "lower": 0.5,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          },
+          "spearman_rho": {
+            "lower": 0.7378647873726218,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          },
+          "direction_accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          }
+        },
+        "existing_item_level": {
+          "bootstrap_95_ci": {
+            "mae": {
+              "lower": 0.004444444444444424,
+              "upper": 0.11333333333333334,
+              "n": 9
+            },
+            "accuracy": {
+              "lower": 0.4444444444444444,
+              "upper": 1.0,
+              "n": 9
+            },
+            "rho": {
+              "lower": 0.5337605126836238,
+              "upper": 1.0,
+              "n": 9
+            }
+          },
+          "point_estimates": {
+            "mae": 0.052222222222222205,
+            "exact_band_accuracy": 0.7777777777777778,
+            "spearman_rho": 0.902201178283859,
+            "direction_accuracy": 1.0
+          },
+          "direction_accuracy": 1.0,
+          "direction_n": 8,
+          "direction_ci": null
+        }
+      },
+      "T04": {
+        "cluster_count": 2,
+        "point_estimates": {
+          "n_paired_scores": 9,
+          "mae": 0.1277777777777778,
+          "exact_band_accuracy": 0.3333333333333333,
+          "spearman_rho": 0.8528602990262663,
+          "direction_accuracy": 1.0,
+          "direction_n": 7
+        },
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.11000000000000001,
+            "upper": 0.15,
+            "valid_replicates": 2000
+          },
+          "exact_band_accuracy": {
+            "lower": 0.25,
+            "upper": 0.4,
+            "valid_replicates": 2000
+          },
+          "spearman_rho": {
+            "lower": 0.7745966692414834,
+            "upper": 0.9486832980505138,
+            "valid_replicates": 2000
+          },
+          "direction_accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          }
+        },
+        "existing_item_level": {
+          "bootstrap_95_ci": {
+            "mae": {
+              "lower": 0.06111111111111113,
+              "upper": 0.17777777777777778,
+              "n": 9
+            },
+            "accuracy": {
+              "lower": 0.1111111111111111,
+              "upper": 0.6666666666666666,
+              "n": 9
+            },
+            "rho": {
+              "lower": 0.5786375623578447,
+              "upper": 0.9622504486493763,
+              "n": 9
+            }
+          },
+          "point_estimates": {
+            "mae": 0.1277777777777778,
+            "exact_band_accuracy": 0.3333333333333333,
+            "spearman_rho": 0.8528602990262663,
+            "direction_accuracy": 1.0
+          },
+          "direction_accuracy": 1.0,
+          "direction_n": 7,
+          "direction_ci": null
+        }
+      },
+      "T05": {
+        "cluster_count": 2,
+        "point_estimates": {
+          "n_paired_scores": 10,
+          "mae": 0.042000000000000016,
+          "exact_band_accuracy": 0.8,
+          "spearman_rho": 0.975,
+          "direction_accuracy": 1.0,
+          "direction_n": 8
+        },
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.03400000000000001,
+            "upper": 0.050000000000000024,
+            "valid_replicates": 2000
+          },
+          "exact_band_accuracy": {
+            "lower": 0.8,
+            "upper": 0.8,
+            "valid_replicates": 2000
+          },
+          "spearman_rho": {
+            "lower": 0.9746794344808964,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          },
+          "direction_accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          }
+        },
+        "existing_item_level": {
+          "bootstrap_95_ci": {
+            "mae": {
+              "lower": 0.0050000000000000044,
+              "upper": 0.08600000000000002,
+              "n": 10
+            },
+            "accuracy": {
+              "lower": 0.5,
+              "upper": 1.0,
+              "n": 10
+            },
+            "rho": {
+              "lower": 0.877039888721299,
+              "upper": 1.0,
+              "n": 10
+            }
+          },
+          "point_estimates": {
+            "mae": 0.042000000000000016,
+            "exact_band_accuracy": 0.8,
+            "spearman_rho": 0.975,
+            "direction_accuracy": 1.0
+          },
+          "direction_accuracy": 1.0,
+          "direction_n": 8,
+          "direction_ci": null
+        }
+      },
+      "overall": {
+        "cluster_count": 10,
+        "point_estimates": {
+          "n_paired_scores": 46,
+          "mae": 0.0691304347826087,
+          "exact_band_accuracy": 0.6521739130434783,
+          "spearman_rho": 0.9266742984189785,
+          "direction_accuracy": 1.0,
+          "direction_n": 38
+        },
+        "bootstrap_95_ci": {
+          "mae": {
+            "lower": 0.04521739130434783,
+            "upper": 0.09613636363636364,
+            "valid_replicates": 2000
+          },
+          "exact_band_accuracy": {
+            "lower": 0.5116279069767442,
+            "upper": 0.7708333333333334,
+            "valid_replicates": 2000
+          },
+          "spearman_rho": {
+            "lower": 0.8617095521225141,
+            "upper": 0.9705758365517709,
+            "valid_replicates": 2000
+          },
+          "direction_accuracy": {
+            "lower": 1.0,
+            "upper": 1.0,
+            "valid_replicates": 2000
+          }
+        },
+        "existing_item_level": {
+          "bootstrap_95_ci": {
+            "mae": {
+              "lower": 0.04413043478260869,
+              "upper": 0.09434782608695652,
+              "n": 46
+            },
+            "accuracy": {
+              "lower": 0.5217391304347826,
+              "upper": 0.782608695652174,
+              "n": 46
+            },
+            "rho": {
+              "lower": 0.8614244324946569,
+              "upper": 0.9640203893028215,
+              "n": 46
+            }
+          },
+          "point_estimates": {
+            "mae": 0.0691304347826087,
+            "exact_band_accuracy": 0.6521739130434783,
+            "spearman_rho": 0.9266742984189785,
+            "direction_accuracy": 1.0
+          },
+          "direction_accuracy": 1.0,
+          "direction_n": 38,
+          "direction_ci": null
+        }
+      }
+    },
+    "stability_warning": "10 question clusters overall (and only 2 clusters for an individual trait) is too small to support stable intervals.",
+    "thresholds": {
+      "mae": {
+        "operator": "at_most",
+        "threshold": 0.15,
+        "lower_bound": 0.04521739130434783,
+        "lower_bound_meets_threshold": true,
+        "appropriate_ci_bound": "upper",
+        "appropriate_bound_meets_threshold": true,
+        "information_only": true
+      },
+      "exact_band_accuracy": {
+        "operator": "at_least",
+        "threshold": 0.6,
+        "lower_bound": 0.5116279069767442,
+        "lower_bound_meets_threshold": false,
+        "appropriate_ci_bound": "lower",
+        "appropriate_bound_meets_threshold": false,
+        "information_only": true
+      },
+      "spearman_rho": {
+        "operator": "at_least",
+        "threshold": 0.8,
+        "lower_bound": 0.8617095521225141,
+        "lower_bound_meets_threshold": true,
+        "appropriate_ci_bound": "lower",
+        "appropriate_bound_meets_threshold": true,
+        "information_only": true
+      },
+      "direction_accuracy": {
+        "operator": "at_least",
+        "threshold": 0.9,
+        "lower_bound": 1.0,
+        "lower_bound_meets_threshold": true,
+        "appropriate_ci_bound": "lower",
+        "appropriate_bound_meets_threshold": true,
+        "information_only": true
+      }
+    }
+  },
+  "evaluation_scope": {
+    "evaluated_against_gold": [
+      "quiz target trait",
+      "organic T01-T05, including gold-null unsupported-inference opportunities already present in metrics.json",
+      "edge-case behavior checks"
+    ],
+    "unassessed": [
+      "quiz non-target traits",
+      "T06"
+    ]
+  }
+}

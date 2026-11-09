@@ -1,3 +1,5 @@
+# Historical note: this review records the initial planning state; later Task 4 deliverables and resolved implementation issues are documented in the project guide and evaluation report.
+
 # Summary
 
 The Task 4 materials are not ready for reproducible evaluation. The prompts, schema, runner, and gold data are internally inconsistent; key evaluation deliverables are missing. The decisions below define a safer, measurable baseline for subsequent prompts.
