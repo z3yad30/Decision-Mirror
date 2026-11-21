@@ -15,6 +15,9 @@ Decision-Mirror/
 |   `-- raw/
 |       `-- .gitkeep
 |-- docs/  # Project documentation and source archives
+|   |-- design/
+|   |   |-- Decision Mirror Chapter 3 Architecture and Design (Draft).pdf
+|   |   `-- Decision Mirror Phase 1 Build Plan.pdf
 |   |-- ontology/
 |   |   |-- Decision_Mirror_Trait_Ontology.pdf
 |   |   `-- Decision_Mirror_Trait_Ontology_Complete.pdf
@@ -24,31 +27,35 @@ Decision-Mirror/
 |   |   `-- Use_Case.pdf
 |   |-- tasks/
 |   |   |-- task-1-project-analysis/
-|   |   |   `-- .gitkeep
+|   |   |   |-- .gitkeep
+|   |   |   `-- Decision Mirror Chapter 1 Analysis (Draft).pdf
 |   |   |-- task-2-trait-ontology/
 |   |   |   |-- Decision Mirror Trait Ontology.docx
 |   |   |   `-- Decision_Mirror_Trait_Ontology.pdf
 |   |   |-- task-3-onboarding-quiz/
 |   |   |   `-- Decision_Mirror_Task_3_Onboarding_Quiz_and_Labeled_Dataset.docx
-|   |   `-- task-4-llm-extraction/
-|   |       |-- human_review/
-|   |       |   |-- cross_review.csv
-|   |       |   `-- README.md
-|   |       |-- source/
-|   |       |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
-|   |       |   |-- Decision_Mirror_Task4_Shams_Amr.docx
-|   |       |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
-|   |       |-- 00_team_review.md
-|   |       |-- 01_input_spec.md
-|   |       |-- 02_output_spec.md
-|   |       |-- 03_extraction_prompts.md
-|   |       |-- 04_evaluation_method.md
-|   |       |-- 05_error_analysis.md
-|   |       |-- 06_evaluation_report.md
-|   |       |-- 07_handoff_to_profile_aggregation.md
-|   |       |-- gold_data.md
-|   |       |-- how_to_run.md
-|   |       `-- TASK4_MANIFEST.json
+|   |   |-- task-4-llm-extraction/
+|   |   |   |-- human_review/
+|   |   |   |   |-- cross_review.csv
+|   |   |   |   `-- README.md
+|   |   |   |-- source/
+|   |   |   |   |-- Decision_Mirror_Task4_Habiba_Final.pdf
+|   |   |   |   |-- Decision_Mirror_Task4_Shams_Amr.docx
+|   |   |   |   `-- Decision_Mirror_Task_4_Team_Assignments.docx
+|   |   |   |-- 00_team_review.md
+|   |   |   |-- 01_input_spec.md
+|   |   |   |-- 02_output_spec.md
+|   |   |   |-- 03_extraction_prompts.md
+|   |   |   |-- 04_evaluation_method.md
+|   |   |   |-- 05_error_analysis.md
+|   |   |   |-- 06_evaluation_report.md
+|   |   |   |-- 07_handoff_to_profile_aggregation.md
+|   |   |   |-- gold_data.md
+|   |   |   |-- how_to_run.md
+|   |   |   `-- TASK4_MANIFEST.json
+|   |   `-- task-5-profile-engine/
+|   |       |-- task5_brief.md.pdf
+|   |       `-- task5_schedule.md.pdf
 |   `-- PROJECT_GUIDE.md
 |-- evaluation/  # Evaluation outputs and results
 |   |-- comparisons/
