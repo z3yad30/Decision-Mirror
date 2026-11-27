@@ -5,3 +5,4 @@ P02 — All nine scenario decisions are approved; the brief requires the first f
 P02 — I placed the situational decision at record 5 and the T03 null at record 9 so the first checkpoint retains four usable values for every trait while the final checkpoint exercises both exclusion rules.
 P02 — The brief requires the scenario's shift flag to fire but the project-wide calibration policy is outside this deliverable; I used a four-observation window and an illustrative 0.20 threshold for the scenario check only, and explicitly marked it non-global.
 P02 — Exact table-to-JSON verification found the T05 value omitted from the situational decision's Markdown row; I added `0.61 / 0.70` to make the visible row match the JSON block.
+P02 — Per follow-up request, I created text-preserving Markdown copies of both checked-in PDFs in page order, retaining their wording and normalizing typographic ligatures for searchable text without editorial changes.

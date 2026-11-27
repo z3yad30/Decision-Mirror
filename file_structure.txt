@@ -59,6 +59,8 @@ Decision-Mirror/
 |   |       |   `-- wp2_storage_design.md
 |   |       |-- source/
 |   |       |   `-- omar_reference_scenario.md
+|   |       |-- 00_task5_brief.md
+|   |       |-- 01_task5_schedule.md
 |   |       |-- task5_brief.md.pdf
 |   |       `-- task5_schedule.md.pdf
 |   `-- PROJECT_GUIDE.md

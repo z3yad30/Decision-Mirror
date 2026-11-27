@@ -635,7 +635,15 @@ The report builder regenerates the report date and `TASK4_MANIFEST.json`; compar
 | 6. Machine-readable JSON block | MISSING | Added the final JSON block and verified its decision rows and checkpoint values against the Markdown tables. |
 | 7. Frozen-file diff | OK | No frozen Task 4 or evaluation files were changed. |
 
-Files added: [`omar_reference_scenario.md`](./tasks/task-5-profile-engine/source/omar_reference_scenario.md) and [`lead_fix_decisions.md`](./tasks/task-5-profile-engine/notes/lead_fix_decisions.md). Files changed: this guide, [`README.md`](../README.md), and [`file_structure.txt`](../file_structure.txt). `requirements.txt` already contains only direct, used dependencies at their installed pinned versions, so it was left unchanged.
+Files added: [`00_task5_brief.md`](./tasks/task-5-profile-engine/00_task5_brief.md),
+[`01_task5_schedule.md`](./tasks/task-5-profile-engine/01_task5_schedule.md),
+[`omar_reference_scenario.md`](./tasks/task-5-profile-engine/source/omar_reference_scenario.md),
+and [`lead_fix_decisions.md`](./tasks/task-5-profile-engine/notes/lead_fix_decisions.md).
+The two Task 5 Markdown source files are text-preserving copies of the checked-in
+PDFs. Files changed: this guide, [`README.md`](../README.md), and
+[`file_structure.txt`](../file_structure.txt). `requirements.txt` already contains
+only direct, used dependencies at their installed pinned versions, so it was
+left unchanged.
 
 This deliverable adds no dedicated pytest module; run the repository suite from PowerShell with:
 
@@ -643,4 +651,4 @@ This deliverable adds no dedicated pytest module; run the repository suite from 
 .\.venv\Scripts\python.exe -m pytest -q
 ```
 
-The full suite passed: `97 passed in 4.57s`. The scenario calculations and JSON/table parity were separately checked with a throwaway local Python script; no API call is needed.
+The full suite passed: `97 passed in 4.97s`. The scenario calculations and JSON/table parity were separately checked with a throwaway local Python script; no API call is needed.
