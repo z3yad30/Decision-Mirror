@@ -6,3 +6,7 @@ P02 — I placed the situational decision at record 5 and the T03 null at record
 P02 — The brief requires the scenario's shift flag to fire but the project-wide calibration policy is outside this deliverable; I used a four-observation window and an illustrative 0.20 threshold for the scenario check only, and explicitly marked it non-global.
 P02 — Exact table-to-JSON verification found the T05 value omitted from the situational decision's Markdown row; I added `0.61 / 0.70` to make the visible row match the JSON block.
 P02 — Per follow-up request, I created text-preserving Markdown copies of both checked-in PDFs in page order, retaining their wording and normalizing typographic ligatures for searchable text without editorial changes.
+P5 — The activation script was blocked by process execution policy; I enabled script execution only for the current PowerShell process and used the existing `.venv`.
+P5 — Pydantic v2.14.1 is already installed; I pinned that exact installed version and did not add `pydantic-settings`.
+P5 — Plain Pydantic `Settings` reads `DM_*` overrides in `__init__`, keeping environment override support separate from the prohibited `pydantic-settings` package.
+P5 — The frozen contract requires trait names inside extraction objects, while the brief defines `TraitObservation` without a trait name; I kept extraction trait names on a separate strict `ExtractionTrait` model.

@@ -652,3 +652,31 @@ This deliverable adds no dedicated pytest module; run the repository suite from 
 ```
 
 The full suite passed: `97 passed in 4.97s`. The scenario calculations and JSON/table parity were separately checked with a throwaway local Python script; no API call is needed.
+
+## Task 5 — WP1 Shared models and configuration
+
+| Checklist item | Status found | Outcome |
+|---|---|---|
+| 1. Shared models and extra-field policy | MISSING | Added strict Pydantic domain models with `extra="forbid"` in `src/decision_mirror/common/models.py`. |
+| 2. Required enums and SituationalCategory parity | MISSING | Added all required enums; category values match the extraction-output schema exactly. |
+| 3. Required WP1 model fields and envelopes | MISSING | Added extraction, observation, record, error, and validation models with separate decision and approval dates. |
+| 4. Semantic and trait validators | MISSING | Added null-score, evidence, field, trait-order/name/status, and T06 history rules. |
+| 5. Single settings object and validation | MISSING | Added plain-Pydantic `Settings` with `DM_*` environment overrides and no `pydantic-settings` dependency. |
+| 6. Model and config tests | MISSING | Added fixture round-trip/rejection and validator tests plus config default/override/invalid tests. |
+| 7. Pinned dependency | MISSING | Pinned installed Pydantic `2.14.1`; existing direct dependencies remain pinned. |
+| 8. WP1 documentation | MISSING | Added `notes/wp1_models_config.md` with the model list, example, and settings table. |
+| 9. Tunables outside modules | OK | Tunable WP1 values are declared only in `common/config.py`; the existing frozen extraction fake score is not a configuration value. |
+| 10. Frozen-file integrity | OK | Verified all 37 entries in `TASK4_MANIFEST.json`; no frozen file changed. |
+
+Files changed or created: [`models.py`](./../src/decision_mirror/common/models.py),
+[`config.py`](./../src/decision_mirror/common/config.py),
+[`test_models.py`](./../tests/test_models.py),
+[`test_config.py`](./../tests/test_config.py),
+[`wp1_models_config.md`](./tasks/task-5-profile-engine/notes/wp1_models_config.md),
+this guide, [`README.md`](../README.md), and `requirements.txt`.
+
+Run this work package's tests from the activated project environment:
+
+```powershell
+pytest -q tests/test_models.py tests/test_config.py
+```

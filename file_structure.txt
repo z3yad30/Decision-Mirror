@@ -56,6 +56,7 @@ Decision-Mirror/
 |   |   `-- task-5-profile-engine/
 |   |       |-- notes/
 |   |       |   |-- lead_fix_decisions.md
+|   |       |   |-- wp1_models_config.md
 |   |       |   `-- wp2_storage_design.md
 |   |       |-- source/
 |   |       |   `-- omar_reference_scenario.md
@@ -170,7 +171,9 @@ Decision-Mirror/
 |       |-- advisory/
 |       |   `-- __init__.py
 |       |-- common/
-|       |   `-- __init__.py
+|       |   |-- __init__.py
+|       |   |-- config.py
+|       |   `-- models.py
 |       |-- extraction/
 |       |   |-- __init__.py
 |       |   |-- llm_client.py
@@ -189,10 +192,12 @@ Decision-Mirror/
 |       `-- __init__.py
 |-- tests/  # Automated test suite
 |   |-- .gitkeep
+|   |-- test_config.py
 |   |-- test_contract.py
 |   |-- test_eval_set.py
 |   |-- test_evaluate_run_cli.py
 |   |-- test_evaluation.py
+|   |-- test_models.py
 |   |-- test_prompt_leakage.py
 |   |-- test_prompt_loader.py
 |   |-- test_runner.py
