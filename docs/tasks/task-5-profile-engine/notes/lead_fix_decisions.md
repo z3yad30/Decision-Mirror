@@ -10,3 +10,7 @@ P5 — The activation script was blocked by process execution policy; I enabled 
 P5 — Pydantic v2.14.1 is already installed; I pinned that exact installed version and did not add `pydantic-settings`.
 P5 — Plain Pydantic `Settings` reads `DM_*` overrides in `__init__`, keeping environment override support separate from the prohibited `pydantic-settings` package.
 P5 — The frozen contract requires trait names inside extraction objects, while the brief defines `TraitObservation` without a trait name; I kept extraction trait names on a separate strict `ExtractionTrait` model.
+P5 — WP2 is documents only: I did not add or modify code under `src/decision_mirror/storage/`.
+P5 — The storage design uses `sessions.decision_id` as the primary key and retains `session_id` as a unique session key because `DecisionRecord` identifies decisions by `decision_id`, while the brief and existing draft also use `session_id`.
+P5 — JSON text columns represent `evidence`, `situational_factor`, and validation warnings; this preserves Pydantic list/nested-object values while keeping SQLite's native scalar column types.
+P5 — The Chapter 3 PDF had no installed local text extractor, so I reconciled the design to the entity names explicitly listed by section 6.2 and the WP1 Pydantic models rather than changing it to code or inventing an extracted diagram.

@@ -146,6 +146,7 @@ supplementary addendum. No API key is needed for this reproduction.
 
 - [x] WP4a Omar reference scenario (Zeyad)
 - [x] WP1 Shared models and configuration (Habiba)
+- [x] WP2 Storage layer: design document (Ahmed Osama)
 
 ## Data
 
