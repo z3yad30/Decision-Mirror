@@ -1,260 +1,257 @@
 # WP2 Storage Layer Design
 
+Authored by: coding agent (lead run)
+Date: 2026-11-27
+
 ## 1. Scope
 
-WP2 owns the deterministic SQLite storage layer for the Decision Mirror profile engine.
+WP2 owns the SQLite storage layer for the Decision Mirror profile engine. It is a Wave 1 design deliverable; no storage implementation is included in this document's change set.
 
-The storage layer persists user/session history and extraction provenance. It does not call an LLM and does not perform aggregation itself.
-
-The design supports:
-
-- user-scoped data isolation;
-- pending, rejected, and approved session lifecycle rules;
-- immutable/append-only trait observations;
-- extraction provenance (`prompt_version`, `prompt_sha256`, `model_version`);
-- separate decision and approval dates;
-- trait scores for decisions ;
-- full account deletion for one user;
-- SQLite `:memory:` and file-backed databases.
+The design follows Chapter 3, section 3.3. It supports append-only decision history, user isolation, session lifecycle rules, extraction provenance, and complete account deletion.
 
 ## 2. Tables
+
+All date/time columns use ISO-8601 UTC strings. SQLite stores these as `TEXT`.
 
 ### 2.1 `users`
 
 | Column | Type | Constraints |
 |---|---|---|
-| `user_id` | TEXT | PK |
+| `user_id` | TEXT | PRIMARY KEY |
 | `created_at` | TEXT | NOT NULL |
 
 ### 2.2 `sessions`
 
 | Column | Type | Constraints |
 |---|---|---|
-| `session_id` | TEXT | PK |
-| `user_id` | TEXT | FK → `users.user_id`, NOT NULL |
-| `name` | TEXT | NOT NULL |
-| `context_paragraph` | TEXT | NOT NULL |
+| `decision_id` | TEXT | PRIMARY KEY |
+| `session_id` | TEXT | NOT NULL, UNIQUE |
+| `user_id` | TEXT | NOT NULL, FOREIGN KEY -> `users.user_id` |
 | `decision_text` | TEXT | NOT NULL |
-| `options_json` | TEXT | NOT NULL; JSON array/object representation |
-| `status` | TEXT | NOT NULL; `pending`, `rejected`, or `approved` |
 | `decision_date` | TEXT | NOT NULL |
-| `approval_date` | TEXT | NULL until approved |
-| `created_at` | TEXT | NOT NULL |
+| `approval_date` | TEXT | NULL |
+| `status` | TEXT | NOT NULL; `pending`, `approved`, or `rejected` |
+| `prompt_version` | TEXT | NOT NULL |
+| `prompt_sha256` | TEXT | NOT NULL |
+| `model_version` | TEXT | NOT NULL |
+| `advisor_top_choice_approved` | INTEGER | NULL or 0/1 |
+| `synthetic` | INTEGER | NOT NULL, default 0 |
 
-`decision_date` records when the decision occurred. `approval_date` records when the user approved storage/extraction. A late approval must never rewrite `decision_date`.
+`decision_id` is the primary key and matches `DecisionRecord.decision_id`.
+`decision_date` is when the decision occurred.
+`approval_date` is when the session was approved.
+They are separate columns and a late approval must not rewrite `decision_date`.
 
 ### 2.3 `chat_messages`
 
 | Column | Type | Constraints |
 |---|---|---|
-| `message_id` | TEXT | PK |
-| `session_id` | TEXT | FK → `sessions.session_id`, NOT NULL |
-| `user_id` | TEXT | FK → `users.user_id`, NOT NULL |
+| `message_id` | TEXT | PRIMARY KEY |
+| `session_id` | TEXT | NOT NULL, FOREIGN KEY -> `sessions.session_id` |
+| `user_id` | TEXT | NOT NULL, FOREIGN KEY -> `users.user_id` |
 | `role` | TEXT | NOT NULL; `user` or `system` |
 | `text` | TEXT | NOT NULL |
 | `created_at` | TEXT | NOT NULL |
 
-`user_id` is stored directly as well as being reachable through the session so every repository operation can enforce user ownership cheaply and explicitly.
+Storing `user_id` directly provides explicit user isolation at the repository boundary.
 
 ### 2.4 `extraction_results`
 
 | Column | Type | Constraints |
 |---|---|---|
-| `result_id` | TEXT | PK |
-| `session_id` | TEXT | UNIQUE FK → `sessions.session_id`, NOT NULL |
-| `user_id` | TEXT | FK → `users.user_id`, NOT NULL |
+| `decision_id` | TEXT | PRIMARY KEY, FOREIGN KEY -> `sessions.decision_id` |
+| `session_id` | TEXT | NOT NULL, UNIQUE, FOREIGN KEY -> `sessions.session_id` |
+| `user_id` | TEXT | NOT NULL, FOREIGN KEY -> `users.user_id` |
+| `extraction_status` | TEXT | NOT NULL; `success`, `insufficient_evidence`, or `error` |
 | `prompt_version` | TEXT | NOT NULL |
 | `prompt_sha256` | TEXT | NOT NULL |
 | `model_version` | TEXT | NOT NULL |
-| `extraction_status` | TEXT | NOT NULL |
-| `extracted_data_json` | TEXT | NOT NULL |
-| `validation_json` | TEXT | NULL |
+| `error_type` | TEXT | NULL |
+| `error_message` | TEXT | NULL |
+| `schema_valid` | INTEGER | NULL or 0/1 |
+| `semantic_valid` | INTEGER | NULL or 0/1 |
+| `warnings_json` | TEXT | NULL |
 | `created_at` | TEXT | NOT NULL |
 
-A session can have at most one persisted extraction result in WP2. Extraction is valid only for an approved session.
+The error fields and validation fields preserve the `ExtractionResult` pipeline envelope.
+`traits` is represented by the `observations` table for successful extraction outputs.
 
 ### 2.5 `observations`
 
 | Column | Type | Constraints |
 |---|---|---|
-| `observation_id` | TEXT | PK |
-| `result_id` | TEXT | FK → `extraction_results.result_id`, NOT NULL |
-| `session_id` | TEXT | FK → `sessions.session_id`, NOT NULL |
-| `user_id` | TEXT | FK → `users.user_id`, NOT NULL |
-| `trait_id` | TEXT | NOT NULL |
-| `trait_name` | TEXT | NOT NULL |
-| `score` | REAL | NOT NULL; 0.0–1.0 |
-| `confidence` | REAL | NOT NULL; 0.0–1.0 |
+| `observation_id` | TEXT | PRIMARY KEY |
+| `decision_id` | TEXT | NOT NULL, FOREIGN KEY -> `sessions.decision_id` |
+| `session_id` | TEXT | NOT NULL, FOREIGN KEY -> `sessions.session_id` |
+| `user_id` | TEXT | NOT NULL, FOREIGN KEY -> `users.user_id` |
+| `trait_id` | TEXT | NOT NULL; `T01` through `T06` |
+| `score` | REAL | NULL or 0.0 through 1.0 |
+| `confidence` | REAL | NOT NULL, 0.0 through 1.0 |
 | `evidence_json` | TEXT | NOT NULL |
-| `source` | TEXT | NOT NULL |
-| `situational_factor` | TEXT | NULL |
+| `situational_factor_json` | TEXT | NULL |
+| `context_notes` | TEXT | NOT NULL |
+| `source` | TEXT | NOT NULL; `quiz` or `decision` |
 | `created_at` | TEXT | NOT NULL |
 
-Observations are the historical/source-of-truth trait evidence. They are append-only: WP2 exposes insert/read operations only; there are deliberately no update/delete repository methods.
+A null score requires confidence `0.0` and an empty evidence list.
+A quiz observation is stored with `source = 'quiz'`; a decision observation uses `source = 'decision'`.
 
-### 2.6 `trait_scores`
+## 3. Model-to-column reconciliation
 
-`TraitScore` is a computed representation, not the historical source of truth. It may be refreshed by the aggregation layer from observations.
-
-| Column | Type | Constraints |
+| Model or field | Database representation | Mismatch status |
 |---|---|---|
-| `user_id` | TEXT | FK → `users.user_id`, NOT NULL |
-| `trait_id` | TEXT | NOT NULL |
-| `trait_name` | TEXT | NOT NULL |
-| `score` | REAL | NOT NULL; 0.0–1.0 |
-| `observation_count` | INTEGER | NOT NULL; >= 0 |
-| `computed_at` | TEXT | NOT NULL |
+| `TraitObservation.trait_id` | `observations.trait_id` | Match |
+| `TraitObservation.score` | `observations.score` nullable REAL | Match |
+| `TraitObservation.confidence` | `observations.confidence` | Match |
+| `TraitObservation.evidence` | `observations.evidence_json` | Name is adapted to JSON storage; value matches the model |
+| `TraitObservation.situational_factor` | `observations.situational_factor_json` | Name is adapted to JSON storage; value matches the model |
+| `TraitObservation.context_notes` | `observations.context_notes` | Match |
+| `TraitObservation.source` | `observations.source` | Match |
+| `DecisionRecord.decision_id` | `sessions.decision_id` | Match |
+| `DecisionRecord.user_id` | `sessions.user_id` | Match |
+| `DecisionRecord.session_id` | `sessions.session_id` | Match |
+| `DecisionRecord.decision_text` | `sessions.decision_text` | Match |
+| `DecisionRecord.decision_date` | `sessions.decision_date` | Match |
+| `DecisionRecord.approval_date` | `sessions.approval_date` | Match |
+| `DecisionRecord.status` | `sessions.status` | Match |
+| `DecisionRecord.prompt_version` | `sessions.prompt_version` | Match |
+| `DecisionRecord.prompt_sha256` | `sessions.prompt_sha256` | Match |
+| `DecisionRecord.model_version` | `sessions.model_version` | Match |
+| `DecisionRecord.advisor_top_choice_approved` | `sessions.advisor_top_choice_approved` | Match |
+| `DecisionRecord.synthetic` | `sessions.synthetic` | Match |
+| `ExtractionResult.model_version`, `prompt_version`, `prompt_sha256` | `extraction_results` matching columns | Match |
 
-Primary key: (`user_id`, `trait_id`).
+No unresolved model-name mismatch remains. JSON columns are used only where the Pydantic model contains a list or nested object.
 
-This table is replaceable/recomputable. Deleting a trait score must never delete its observations.
-
-## 3. Relationships
+## 4. Relationships
 
 ```text
-users
-  1
-  |
-  N
-sessions
-  |   |  \ 0..1
-  |     |    extraction_results
-  |
-  N
-chat_messages
-
-extraction_results
-  1
-  |
-  N
-observations
-
-users
-  1
-  |
-  N
-trait_scores
+users 1 ---> N sessions
+users 1 ---> N chat_messages
+sessions 1 ---> N chat_messages
+sessions 1 ---> 0..1 extraction_results
+extraction_results 1 ---> N observations
 ```
 
-Conceptually:
+All tables use foreign keys and direct `user_id` ownership columns where user-scoped queries must remain explicit.
 
-- one user has many sessions;
-- one session has many chat messages;
-- one session has zero or one extraction result;
-- one extraction result has many observations;
-- one user has many computed trait scores.
-
-`TraitObservation` is the historical/source-of-truth layer. `TraitScore` is derived/computed.
-
-## 4. Session lifecycle invariants
+## 5. Session lifecycle invariants
 
 ### Pending
 
-A pending session may have chat messages, but:
-
-- no extraction result;
-- no observations;
-- no trait score is created by the storage layer.
+- A pending session has chat messages.
+- It has no extraction result and no observations.
+- It must not accept extraction or observation writes.
 
 ### Rejected
 
-A rejected session retains its chat history, but:
-
-- no extraction result;
-- no observations.
+- A rejected session keeps its chat messages.
+- It has no extraction result and no observations.
 
 ### Approved
 
-An approved session may have:
+- An approved session may have one extraction result.
+- It may have observations produced from that extraction result.
+- Only approved sessions have extraction results and observations.
 
-- one extraction result;
-- zero or more observations produced from that result.
+## 6. Append-only observations
 
-The repository rejects extraction/observation writes when the session is not approved.
+Observations are append-only in two independent layers:
 
-## 5. User isolation
+1. SQLite triggers reject `UPDATE` and `DELETE` statements on `observations`, with one carefully defined exception: deleting a user activates a temporary or transaction-scoped account-deletion context that permits cascade deletion of that user's observations.
+2. Python repositories expose only append and read methods for observations. There are no update or delete methods.
 
-Every repository method takes `user_id` as its first argument.
+The exception must permit only an account deletion transaction. Direct SQL updates/deletes and any observation deletion not initiated by `delete_user(user_id)` must abort.
+For table identity, the trigger checks the observation's `user_id` against a temporary deletion marker set by `delete_user`.
 
-Queries that access user-owned data include the user predicate explicitly. Child records are checked through both their direct `user_id` and their parent relationship where appropriate.
+## 7. Account deletion
 
-A caller cannot read another user's session, messages, extraction results, observations, or trait scores by knowing only the child ID.
+`delete_user(user_id)` removes every row owned by that user from `observations`, `extraction_results`, `chat_messages`, `sessions`, and `users`.
+It changes no row owned by another user.
+The implementation uses a single transaction, foreign keys, parameterized SQL, and the whole-user deletion exception for observation triggers.
+`extraction_results` and `observations` are removed before `sessions`; chat messages are removed before sessions.
 
-## 6. Account deletion
+## 8. Repository interfaces
 
-`delete_account(user_id)` removes all data owned by that user and only that user.
+Every method takes `user_id` as the first argument.
 
-Foreign keys are enabled. The schema uses cascading relationships from `users` to user-owned records and from sessions/results to their children. The repository deletes the user row only after verifying that the transaction is scoped to the requested user.
+### `UserRepository`
 
-## 7. SQLite rules
+```text
+create_user(user_id: str, created_at: str) -> None
+user_exists(user_id: str) -> bool
+delete_user(user_id: str) -> None
+```
 
-- Python standard library `sqlite3` only.
-- Foreign keys enabled with `PRAGMA foreign_keys = ON`.
-- Parameterized SQL only.
-- Supports `:memory:` and file database paths.
-- Explicit transaction boundaries are used for multi-row writes.
-- Indexes are added for user/session/result lookup paths.
+### `SessionRepository`
 
-## 8. Repository contract
+```text
+create_session(user_id: str, decision_id: str, session_id: str, decision_text: str,
+               decision_date: str, approval_date: str | None, status: str,
+               prompt_version: str, prompt_sha256: str, model_version: str,
+               advisor_top_choice_approved: bool | None, synthetic: bool) -> None
+get_session(user_id: str, decision_id: str) -> DecisionRecord | None
+list_sessions(user_id: str) -> list[DecisionRecord]
+update_session_status(user_id: str, decision_id: str, status: str,
+                      approval_date: str | None) -> None
+```
 
-The implementation exposes these logical operations:
+Session status may be updated, but observations remain append-only.
+The repository deliberately has no session deletion method in this design.
 
-### Users
-- `create_user(user_id, created_at)`
-- `user_exists(user_id)`
-- `delete_account(user_id)`
+### `ChatMessageRepository`
 
-### Sessions
-- `create_session(user_id, ...)`
-- `get_session(user_id, session_id)`
-- `list_sessions(user_id)`
-- `update_session_status(user_id, session_id, status, approval_date)`
-- `delete_session(user_id, session_id)` (session deletion is allowed; observation deletion is not)
+```text
+append_chat_message(user_id: str, session_id: str, message_id: str,
+                    role: str, text: str, created_at: str) -> None
+list_chat_messages(user_id: str, session_id: str) -> list[dict]
+```
 
-### Chat messages
-- `append_chat_message(user_id, session_id, ...)`
-- `list_chat_messages(user_id, session_id)`
+### `ObservationRepository`
 
-### Extraction
-- `save_extraction_result(user_id, session_id, ...)`
-- `get_extraction_result(user_id, session_id)`
+```text
+append_observation(user_id: str, decision_id: str, observation: TraitObservation,
+                   created_at: str) -> None
+list_observations(user_id: str, decision_id: str) -> list[TraitObservation]
+list_user_observations(user_id: str) -> list[TraitObservation]
+```
 
-### Observations
-- `append_observation(user_id, session_id, ...)`
-- `list_observations(user_id, session_id)`
-- `list_user_observations(user_id)`
+This repository has append and read methods only.
+It has no update and no delete method.
 
-There are intentionally no `update_observation` or `delete_observation` methods.
+### `ExtractionResultRepository`
 
-### Trait scores
-- `upsert_trait_score(user_id, trait_id, ...)`
-- `list_trait_scores(user_id)`
+```text
+save_extraction_result(user_id: str, decision_id: str,
+                       result: ExtractionResult) -> None
+get_extraction_result(user_id: str, decision_id: str) -> ExtractionResult | None
+```
 
-## 9. Validation and integrity
+## 9. Extraction result contents
 
-The storage layer validates:
+An extraction result stores:
 
-- session status is one of `pending`, `rejected`, `approved`;
-- message role is one of `user`, `system`;
-- extraction status is non-empty;
-- scores and confidence values are within `[0, 1]`;
-- observations reference an approved session and an existing extraction result;
-- extraction results are unique per session.
+- `prompt_version`;
+- `prompt_sha256`;
+- `model_version`;
+- `decision_id`;
+- `session_id`;
+- `extraction_status`;
+- pipeline `error`, if present;
+- pipeline `validation`, if present;
+- output traits are stored as append-only observation rows.
 
-## 10. Test coverage
+## 10. SQLite implementation rules
 
-The contract tests cover:
+- Use the standard library `sqlite3` package only.
+- Enable foreign keys with `PRAGMA foreign_keys = ON`.
+- Use parameterized queries only; never format SQL from caller values.
+- Support `:memory:` and file database paths with the same class.
+- Enforce lifecycle and ownership checks in repositories.
+- Use explicit transactions for account deletion and multi-row writes.
 
-1. memory database creation;
-2. file database creation;
-3. foreign keys;
-4. user isolation;
-5. session lifecycle;
-6. pending/rejected extraction rejection;
-7. approved extraction and observation insertion;
-8. observation append-only behavior;
-9. extraction provenance metadata;
-10. separate decision/approval dates;
-11. full account deletion;
-12. computed trait-score persistence;
-13. parameterized inputs containing SQL-like text.
+## 11. Open questions
+
+- The session identifier and decision identifier need a final uniqueness convention; the design currently uses `decision_id` as the record primary key and requires `session_id` to be unique.
+- The retention format for rejected-session chat messages is not finalized beyond retaining them.
+- Trigger syntax for the whole-user deletion exception should be reviewed against the final SQLite implementation and test suite.

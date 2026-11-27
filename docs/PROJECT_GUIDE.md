@@ -680,3 +680,29 @@ Run this work package's tests from the activated project environment:
 ```powershell
 pytest -q tests/test_models.py tests/test_config.py
 ```
+
+## Task 5 — WP2 Storage layer design
+
+| Checklist item | Status found | Outcome |
+|---|---|---|
+| 1. Required tables and keys | WRONG | Rebuilt the design around `users`, `sessions`, `chat_messages`, `observations`, and `extraction_results`, including primary and foreign keys. |
+| 2. Names match WP1 models | WRONG | Reconciled model fields and storage columns; document now separately lists every model-to-column mapping and JSON adaptations. |
+| 3. Repository signatures and observation API | WRONG | Added repository interfaces with `user_id` first and observation append/read-only methods. |
+| 4. Append-only enforcement | WRONG | Documented database triggers plus Python's absence of observation update/delete methods and the whole-user deletion exception. |
+| 5. Full user deletion | WRONG | Added `delete_user(user_id)` rules covering every row for only that user. |
+| 6. Session lifecycle and quiz observations | WRONG | Documented approved-only extraction/observations, rejected chat retention, pending no extraction, and quiz source values. |
+| 7. Extraction provenance | WRONG | Documented `prompt_version`, `prompt_sha256`, and `model_version` on each extraction result. |
+| 8. Separate ISO-8601 UTC dates | WRONG | Added separate `decision_date` and `approval_date` columns and UTC string format. |
+| 9. SQLite and parameterized SQL rules | WRONG | Documented standard-library `sqlite3`, foreign keys, and parameterized queries only. |
+| 10. Open questions | WRONG | Added a short open-questions section. |
+| 11. No storage implementation | OK | No files under `src/decision_mirror/storage/` were added or changed. |
+
+Files changed: [`wp2_storage_design.md`](./tasks/task-5-profile-engine/notes/wp2_storage_design.md),
+[`lead_fix_decisions.md`](./tasks/task-5-profile-engine/notes/lead_fix_decisions.md),
+this guide, [`README.md`](../README.md), and `file_structure.txt`.
+
+This deliverable has no dedicated storage tests. Run the existing repository suite from PowerShell:
+
+```powershell
+pytest -q
+```
