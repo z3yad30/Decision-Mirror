@@ -145,6 +145,7 @@ supplementary addendum. No API key is needed for this reproduction.
 ## Task 5 progress
 
 - [x] WP4a Omar reference scenario (Zeyad)
+- [x] WP1 Shared models and configuration (Habiba)
 
 ## Data
 

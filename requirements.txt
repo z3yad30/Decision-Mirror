@@ -6,3 +6,4 @@ python-dotenv==1.2.4
 
 # Test dependency
 pytest==9.1.1
+pydantic==2.14.1
