@@ -142,6 +142,10 @@ metrics, and post-hoc analysis sources/outputs. The final report preserves its
 original headline numbers and adds a separately labeled post-freeze
 supplementary addendum. No API key is needed for this reproduction.
 
+## Task 5 progress
+
+- [x] WP4a Omar reference scenario (Zeyad)
+
 ## Data
 
 - `data/gold/` contains the supplied 125-record quiz gold file (unchanged), the

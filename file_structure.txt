@@ -54,6 +54,11 @@ Decision-Mirror/
 |   |   |   |-- how_to_run.md
 |   |   |   `-- TASK4_MANIFEST.json
 |   |   `-- task-5-profile-engine/
+|   |       |-- notes/
+|   |       |   |-- lead_fix_decisions.md
+|   |       |   `-- wp2_storage_design.md
+|   |       |-- source/
+|   |       |   `-- omar_reference_scenario.md
 |   |       |-- task5_brief.md.pdf
 |   |       `-- task5_schedule.md.pdf
 |   `-- PROJECT_GUIDE.md

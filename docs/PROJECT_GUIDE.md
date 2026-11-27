@@ -622,3 +622,25 @@ The report builder regenerates the report date and `TASK4_MANIFEST.json`; compar
 - The v2.1 prompt heading discrepancy (“System Prompt v2.0”) is documented in the prompt changelog and intentionally left unchanged because its hash is recorded in the registry and run manifest.
 - `00_team_review.md` is retained as historical review material; its initial planning-state findings are not a current implementation status.
 - **UNVERIFIED:** the Task 4 source archive's original assignment requirements were not independently reconciled against every final implementation detail; this guide relies on current repository code and checked-in Task 4 Markdown/specifications.
+
+## Task 5 — WP4a Omar reference scenario
+
+| Checklist item | Status found | Outcome |
+|---|---|---|
+| 1. Scenario file and synthetic labeling | MISSING | Added the scenario; all nine records are explicitly synthetic. |
+| 2. Nine decisions, fields, dates, and invented descriptions | MISSING | Added nine fully scored records (one documented null), ascending past dates, and passed the normalized substring scan against quiz, organic, and edge-case text. |
+| 3. T06 checkpoint table, counts, and exclusions | MISSING | Added both checkpoints, per-trait usable counts, and the exclusion reasons. |
+| 4. Independent T06 recomputation | MISSING | Recomputed all traits at both checkpoints with a throwaway script outside the repository; T01 is 0.90 at four decisions and 0.74 at nine. |
+| 5. Correct values and arithmetic | OK | No prior scenario values existed; the authored values match the formula and include the mean, squared-deviation sum, variance, SD, and final calculation. |
+| 6. Machine-readable JSON block | MISSING | Added the final JSON block and verified its decision rows and checkpoint values against the Markdown tables. |
+| 7. Frozen-file diff | OK | No frozen Task 4 or evaluation files were changed. |
+
+Files added: [`omar_reference_scenario.md`](./tasks/task-5-profile-engine/source/omar_reference_scenario.md) and [`lead_fix_decisions.md`](./tasks/task-5-profile-engine/notes/lead_fix_decisions.md). Files changed: this guide, [`README.md`](../README.md), and [`file_structure.txt`](../file_structure.txt). `requirements.txt` already contains only direct, used dependencies at their installed pinned versions, so it was left unchanged.
+
+This deliverable adds no dedicated pytest module; run the repository suite from PowerShell with:
+
+```powershell
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+The full suite passed: `97 passed in 4.57s`. The scenario calculations and JSON/table parity were separately checked with a throwaway local Python script; no API call is needed.
