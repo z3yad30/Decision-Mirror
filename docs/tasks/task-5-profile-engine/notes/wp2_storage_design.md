@@ -76,14 +76,32 @@ Storing `user_id` directly provides explicit user isolation at the repository bo
 The error fields and validation fields preserve the `ExtractionResult` pipeline envelope.
 `traits` is represented by the `observations` table for successful extraction outputs.
 
-### 2.5 `observations`
+`decision_id` is the primary key and is the key that identifies the single extraction
+result for the corresponding session. `session_id` is UNIQUE because Chapter 3 defines
+one extraction result for a session, and Task 5 lifecycle rules permit at most one
+extraction result for an approved session.
+
+### 2.5 `quiz_responses`
+
+| Column | Type | Constraints |
+|---|---|---|
+| `quiz_response_id` | TEXT | PRIMARY KEY |
+| `user_id` | TEXT | NOT NULL, FOREIGN KEY -> `users.user_id` |
+| `question_id` | TEXT | NOT NULL |
+| `selected_answer` | TEXT | NOT NULL |
+
+The conceptual Chapter 3 ERD defines a `QuizResponse` entity linked to `User`
+and to `TraitObservation`. This table is the quiz-side owner of quiz-derived
+observations; it is separate from a decision session.
+
+### 2.6 `observations`
 
 | Column | Type | Constraints |
 |---|---|---|
 | `observation_id` | TEXT | PRIMARY KEY |
-| `decision_id` | TEXT | NOT NULL, FOREIGN KEY -> `sessions.decision_id` |
-| `session_id` | TEXT | NOT NULL, FOREIGN KEY -> `sessions.session_id` |
 | `user_id` | TEXT | NOT NULL, FOREIGN KEY -> `users.user_id` |
+| `extraction_result_id` | TEXT | NULL, FOREIGN KEY -> `extraction_results.decision_id` |
+| `quiz_response_id` | TEXT | NULL, FOREIGN KEY -> `quiz_responses.quiz_response_id` |
 | `trait_id` | TEXT | NOT NULL; `T01` through `T06` |
 | `score` | REAL | NULL or 0.0 through 1.0 |
 | `confidence` | REAL | NOT NULL, 0.0 through 1.0 |
@@ -95,6 +113,26 @@ The error fields and validation fields preserve the `ExtractionResult` pipeline 
 
 A null score requires confidence `0.0` and an empty evidence list.
 A quiz observation is stored with `source = 'quiz'`; a decision observation uses `source = 'decision'`.
+
+Every row must have exactly one owner:
+
+- Decision observation: `source = 'decision'`, `extraction_result_id` is set,
+  and `quiz_response_id` is NULL.
+- Quiz observation: `source = 'quiz'`, `quiz_response_id` is set, and
+  `extraction_result_id` is NULL.
+
+`UNIQUE(extraction_result_id, trait_id)` is required for decision observations:
+one extraction result contains the six ordered trait results and must not generate
+duplicate rows for the same trait. `UNIQUE(quiz_response_id, trait_id)` is required
+for quiz observations so one quiz response has only one observation per trait.
+Partial unique constraints or equivalent repository checks must enforce these rules
+without making the two owner columns unique across the other source type.
+
+The direct `user_id` column is denormalized ownership for per-user isolation and
+account deletion. It does not replace the architectural owner. It must always agree
+with the owner chain: a decision observation agrees with
+`extraction_results.user_id` and the session/user behind that result; a quiz
+observation agrees with `quiz_responses.user_id`.
 
 ## 3. Model-to-column reconciliation
 
@@ -120,6 +158,9 @@ A quiz observation is stored with `source = 'quiz'`; a decision observation uses
 | `DecisionRecord.advisor_top_choice_approved` | `sessions.advisor_top_choice_approved` | Match |
 | `DecisionRecord.synthetic` | `sessions.synthetic` | Match |
 | `ExtractionResult.model_version`, `prompt_version`, `prompt_sha256` | `extraction_results` matching columns | Match |
+| `QuizResponse` entity | `quiz_responses` table; quiz observations link by `quiz_response_id` | Added to match Chapter 3 ERD |
+| Extraction-owned trait lineage | `observations.extraction_result_id -> extraction_results.decision_id` | Added to match Chapter 3 1-to-N ERD relationship |
+| Quiz-owned trait lineage | `observations.quiz_response_id -> quiz_responses.quiz_response_id` | Added to match Chapter 3 1-to-N ERD relationship |
 
 No unresolved model-name mismatch remains. JSON columns are used only where the Pydantic model contains a list or nested object.
 
@@ -128,12 +169,20 @@ No unresolved model-name mismatch remains. JSON columns are used only where the 
 ```text
 users 1 ---> N sessions
 users 1 ---> N chat_messages
+users 1 ---> N quiz_responses
+quiz_responses 1 ---> N observations
 sessions 1 ---> N chat_messages
 sessions 1 ---> 0..1 extraction_results
 extraction_results 1 ---> N observations
 ```
 
 All tables use foreign keys and direct `user_id` ownership columns where user-scoped queries must remain explicit.
+
+This relationship diagram distinguishes the two conceptual observation owners:
+organic decision observations follow
+`session -> extraction_result -> observations`, while quiz observations follow
+`user -> quiz_response -> observations`. The ERD does not define a direct
+Session-to-TraitObservation edge; the WP2 design must not invent one.
 
 ## 5. Session lifecycle invariants
 
@@ -152,7 +201,8 @@ All tables use foreign keys and direct `user_id` ownership columns where user-sc
 
 - An approved session may have one extraction result.
 - It may have observations produced from that extraction result.
-- Only approved sessions have extraction results and observations.
+- Only approved sessions have extraction results or decision-derived observations.
+- Quiz observations are independent of session approval and belong to quiz responses.
 
 ## 6. Append-only observations
 
@@ -166,10 +216,12 @@ For table identity, the trigger checks the observation's `user_id` against a tem
 
 ## 7. Account deletion
 
-`delete_user(user_id)` removes every row owned by that user from `observations`, `extraction_results`, `chat_messages`, `sessions`, and `users`.
+`delete_user(user_id)` removes every row owned by that user from `observations`,
+`extraction_results`, `quiz_responses`, `chat_messages`, `sessions`, and `users`.
 It changes no row owned by another user.
 The implementation uses a single transaction, foreign keys, parameterized SQL, and the whole-user deletion exception for observation triggers.
-`extraction_results` and `observations` are removed before `sessions`; chat messages are removed before sessions.
+`observations` are removed before `extraction_results` and `quiz_responses`;
+`extraction_results` and chat messages are removed before `sessions`.
 
 ## 8. Repository interfaces
 
@@ -207,17 +259,35 @@ append_chat_message(user_id: str, session_id: str, message_id: str,
 list_chat_messages(user_id: str, session_id: str) -> list[dict]
 ```
 
+### `QuizResponseRepository`
+
+```text
+save_quiz_response(user_id: str, quiz_response_id: str,
+                   question_id: str, selected_answer: str) -> None
+get_quiz_response(user_id: str, quiz_response_id: str) -> dict | None
+list_quiz_responses(user_id: str) -> list[dict]
+```
+
 ### `ObservationRepository`
 
 ```text
-append_observation(user_id: str, decision_id: str, observation: TraitObservation,
+append_observation(user_id: str,
+                   extraction_result_id: str | None,
+                   quiz_response_id: str | None,
+                   observation: TraitObservation,
                    created_at: str) -> None
-list_observations(user_id: str, decision_id: str) -> list[TraitObservation]
+list_decision_observations(user_id: str, decision_id: str) -> list[TraitObservation]
+list_quiz_observations(user_id: str, quiz_response_id: str) -> list[TraitObservation]
 list_user_observations(user_id: str) -> list[TraitObservation]
 ```
 
 This repository has append and read methods only.
 It has no update and no delete method.
+`append_observation` accepts exactly one owner key. It must reject decision
+observations without `extraction_result_id`, quiz observations without
+`quiz_response_id`, and every row whose owner key disagrees with `user_id`.
+`list_decision_observations` follows `decision_id ->
+extraction_results.decision_id -> observations.extraction_result_id`.
 
 ### `ExtractionResultRepository`
 
@@ -240,6 +310,8 @@ An extraction result stores:
 - pipeline `error`, if present;
 - pipeline `validation`, if present;
 - output traits are stored as append-only observation rows.
+- decision-derived output traits are linked through
+  `observations.extraction_result_id = extraction_results.decision_id`.
 
 ## 10. SQLite implementation rules
 
@@ -252,6 +324,14 @@ An extraction result stores:
 
 ## 11. Open questions
 
-- The session identifier and decision identifier need a final uniqueness convention; the design currently uses `decision_id` as the record primary key and requires `session_id` to be unique.
+- The Chapter 3 ERD has no separate conceptual `Decision` entity: a decision is
+  represented by the `Session` entity fields `decision_text`, `decision_date`,
+  and `approved_at`. Task 5 therefore retains `decision_id` as the stable
+  identifier in the implementation and `session_id` as the unique session key.
+  This convention is consistent with `DecisionRecord`; no second decision table
+  should be added.
+- The exact storage primary key for `ExtractionResult` is implementation-owned,
+  but `decision_id` is already its approved Task 5/Task 4 relationship key and
+  therefore is used as the unique extraction owner key in this design.
 - The retention format for rejected-session chat messages is not finalized beyond retaining them.
 - Trigger syntax for the whole-user deletion exception should be reviewed against the final SQLite implementation and test suite.

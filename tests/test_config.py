@@ -22,6 +22,23 @@ def test_environment_override(monkeypatch):
     assert Settings().reminder_days == 14
 
 
+def test_shift_window_requires_one_decision():
+    with pytest.raises(ValidationError):
+        Settings(shift_window=0)
+    assert Settings(shift_window=1).shift_window == 1
+
+
+def test_recency_half_life_accepts_none_and_positive():
+    assert Settings(recency_half_life_days=None).recency_half_life_days is None
+    assert Settings(recency_half_life_days=30).recency_half_life_days == 30
+
+
+@pytest.mark.parametrize("value", [0, -1, -30])
+def test_recency_half_life_rejects_non_positive_numbers(value):
+    with pytest.raises(ValidationError):
+        Settings(recency_half_life_days=value)
+
+
 @pytest.mark.parametrize(
     ("name", "value"),
     [

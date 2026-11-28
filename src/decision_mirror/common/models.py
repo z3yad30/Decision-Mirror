@@ -63,6 +63,8 @@ class TraitObservation(StrictModel):
                 raise ValueError("null score requires confidence 0.0")
             if self.evidence:
                 raise ValueError("null score requires empty evidence")
+            if self.trait_id != TraitId.T06 and not self.context_notes.strip():
+                raise ValueError("null T01-T05 score requires explanatory context_notes")
         elif not self.evidence:
             raise ValueError("non-null score requires at least one evidence item")
         return self
@@ -160,11 +162,11 @@ class ExtractionValidation(StrictModel):
 class ExtractionResult(StrictModel):
     decision_id: str = Field(pattern=r"^[A-Za-z0-9_.\-]{1,64}$")
     extraction_status: str
-    traits: Optional[list[ExtractionTrait]] = None
+    traits: Optional[list[ExtractionTrait]] = Field(default=...)
     model_version: str = Field(min_length=1)
     prompt_version: str = Field(min_length=1)
     prompt_sha256: str = Field(pattern=r"^[a-fA-F0-9]{64}$")
-    error: Optional[ExtractionError] = None
+    error: Optional[ExtractionError] = Field(default=...)
     validation: ExtractionValidation
 
     @model_validator(mode="after")
