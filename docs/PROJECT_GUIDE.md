@@ -706,3 +706,57 @@ This deliverable has no dedicated storage tests. Run the existing repository sui
 ```powershell
 pytest -q
 ```
+
+## Task 5 — WP4b T06 policy
+
+| Checklist item | Status found | Outcome |
+|---|---|---|
+| 1. PROPOSED policy file | MISSING | Created [`t06_policy.md`](./design/t06_policy.md) as `PROPOSED`. |
+| 2. Per-trait eligible history and no LLM extraction | MISSING | Documented approved, non-null-for-trait, non-situational eligibility and explicit no-LLM extraction rule. |
+| 3. Population-SD formula and sample open point | MISSING | Documented population variance/SD and why it is used; sample-SD remains an open point. |
+| 4. Tiers and setting names | WRONG | Documented hidden/moderate/strong boundaries using `t06_min_usable`, `t06_strong_at`, and the 4/8 defaults. |
+| 5. Shift rule and synthetic calibration | MISSING | Documented splitting, too-short behavior, six histories, all 12 parameter pairs, and the selected 4/0.15 calibration. |
+| 6. Omar scenario consistency | OK | Independently recomputed both checkpoints outside the repository; scenario and JSON values agree. |
+| 7. T06 outside aggregation engine | OK | Policy explicitly states T06 is not part of `profiling/aggregation.py`. |
+| 8. No profiling implementation file in this work package | OK | No file was added under `src/decision_mirror/profiling/`; its existing `__init__.py` is unchanged. |
+
+Files changed or created: [`t06_policy.md`](./design/t06_policy.md),
+[`config.py`](../src/decision_mirror/common/config.py),
+[`test_config.py`](../tests/test_config.py),
+[`lead_fix_decisions.md`](./tasks/task-5-profile-engine/notes/lead_fix_decisions.md),
+this guide, and [`README.md`](../README.md).
+
+Run the WP4 policy/config checks and full suite from the activated environment:
+
+```powershell
+pytest -q tests/test_config.py
+pytest -q
+```
+
+## Task 5 — WP3 Aggregation policy and oracle fixtures
+
+| Checklist item | Status found | Outcome |
+|---|---|---|
+| 1. PROPOSED policy file | WRONG | Kept [`aggregation_policy.md`](./design/aggregation_policy.md) and removed mismatched/conflicting settings while preserving its PROPOSED status. |
+| 2. Null and insufficient rules | OK | The policy specifies null-dropping, no midpoint replacement, and insufficient output with zero confidence. |
+| 3. Observation weighting and recency | WRONG | Corrected the policy to the baseline `k = 1.0` and documented source, situational, category-independent, and recency rules. |
+| 4. Weighted mean and T06 exclusion | OK | The policy specifies weighted mean and explicitly excludes T06 observations and aggregation. |
+| 5. Confidence formula and properties | WRONG | Changed to `C = W / (W + 1.0)`, with numeric reference values and property statements. |
+| 6. Quiz/decision disagreement | OK | The policy states that the weighted mean is the only rule and neither source is overridden. |
+| 7. Setting-name consistency | WRONG | Removed the nonexistent `confidence_k` setting; policy settings now match `common/config.py`. |
+| 8. Oracle fixture coverage | WRONG | Rebuilt [`aggregation_oracle.json`](../tests/fixtures/aggregation_oracle.json), recomputed values and arithmetic, corrected observation shape, and marked every case `added_by_lead_fix: true`. |
+| 9. Independent recomputation | OK | Recomputed every case outside the repository and corrected confidence values from `k = 1.5` to `k = 1.0`. |
+| 10. Open-points document | MISSING | Added [`wp3_open_points.md`](./tasks/task-5-profile-engine/notes/wp3_open_points.md) stating no rules remain unsettled. |
+| 11. No profiling implementation | OK | No file was added under `src/decision_mirror/profiling/`; the package remains unchanged. |
+
+Files changed or created: [`aggregation_policy.md`](./design/aggregation_policy.md),
+[`aggregation_oracle.json`](../tests/fixtures/aggregation_oracle.json),
+[`wp3_open_points.md`](./tasks/task-5-profile-engine/notes/wp3_open_points.md),
+[`lead_fix_decisions.md`](./tasks/task-5-profile-engine/notes/lead_fix_decisions.md),
+this guide, and [`README.md`](../README.md).
+
+Run the repository suite from PowerShell:
+
+```powershell
+pytest -q
+```

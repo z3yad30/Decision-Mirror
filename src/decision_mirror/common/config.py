@@ -22,9 +22,9 @@ class Settings(BaseModel):
     quiz_confidence: float = Field(default=0.30, ge=0.0, le=1.0)
     # PROPOSED: no recency decay in the first version.
     recency_half_life_days: float | None = Field(default=None, ge=0.0)
-    # PROPOSED: placeholder shift window; calibrate in WP3/WP4.
-    shift_window: int = Field(default=3, ge=0)
-    # PROPOSED: placeholder shift threshold; calibrate in WP3/WP4.
+    # PROPOSED: calibrated synthetic shift window.
+    shift_window: int = Field(default=4, ge=0)
+    # PROPOSED: calibrated synthetic shift threshold.
     shift_threshold: float = Field(default=0.15, ge=0.0, le=1.0)
 
     def __init__(self, **data):

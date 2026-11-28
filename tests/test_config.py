@@ -13,7 +13,7 @@ def test_defaults():
     assert settings.quiz_weight == 0.5
     assert settings.quiz_confidence == 0.30
     assert settings.recency_half_life_days is None
-    assert settings.shift_window == 3
+    assert settings.shift_window == 4
     assert settings.shift_threshold == 0.15
 
 

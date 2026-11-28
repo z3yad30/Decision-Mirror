@@ -16,8 +16,10 @@ Decision-Mirror/
 |       `-- .gitkeep
 |-- docs/  # Project documentation and source archives
 |   |-- design/
+|   |   |-- aggregation_policy.md
 |   |   |-- Decision Mirror Chapter 3 Architecture and Design (Draft).pdf
-|   |   `-- Decision Mirror Phase 1 Build Plan.pdf
+|   |   |-- Decision Mirror Phase 1 Build Plan.pdf
+|   |   `-- t06_policy.md
 |   |-- ontology/
 |   |   |-- Decision_Mirror_Trait_Ontology.pdf
 |   |   `-- Decision_Mirror_Trait_Ontology_Complete.pdf
@@ -57,7 +59,8 @@ Decision-Mirror/
 |   |       |-- notes/
 |   |       |   |-- lead_fix_decisions.md
 |   |       |   |-- wp1_models_config.md
-|   |       |   `-- wp2_storage_design.md
+|   |       |   |-- wp2_storage_design.md
+|   |       |   `-- wp3_open_points.md
 |   |       |-- source/
 |   |       |   `-- omar_reference_scenario.md
 |   |       |-- 00_task5_brief.md
@@ -191,6 +194,8 @@ Decision-Mirror/
 |       |   `-- __init__.py
 |       `-- __init__.py
 |-- tests/  # Automated test suite
+|   |-- fixtures/
+|   |   `-- aggregation_oracle.json
 |   |-- .gitkeep
 |   |-- test_config.py
 |   |-- test_contract.py
