@@ -145,6 +145,8 @@ supplementary addendum. No API key is needed for this reproduction.
 ## Task 5 progress
 
 - [x] WP4a Omar reference scenario (Zeyad)
+- [x] WP4b T06 policy (Zeyad)
+- [x] WP3 Aggregation: policy and oracle fixtures (Mohamed Abdelhakam)
 - [x] WP1 Shared models and configuration (Habiba)
 - [x] WP2 Storage layer: design document (Ahmed Osama)
 

@@ -36,7 +36,7 @@ Null-score observations are **dropped before anything else**. Observations with 
 ```
 W      = Σ w_i                    over the kept observations
 score  = ( Σ w_i × s_i ) / W      (weighted mean, always inside [0, 1])
-confidence = W / (W + k)          k = confidence_k  (PROPOSED 1.5)
+confidence = W / (W + k)          k = 1.0
 status = sufficient
 ```
 
@@ -53,34 +53,34 @@ No rounding is done inside the engine. Tests compare with tolerance 1e-9.
 |---|---|---|
 | `quiz_weight` | 0.5 | source weight of a quiz observation |
 | `situational_weight` | 0.5 | multiplier when `situational_factor` is not null (any category) |
-| `confidence_k` | 1.5 | half-saturation constant of the confidence rule. **New setting: not in the WP1 table, see open point 1.** |
 | `recency_half_life_days` | None | unused in v1 (see §6) |
 
 `quiz_confidence` (0.30) is applied when the quiz module creates the observation (WP6). The engine just reads the `confidence` stored on each observation.
 
 ## 5. Confidence rule and why
 
-`confidence = W / (W + k)` where `W` is the total evidence weight.
+`confidence = W / (W + k)` where `W` is the total evidence weight and the
+constant `k` is fixed at `1.0` in version 1.
 
 - It grows smoothly with the amount of evidence, rises quickly at first and then flattens, and never reaches 1. This avoids claiming certainty from a few observations.
-- `k` is the amount of weight at which confidence is exactly 0.5. With `k = 1.5` that is about two decisions of confidence 0.75, which feels like "a first reasonable picture".
+- `k` is the amount of weight at which confidence is exactly 0.5. With `k = 1.0`, confidence is 0.5 at one unit of weighted evidence.
 - It depends only on how much weighted evidence exists, not on whether observations agree. Consistency over time is the job of T06. Two opposite decisions therefore give a middling score at normal confidence (case `conflicting_scores`). This is intentional and is open point 3.
 
-Reference values (defaults, k = 1.5):
+Reference values (defaults, k = 1.0):
 
 | Situation | W | confidence |
 |---|---|---|
-| quiz only, 5 observations (0.3 × 0.5 each) | 0.75 | 0.333 |
-| 1 decision, c = 0.7 | 0.7 | 0.318 |
-| 3 decisions, c = 0.8 / 0.6 / 0.7 | 2.1 | 0.583 |
-| 10 decisions, c = 0.7 | 7.0 | 0.824 |
+| quiz only, 5 observations (0.3 × 0.5 each) | 0.75 | 0.429 |
+| 1 decision, c = 0.7 | 0.7 | 0.412 |
+| 3 decisions, c = 0.6 / 0.6 / 0.6 | 1.8 | 0.643 |
+| 10 decisions, c = 0.7 | 7.0 | 0.875 |
 
 ### Required properties (each is a test)
 
 | | Property | Why it holds | Oracle case / property test |
 |---|---|---|---|
 | (a) | No data gives 0.0 | By the "no usable evidence" rule | `empty_history`, `all_nulls`, `zero_weight_only` |
-| (b) | Quiz-only has lower confidence than 3+ decisions of moderate confidence | `W/(W+k)` is strictly increasing in `W`. A trait has at most 5 quiz observations, so quiz-only `W ≤ 5 × 0.3 × 0.5 = 0.75`. Three non-situational decisions with `c ≥ 0.5` give `W ≥ 1.5`. | `quiz_only_five` (0.333) < `three_decisions` (0.583); property test over a grid of confidences 0.5–1.0 and 3–10 decisions |
+| (b) | Quiz-only has lower confidence than 3+ decisions of moderate confidence | `W/(W+k)` is strictly increasing in `W`. A trait has at most 5 quiz observations, so quiz-only `W ≤ 5 × 0.3 × 0.5 = 0.75`. Three non-situational decisions with `c ≥ 0.6` give `W ≥ 1.8`. | `quiz_only_five` (0.429) < `three_decisions` (0.677); property test over a grid of confidences 0.5–1.0 and 3–10 decisions |
 | (c) | Adding a consistent observation never lowers confidence | Every weight is ≥ 0, so `W` cannot fall, and the function is increasing in `W`. This holds for any added scored observation, and the property test uses consistent ones as required. | property test: add observations one by one and assert confidence is non-decreasing |
 | (d) | Confidence is always in [0, 1] | `W ≥ 0`, `k > 0` give `0 ≤ W/(W+k) < 1` | property test over random histories, plus every oracle case |
 
