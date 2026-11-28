@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import os
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class Settings(BaseModel):
@@ -21,11 +21,18 @@ class Settings(BaseModel):
     # PROPOSED: fixed low confidence used for quiz observations.
     quiz_confidence: float = Field(default=0.30, ge=0.0, le=1.0)
     # PROPOSED: no recency decay in the first version.
-    recency_half_life_days: float | None = Field(default=None, ge=0.0)
+    recency_half_life_days: float | None = Field(default=None)
     # PROPOSED: calibrated synthetic shift window.
-    shift_window: int = Field(default=4, ge=0)
+    shift_window: int = Field(default=4, ge=1)
     # PROPOSED: calibrated synthetic shift threshold.
     shift_threshold: float = Field(default=0.15, ge=0.0, le=1.0)
+
+    @field_validator("recency_half_life_days")
+    @classmethod
+    def validate_recency_half_life(cls, value: float | None) -> float | None:
+        if value is not None and value <= 0:
+            raise ValueError("recency_half_life_days must be positive or None")
+        return value
 
     def __init__(self, **data):
         for name in type(self).model_fields:

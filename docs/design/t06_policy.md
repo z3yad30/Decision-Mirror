@@ -54,6 +54,11 @@ If the usable history has fewer than `2 * shift_window` decisions, there are too
 few decisions to form both windows and the shift flag is false. The same rule
 applies after per-trait status, null, and situational exclusions.
 
+Comparisons use decimal policy arithmetic. `shift_threshold` is converted to
+`Decimal` rather than comparing binary floating-point means, so an exact
+mathematical equality such as `0.10` is inclusive and fires (`>=`). No
+tolerance is applied; values below the threshold remain false.
+
 ## Synthetic calibration
 
 Authored by: coding agent (lead run) — 2026-11-28
@@ -77,8 +82,8 @@ split mean difference meets the threshold and `N` otherwise.
 
 | Window | Threshold | Stable | Noisy stable | Gradual drift | Abrupt shift | Too short | Situational excluded |
 |---:|---:|---|---|---|---|---|---|
-| 2 | 0.10 | N | N | N | N | N | N |
-| 2 | 0.15 | N | N | N | N | N | N |
+| 2 | 0.10 | N | N | Y | Y | N | Y |
+| 2 | 0.15 | N | N | N | Y | N | N |
 | 2 | 0.20 | N | N | N | N | N | N |
 | 2 | 0.25 | N | N | N | N | N | N |
 | 3 | 0.10 | N | N | Y | Y | N | Y |

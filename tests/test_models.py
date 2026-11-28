@@ -4,7 +4,11 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from decision_mirror.common.models import ExtractionOutput, TraitObservation
+from decision_mirror.common.models import (
+    ExtractionOutput,
+    ExtractionResult,
+    TraitObservation,
+)
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -53,13 +57,32 @@ def observation_data(**changes):
     return data
 
 
-def test_null_score_requires_zero_confidence_and_empty_evidence():
+def test_null_score_requires_explanatory_context_zero_confidence_and_empty_evidence():
     with pytest.raises(ValidationError):
         TraitObservation.model_validate(
             observation_data(score=None, confidence=0.4, evidence=["unsupported"])
         )
+    with pytest.raises(ValidationError):
+        TraitObservation.model_validate(
+            observation_data(score=None, confidence=0.0, evidence=[], context_notes="")
+        )
+    with pytest.raises(ValidationError):
+        TraitObservation.model_validate(
+            observation_data(score=None, confidence=0.0, evidence=[], context_notes="   ")
+        )
+    with pytest.raises(ValidationError):
+        TraitObservation.model_validate(
+            observation_data(score=None, confidence=0.0, evidence=["unsupported"], context_notes="No support")
+        )
     model = TraitObservation.model_validate(
         observation_data(score=None, confidence=0.0, evidence=[], context_notes="No support")
+    )
+    assert model.score is None
+
+
+def test_t06_null_score_does_not_require_context_notes():
+    model = TraitObservation.model_validate(
+        observation_data(trait_id="T06", score=None, confidence=0.0, evidence=[], context_notes="")
     )
     assert model.score is None
 
@@ -87,3 +110,42 @@ def test_extraction_status_consistency():
     success["extraction_status"] = "insufficient_evidence"
     with pytest.raises(ValidationError):
         ExtractionOutput.model_validate(success)
+
+
+def extraction_result_data(**changes):
+    data = {
+        "decision_id": "D001",
+        "extraction_status": "success",
+        "traits": [],
+        "model_version": "m1",
+        "prompt_version": "v1",
+        "prompt_sha256": "a" * 64,
+        "error": None,
+        "validation": {
+            "schema_valid": True,
+            "semantic_valid": True,
+            "warnings": [],
+        },
+    }
+    data.update(changes)
+    return data
+
+
+@pytest.mark.parametrize("required_key", ["traits", "error"])
+def test_extraction_result_required_nullable_keys_cannot_be_omitted(required_key):
+    data = extraction_result_data()
+    del data[required_key]
+    with pytest.raises(ValidationError):
+        ExtractionResult.model_validate(data)
+
+
+def test_extraction_result_accepts_explicit_null_keys():
+    model = ExtractionResult.model_validate(
+        extraction_result_data(
+            extraction_status="error",
+            traits=None,
+            error={"type": "api_error", "message": "provider unavailable"},
+        )
+    )
+    assert model.traits is None
+    assert model.error is not None

@@ -53,5 +53,5 @@ The `ExtractionOutput` example is intentionally a reduction of the contract for 
 | `quiz_weight` | 0.5 | PROPOSED | `DM_QUIZ_WEIGHT` |
 | `quiz_confidence` | 0.30 | PROPOSED | `DM_QUIZ_CONFIDENCE` |
 | `recency_half_life_days` | null | PROPOSED | `DM_RECENCY_HALF_LIFE_DAYS` |
-| `shift_window` | 3 | PROPOSED | `DM_SHIFT_WINDOW` |
+| `shift_window` | 4 | PROPOSED | `DM_SHIFT_WINDOW` |
 | `shift_threshold` | 0.15 | PROPOSED | `DM_SHIFT_THRESHOLD` |
